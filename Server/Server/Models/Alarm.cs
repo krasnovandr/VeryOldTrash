@@ -12,11 +12,9 @@ namespace Server.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Time
+    public partial class Alarm
     {
         public int Id { get; set; }
-        public Nullable<System.DateTime> From { get; set; }
-        public Nullable<System.DateTime> To { get; set; }
         public Nullable<int> DeviceSerial { get; set; }
     }
 }

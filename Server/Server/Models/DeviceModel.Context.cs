@@ -13,10 +13,10 @@ namespace Server.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class DevicesEntities : DbContext
+    public partial class DevicesEntities1 : DbContext
     {
-        public DevicesEntities()
-            : base("name=DevicesEntities")
+        public DevicesEntities1()
+            : base("name=DevicesEntities1")
         {
         }
     
@@ -25,6 +25,7 @@ namespace Server.Models
             throw new UnintentionalCodeFirstException();
         }
     
+        public DbSet<Alarm> Alarm { get; set; }
         public DbSet<Device> Device { get; set; }
         public DbSet<Sensor> Sensor { get; set; }
         public DbSet<Time> Time { get; set; }

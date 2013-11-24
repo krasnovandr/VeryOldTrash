@@ -15,8 +15,9 @@
      <nav>
           @if (Request.IsAuthenticated)
           {
-                  <h2>@Html.ActionLink("Show Devices Table", "Index", "Home")</h2>
-           
+                  <h2 id="Mylink">@Html.ActionLink("Show Your Devices Table", "Index", "Home")</h2>
+                  <h2>@Html.ActionLink("Show empty Devicse Table", "EmptyDevices", "Home")</h2>
+                  <h2>@Html.ActionLink("Send Email", "Send", "Home")</h2>    
                  
           }
         <ul class="menu">

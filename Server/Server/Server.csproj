@@ -39,6 +39,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ActionMailer.Net">
+      <HintPath>..\packages\ActionMailer.0.7.4\lib\Net40\ActionMailer.Net.dll</HintPath>
+    </Reference>
+    <Reference Include="ActionMailer.Net.Mvc">
+      <HintPath>..\packages\ActionMailer.0.7.4\lib\Net40\ActionMailer.Net.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -127,35 +133,40 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\EmailController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\TransactionController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\Alarm.cs">
+      <DependentUpon>DeviceModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Device.cs">
-      <DependentUpon>DevicesModel.tt</DependentUpon>
+      <DependentUpon>DeviceModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\DevicesModel.Context.cs">
+    <Compile Include="Models\DeviceModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>DevicesModel.Context.tt</DependentUpon>
+      <DependentUpon>DeviceModel.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\DevicesModel.cs">
+    <Compile Include="Models\DeviceModel.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>DevicesModel.tt</DependentUpon>
+      <DependentUpon>DeviceModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\DevicesModel.Designer.cs">
+    <Compile Include="Models\DeviceModel.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>DevicesModel.edmx</DependentUpon>
+      <DependentUpon>DeviceModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\EmailModel.cs" />
     <Compile Include="Models\Sensor.cs">
-      <DependentUpon>DevicesModel.tt</DependentUpon>
+      <DependentUpon>DeviceModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Time.cs">
-      <DependentUpon>DevicesModel.tt</DependentUpon>
+      <DependentUpon>DeviceModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Others\Packet.cs" />
     <Compile Include="Others\MySerialize.cs" />
@@ -219,22 +230,22 @@
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <EntityDeploy Include="Models\DevicesModel.edmx">
+    <EntityDeploy Include="Models\DeviceModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>DevicesModel.Designer.cs</LastGenOutput>
+      <LastGenOutput>DeviceModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Models\DevicesModel.Context.tt">
+    <Content Include="Models\DeviceModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>DevicesModel.edmx</DependentUpon>
-      <LastGenOutput>DevicesModel.Context.cs</LastGenOutput>
+      <DependentUpon>DeviceModel.edmx</DependentUpon>
+      <LastGenOutput>DeviceModel.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\DevicesModel.edmx.diagram">
-      <DependentUpon>DevicesModel.edmx</DependentUpon>
+    <Content Include="Models\DeviceModel.edmx.diagram">
+      <DependentUpon>DeviceModel.edmx</DependentUpon>
     </Content>
-    <Content Include="Models\DevicesModel.tt">
+    <Content Include="Models\DeviceModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>DevicesModel.edmx</DependentUpon>
-      <LastGenOutput>DevicesModel.cs</LastGenOutput>
+      <DependentUpon>DeviceModel.edmx</DependentUpon>
+      <LastGenOutput>DeviceModel.cs</LastGenOutput>
     </Content>
     <None Include="Properties\PublishProfiles\Profile.pubxml" />
     <None Include="Scripts\jquery-1.7.1.intellisense.js" />
@@ -272,6 +283,11 @@
     <Content Include="Views\Home\CreateShedule.cshtml" />
     <Content Include="Views\Home\Schedule.cshtml" />
     <Content Include="Views\Home\DeleteShedule.cshtml" />
+    <Content Include="Views\Home\emptyDevices.cshtml" />
+    <Content Include="Views\Home\TconstSet.cshtml" />
+    <Content Include="Views\Email\SendEmail.html.cshtml" />
+    <Content Include="Views\Home\Send.cshtml" />
+    <Content Include="Views\Home\ResetAlarm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

@@ -1,0 +1,13 @@
+﻿@model User
+
+@{
+    Layout = null;
+}
+
+Welcome to My Cool Site, @User.FirstName
+
+We need you to verify your email.  Click this nifty link to get verified!
+
+@Url.Action("Verify", "Account", new { code = @User.EmailActivationToken.ToString() })
+
+Thanks!

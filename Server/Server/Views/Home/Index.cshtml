@@ -15,54 +15,109 @@
 
 <script>
     $(document).ready(function () {
-        setInterval(ajaxState, 3000);
-        setInterval(ajaxDevice, 3000);
-       
+        setInterval(ajaxState, 300);
+        setInterval(ajaxAlarms, 300);
+        setInterval(ajaxTemp, 300);
+        var massiv = $(".alarm").hide();
+
+
     });
+    function alarmShow(sel) {
+        $(sel).fadeOut(200);
+        $(sel).fadeIn(200);
+    }
 
-
-    function ajaxState() {
+    function ajaxTemp() {
         var httpRequest;
-        
         if (window.XMLHttpRequest) {
             httpRequest = new XMLHttpRequest();
         }
         else {
             httpRequest = new ActiveXObject("Microsoft.XMLHTTP");
         }
-        var res = document.getElementById("res");
         // httpRequest.open("GET", "@Request.Url.AbsoluteUri" + "/Home/GetState");
-        httpRequest.open("GET", "http://localhost:81/Server/Home/GetState");
+        httpRequest.open("GET", "http://localhost:81/Server/Home/GetTemperature");
+        var res = document.getElementById("res");
         httpRequest.onreadystatechange = function () {
             if (httpRequest.readyState == 4 && httpRequest.status == 200) {
+                var massiv = $(".temperatures");
                 res.value = httpRequest.responseText;
+                for (var i = 0; i < massiv.length; i++) {
+                    massiv[i].textContent = "";
+                    for (var j = 0; j < httpRequest.responseText.length; j++) {
+                        
+                        if (httpRequest.responseText[j] != " ") {
+                            massiv[i].textContent += httpRequest.responseText[j];
+                        }
+                        else {
+                            break;
+                        }
+                    }
+                }
             }
         }
         httpRequest.send();
     }
-    function ajaxDevice() {
+
+
+
+
+
+
+
+    function ajaxState() {
         var httpRequest;
-       
         if (window.XMLHttpRequest) {
             httpRequest = new XMLHttpRequest();
         }
         else {
             httpRequest = new ActiveXObject("Microsoft.XMLHTTP");
         }
-        var res = document.getElementById("MainTable");
-        // res.value = a;GetState
         // httpRequest.open("GET", "@Request.Url.AbsoluteUri" + "/Home/GetState");
-        httpRequest.open("GET", "http://localhost:81/Server/Home/OnDeviceLoad");
-            httpRequest.onreadystatechange = function () {
-                if (httpRequest.readyState == 4 && httpRequest.status == 200) {
-                    
-                    $("#MainTable").append(httpRequest.responseText);
+        httpRequest.open("GET", "http://localhost:81/Server/Home/GetState");
+        httpRequest.onreadystatechange = function () {
+            if (httpRequest.readyState == 4 && httpRequest.status == 200) {
+                var massiv = $(".state");
+                for (var i = 0; i < massiv.length; i++) {
+                    if (httpRequest.responseText[i] == 0) {
+                        massiv[i].textContent = "Off";
+                    }
+                    else {
+                        massiv[i].textContent = "On";
+                    }
                 }
             }
-            httpRequest.send();
         }
-</script>
+        httpRequest.send();
+    }
+    function ajaxAlarms() {
+        var httpRequest;
+        if (window.XMLHttpRequest) {
+            httpRequest = new XMLHttpRequest();
+        }
+        else {
+            httpRequest = new ActiveXObject("Microsoft.XMLHTTP");
+        }
 
+        var res = document.getElementById("res");
+        // httpRequest.open("GET", "@Request.Url.AbsoluteUri" + "/Home/GetState");
+        httpRequest.open("GET", "http://localhost:81/Server/Home/GetAlarm");
+        httpRequest.onreadystatechange = function () {
+            if (httpRequest.readyState == 4 && httpRequest.status == 200) {
+                var massiv = $(".alarm");
+              //  res.value = httpRequest.responseText;
+                for (var i = 0; i < httpRequest.responseText.length + 1; i++) {
+                    if (httpRequest.responseText[i] == 1) {
+                        var a = "#" + massiv[i].id;
+                        setInterval(alarmShow(a), 400);
+                    }
+                }
+            }
+        }
+        httpRequest.send();
+    }
+</script>
+<a href="http://www.sitenull.ru" class="blink">Ссылка</a>
 <input type="text" id="res" />
 <table id="MainTable">
     <tr>
@@ -75,7 +130,12 @@
         <th>
             @Html.DisplayNameFor(model => model.State)
         </th>
-        <th></th>
+        <th>Temperatura
+        </th>
+        <th>Tconst
+        </th>
+        <th>Settings
+        </th>
     </tr>
 
 
@@ -90,7 +150,7 @@
                 @((Server.Controllers.DeviceType)item.Type)
 
             </td>
-            <td>
+            <td class="state">
                 @if (item.State == 0)
                 {
                     @Html.Label("Off")
@@ -101,11 +161,64 @@
                 }
 
             </td>
-            <td>
-                @Html.ActionLink("Turn On/Off", "TurnOnOff", new { DeviceSerial = item.DeviceSerial })<br />
 
-                @Html.ActionLink("Set up Schedule", "Schedule", new { DeviceSerial = item.DeviceSerial })
+            <td>
+                @if (item.Type != 4)
+                {
+                    <h4>-</h4>
+                }
+                else
+                {
+                    <div class ="temperatures" >
+                        @for (int j = 0; j < ViewBag.listSensor.Count; j++)
+                        {
+                            if (item.DeviceSerial == ViewBag.listSensor[j].DeviceSerial)
+                            { 
+                            <h4>@ViewBag.listSensor[j].temperature</h4>
+                            }
+                        }
+                    </div>
+                }
             </td>
+            <td>
+                @if (item.Type != 4)
+                {
+                    <h4>-</h4>
+                }
+                else
+                {
+                    for (int j = 0; j < ViewBag.listSensor.Count; j++)
+                    {
+                        if (item.DeviceSerial == ViewBag.listSensor[j].DeviceSerial)
+                        { 
+                    <h4>@ViewBag.listSensor[j].tconst</h4>
+                        }
+                    }
+                }
+            </td>
+            <td>
+                @if (item.Type != 4)
+                {
+                    @Html.ActionLink("Turn On/Off", "TurnOnOff", new { DeviceSerial = item.DeviceSerial })<br />
+
+                    @Html.ActionLink("Set up Schedule", "Schedule", new { DeviceSerial = item.DeviceSerial })            
+                }
+                else
+                {
+                    @Html.ActionLink("Set up Tconst", "TconstSet", new { DeviceSerial = item.DeviceSerial }) 
+                }
+
+            </td>
+
+            <td>
+                <div class="alarm" id="@item.DeviceSerial">
+                    @if (item.Type == 4 || item.Type == 1)
+                    {
+                        @Html.ActionLink("Alarm", "ResetAlarm", new { DeviceSerial = item.DeviceSerial })
+                    }
+                </div>
+            </td>
+
         </tr>
     }
 

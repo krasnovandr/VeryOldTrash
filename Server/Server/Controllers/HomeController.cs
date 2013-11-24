@@ -15,6 +15,11 @@ namespace Server.Controllers
 
     public enum DeviceType { Signalization = 1, Door, Conditioner, Sensor }
     public enum Days { Monday = 1, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday }
+    public static class IpPort
+    {
+        public static string ip = "192.168.1.4";
+        public static int port = 2200;
+    }
     public static class Times
     {
         public static int year = 1;
@@ -25,43 +30,41 @@ namespace Server.Controllers
     {
         //
         // GET: /Home/
-        public string Rec(int i)
-        {
-            TcpClient Client = new TcpClient();
-            try
-            {
-                Client.Connect(IPAddress.Parse("192.168.1.4"), 2200);
-            }
-            catch
-            {
-                return "Cannot connect to remote host!";
-            }
-
-            Socket Sock = Client.Client;
-
-            string data = "YaZakonectilsaaaaaaaaaaaaaaaaaaa";
-            Sock.Send(Encoding.ASCII.GetBytes(data));
-
-            Sock.Close();
-            Client.Close();
-            return "Hello World From Bro=" + i.ToString();
-
-        }
 
 
         public ActionResult Index()
         {
 
 
-            using (var context = new DevicesEntities())
+            using (var context = new DevicesEntities1())
             {
                 var result = (from ent in context.Device
                               where ent.UserName == User.Identity.Name
                               select ent).ToList();
                 ViewBag.lol = result.Count;
+
+
+                List<Sensor> listSensor = new List<Sensor>();
+
+                var sen = (from ent1 in context.Sensor
+                           //where ent1.DeviceSerial == result[i].DeviceSerial
+                           select ent1).ToList();
+
+                for (int i = 0; i < sen.Count; i++)
+                {
+                    for (int j = 0; j < result.Count; j++)
+                    {
+                        if (sen[i].DeviceSerial == result[j].DeviceSerial)
+                        {
+                            listSensor.Add(sen[i]);
+                        }
+                    }
+                }
+
+                ViewBag.listSensor = listSensor;
+
                 return View(result);
             }
-
         }
         public ActionResult CreateShedule(int DeviceSerial)
         {
@@ -73,7 +76,7 @@ namespace Server.Controllers
         public ActionResult CreateShedule(Time time)
         {
 
-            using (var context = new DevicesEntities())
+            using (var context = new DevicesEntities1())
             {
                 try
                 {
@@ -81,7 +84,7 @@ namespace Server.Controllers
                     {
                         context.Time.Add(time);
                         context.SaveChanges();
-                        //return RedirectToAction("Schedule");
+                        return RedirectToAction("Schedule", new { DeviceSerial = time.DeviceSerial });
                     }
                 }
                 catch (Exception ex)
@@ -94,7 +97,7 @@ namespace Server.Controllers
 
         public ActionResult DeleteShedule(int id)
         {
-            using (var context = new DevicesEntities())
+            using (var context = new DevicesEntities1())
             {
                 var employeeDelete = (from entity in context.Time
                                       where entity.Id == id
@@ -108,7 +111,7 @@ namespace Server.Controllers
         public ActionResult DeleteShedule(int id, FormCollection collection)
         {
 
-            using (var context = new DevicesEntities())
+            using (var context = new DevicesEntities1())
             {
                 var employeeDelete = (from entity in context.Time
                                       where entity.Id == id
@@ -118,7 +121,7 @@ namespace Server.Controllers
                     context.Time.Attach(employeeDelete);
                     context.Time.Remove(employeeDelete);
                     context.SaveChanges();
-                    return RedirectToAction("Index");
+                    return RedirectToAction("Schedule", new { DeviceSerial = employeeDelete.DeviceSerial });
                 }
                 catch
                 {
@@ -129,7 +132,7 @@ namespace Server.Controllers
         public ActionResult Schedule(int DeviceSerial)
         {
 
-            using (var context = new DevicesEntities())
+            using (var context = new DevicesEntities1())
             {
                 var device = (from entity in context.Device
                               where entity.DeviceSerial == DeviceSerial
@@ -146,41 +149,80 @@ namespace Server.Controllers
         }
 
 
+        public ActionResult TconstSet(int DeviceSerial)
+        {
+
+            using (var context = new DevicesEntities1())
+            {
+                var sensor = (from entity in context.Sensor
+                              where entity.DeviceSerial == DeviceSerial
+                              select entity).First();
+
+                return View(sensor);
+            }
+        }
+
+        [HttpPost]
+        public ActionResult TconstSet(Sensor model)
+        {
+            using (var context = new DevicesEntities1())
+            {
+
+                var device = (from entity in context.Sensor
+                              where entity.DeviceSerial == model.DeviceSerial
+                              select entity).First();
+
+                device.tconst = model.tconst;
+
+                UpdateModel(device);
+                context.SaveChanges();
+                TcpClient Client = new TcpClient();
+                Client.Connect(IPAddress.Parse(IpPort.ip), IpPort.port);
+
+                Socket Sock = Client.Client;
+                Sock.Send(MySerialize.serialize(device, typeof(Sensor)));
+
+                Sock.Close();
+                Client.Close();
+            }
+
+            return RedirectToAction("Index", "Home");
+        }
 
 
+        public ActionResult AddEmptyToYour(int DeviceSerial)
+        {
+            using (var context = new DevicesEntities1())
+            {
+                var result = (from ent in context.Device
+                              where ent.DeviceSerial == DeviceSerial
+                              select ent).First();
+                result.UserName = User.Identity.Name;
+                UpdateModel(result);
+                context.SaveChanges();
+                return RedirectToAction("emptyDevices");
+            }
 
-        //[HttpPost]
-        //public ActionResult Schedule(int id,Time time,string Day)
-        //{
-        //    //Time newTime = new Time();
-        //    //newTime.From.Value.Day = (int)Enum.Parse(typeof(Days), Day);
-        //    //time.From.Value.DayOfWeek = (int)Enum.Parse(typeof(Days),Day);
-        //    using (var context = new DevicesEntities())
-        //    {
-        //        try
-        //        {
-        //            if (ModelState.IsValid)
-        //            {
-        //                context.Time.Add(time);
-        //                context.SaveChanges();
-        //                return RedirectToAction("Index");
-        //            }
-        //        }
-        //        catch (Exception ex)
-        //        {
-        //            ModelState.AddModelError(String.Empty, ex);
-        //        }
-        //        return View(time);
-        //    }
 
-        //}
+        }
+        public ActionResult emptyDevices()
+        {
+            using (var context = new DevicesEntities1())
+            {
+                var result = (from ent in context.Device
+                              where ent.UserName == "Empty"
+                              select ent).ToList();
+
+                return View(result);
+            }
+        }
 
 
 
 
         public ActionResult TurnOnOff(int DeviceSerial)
         {
-            using (var context = new DevicesEntities())
+            using (var context = new DevicesEntities1())
             {
                 var device = (from entity in context.Device
                               where entity.DeviceSerial == DeviceSerial
@@ -196,7 +238,7 @@ namespace Server.Controllers
                 UpdateModel(device);
                 context.SaveChanges();
                 TcpClient Client = new TcpClient();
-                Client.Connect(IPAddress.Parse("192.168.1.4"), 2200);
+                Client.Connect(IPAddress.Parse(IpPort.ip), IpPort.port);
 
                 Socket Sock = Client.Client;
                 Sock.Send(MySerialize.serialize(device, typeof(Device)));
@@ -212,7 +254,7 @@ namespace Server.Controllers
         public ActionResult setTiming(int DeviceSerial)
         {
 
-            using (var context = new DevicesEntities())
+            using (var context = new DevicesEntities1())
             {
                 var device = (from entity in context.Device
                               where entity.DeviceSerial == DeviceSerial
@@ -226,7 +268,7 @@ namespace Server.Controllers
                 packet.time = times;
 
                 TcpClient Client = new TcpClient();
-                Client.Connect(IPAddress.Parse("192.168.1.4"), 2200);
+                Client.Connect(IPAddress.Parse(IpPort.ip), IpPort.port);
 
                 Socket Sock = Client.Client;
                 Sock.Send(MySerialize.serialize(packet, typeof(Packet)));
@@ -238,9 +280,62 @@ namespace Server.Controllers
             }
 
         }
-        public void setTconst()
+   
+        public int sendTemperature(int DeviceSerial)
         {
+            using (var context = new DevicesEntities1())
+            {
+                var device = (from entity in context.Sensor
+                              where entity.DeviceSerial == DeviceSerial
+                              select entity).First();
+                return (int)device.temperature;
+            }
 
+        }
+
+        public int sendTconst(int DeviceSerial)
+        {
+            using (var context = new DevicesEntities1())
+            {
+                var device = (from entity in context.Sensor
+                              where entity.DeviceSerial == DeviceSerial
+                              select entity).First();
+                return (int)device.tconst;
+            }
+        }
+
+        public ActionResult ResetAlarm(int DeviceSerial)
+        {
+            using (var context = new DevicesEntities1())
+            {
+                var deviceAlarm = (from entity in context.Alarm
+                                   where entity.DeviceSerial == DeviceSerial
+                                   select entity).First();
+
+                return View(deviceAlarm);
+            }
+        }
+        public ActionResult ignoreAlarm(int DeviceSerial)
+        {
+            using (var context = new DevicesEntities1())
+            {
+                var deviceAlarm = (from entity in context.Alarm
+                                   where entity.DeviceSerial == DeviceSerial
+                                   select entity).First();
+
+                context.Alarm.Attach(deviceAlarm);
+                context.Alarm.Remove(deviceAlarm);
+                context.SaveChanges();
+                return RedirectToAction("Index");
+            }
+        }
+
+        public ActionResult setReport(int DeviceSerial)
+        {
+            EmailModel model;
+
+            //new EmailController().SendEmail(model).Deliver();
+            return RedirectToAction("Index");
         }
 
 
@@ -248,14 +343,14 @@ namespace Server.Controllers
         public string AddDevice(int DeviceSerial, int Type, int State)
         {
 
-            using (var context = new DevicesEntities())
+            using (var context = new DevicesEntities1())
             {
 
                 Device device = new Device();
                 device.DeviceSerial = DeviceSerial;
                 device.Type = Type;
                 device.State = State;
-                device.UserName = "Kalter";
+                device.UserName = "Empty";
                 try
                 {
                     context.Device.Add(device);
@@ -270,16 +365,40 @@ namespace Server.Controllers
 
             }
         }
+        public string AddSensor(int DeviceSerial, int Type, int State, int Tconst, int Temp)
+        {
+            using (var context = new DevicesEntities1())
+            {
 
-        //public string AddSensor(int DeviceSerial, int Type, int State,int tconst,int t)
-        //{
+                Device device = new Device();
+                device.DeviceSerial = DeviceSerial;
+                device.Type = Type;
+                device.State = State;
+                device.UserName = "Empty";
 
+                Sensor sensor = new Sensor();
+                sensor.DeviceSerial = DeviceSerial;
+                sensor.tconst = Tconst;
+                sensor.temperature = Temp;
+                try
+                {
+                    context.Device.Add(device);
+                    context.Sensor.Add(sensor);
+                    context.SaveChanges();
+                }
+                catch (Exception ex)
+                {
+                    return ex.Message;
+                }
 
-        //}
+                return "Sensor" + device.DeviceSerial + "Connected";
+
+            }
+        }
         [HttpGet]
         public string GetState()
         {
-            using (var context = new DevicesEntities())
+            using (var context = new DevicesEntities1())
             {
                 var result = (from ent in context.Device
                               where ent.UserName == User.Identity.Name
@@ -293,43 +412,89 @@ namespace Server.Controllers
                 return states;
             }
         }
-
         [HttpGet]
-        public string OnDeviceLoad()
+        public string GetTemperature()
         {
-            using (var context = new DevicesEntities())
+            using (var context = new DevicesEntities1())
             {
-                var result = (from ent in context.Device
-                              where ent.UserName == User.Identity.Name
-                              select ent).ToList();
-
-                string row="" ;
-
-                for (int i = 0; i < result.Count; i++)
+                var devices = (from entity in context.Sensor
+                               select entity).ToList();
+                string response = "";
+                for (int i = 0; i < devices.Count; i++)
                 {
-                    row += "<tr><td>"
-                                +result[i].DeviceSerial+"</td><td>"
-                                +result[i].Type+"</td><td>"
-                                +result[i].State+"</td></tr>";
+                    response += devices[i].temperature + " ";
                 }
 
-                return row;
+                return response;
             }
-
         }
 
 
 
 
+
+
+
+
+
+        [HttpGet]
+        public string GetAlarm()
+        {
+            using (var context = new DevicesEntities1())
+            {
+                var result = (from ent in context.Device
+                              where ent.UserName == User.Identity.Name
+                              select ent).ToList();
+                var alarms = (from ent in context.Alarm
+                              select ent).ToList();
+                string response = "";
+                //for (int i = 0; i < result.Count; i++)
+                //{
+                //    response += "0";
+                //}
+                for (int i = 0; i < result.Count; i++)
+                {
+                    bool flg = false;
+
+                    for (int j = 0; j < alarms.Count; j++)
+                    {
+                        if (result[i].DeviceSerial == alarms[j].DeviceSerial)
+                        {
+                            flg = true;
+                        }
+                    }
+
+                    if (flg == true)
+                    {
+                        response += "1";
+                    }
+                    else
+                    {
+                        response += "0";
+                    }
+                }
+
+                //
+                //if (result.Count != 0)
+                //{
+                //    for (int i = 0; i < result.Count; i++)
+                //    {
+                //        response += result[i].DeviceSerial;
+                //    }
+
+                //}
+                return response;
+            }
+        }
         public string sendDevices()
         {
-            using (var context = new DevicesEntities())
+            using (var context = new DevicesEntities1())
             {
                 var devicesToSend = (from ent in context.Device
                                      select ent).ToList();
                 TcpClient Client = new TcpClient();
 
-                Client.Connect(IPAddress.Parse("192.168.1.4"), 2200);
+                Client.Connect(IPAddress.Parse(IpPort.ip), IpPort.port);
 
 
                 Socket Sock = Client.Client;
@@ -346,21 +511,47 @@ namespace Server.Controllers
         }
         public string AlarmSignalization(int DeviceSerial)
         {
-            ViewBag.dev = DeviceSerial;
-            ViewBag.type = "AlarmSignalization";
+            using (var context = new DevicesEntities1())
+            {
+                Alarm alarm = new Alarm();
+                alarm.DeviceSerial = DeviceSerial;
 
-            //Redirect("http://localhost:81/Server/Home");
-            return Redirect("http://localhost:81/Server/Home").Url;
+                try
+                {
+                    context.Alarm.Add(alarm);
+                    context.SaveChanges();
+                }
+                catch (Exception ex)
+                {
+                    return ex.Message;
+                }
+
+                return "Signalization" + alarm.DeviceSerial + "Allarmed";
+            }
         }
         public string AlarmSensor(int DeviceSerial)
         {
-            ViewBag.dev = DeviceSerial;
-            ViewBag.type = "AlarmSensor";
-            return "AlarmSensor";
+            using (var context = new DevicesEntities1())
+            {
+                Alarm alarm = new Alarm();
+                alarm.DeviceSerial = DeviceSerial;
+
+                try
+                {
+                    context.Alarm.Add(alarm);
+                    context.SaveChanges();
+                }
+                catch (Exception ex)
+                {
+                    return ex.Message;
+                }
+
+                return "Sensor" + alarm.DeviceSerial + "Allarmed";
+            }
         }
         public string ChangeState(int DeviceSerial, int state)
         {
-            using (var context = new DevicesEntities())
+            using (var context = new DevicesEntities1())
             {
                 var device = (from entity in context.Device
                               where entity.DeviceSerial == DeviceSerial
@@ -376,15 +567,33 @@ namespace Server.Controllers
         }
         public string ChangeTemperature(int DeviceSerial, int temperature)
         {
-            ViewBag.temperature = temperature;
-            ViewBag.dev = DeviceSerial;
-            ViewBag.type = "ChangeTemperature";
-            return "ChangeTemperature";
+            using (var context = new DevicesEntities1())
+            {
+                var device = (from entity in context.Sensor
+                              where entity.DeviceSerial == DeviceSerial
+                              select entity).First();
+                device.temperature = temperature;
+
+                UpdateModel(device);
+                context.SaveChanges();
+                return " New Temperature" + device.temperature;
+            }
+
+            //public ActionResult Send()
+            //{
+            //    return View();
+            //}
+            //[HttpPost]
+            //public ActionResult Send(EmailModel model)
+            //{
+            // //   if (ModelState.IsValid)
+            //  //  {
+            //        new EmailController().SendEmail(model).Deliver();
+            //    //}
+            //    return View(model);
+            //}
+
+
         }
-
-
-
-
-
     }
 }

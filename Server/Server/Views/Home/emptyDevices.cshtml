@@ -1,0 +1,56 @@
+﻿@model IEnumerable<Server.Models.Device>
+
+@{
+    ViewBag.Title = "emptyDevices";
+}
+
+<h2>emptyDevices</h2>
+
+
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.DeviceSerial)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Type)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.State)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UserName)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.DeviceSerial)
+            </td>
+            <td>
+                @((Server.Controllers.DeviceType)item.Type)
+            </td>
+            <td>
+
+                @if (item.State == 0)
+                {
+                    @Html.Label("Off")
+                }
+                else
+                {
+                    @Html.Label("On")
+                }
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserName)
+            </td>
+            <td>
+                @Html.ActionLink("Add to your devices", "AddEmptyToYour", new { DeviceSerial = item.DeviceSerial })
+            </td>
+        </tr>
+    }
+
+</table>

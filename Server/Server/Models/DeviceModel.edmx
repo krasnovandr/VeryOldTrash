@@ -6,10 +6,18 @@
     <edmx:StorageModels>
       <Schema Namespace="Хранилище DevicesModel" Alias="Self" Provider="System.Data.SqlServerCe.4.0" ProviderManifestToken="4.0" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityContainer Name="Хранилище DevicesModelContainer">
+          <EntitySet Name="Alarm" EntityType="Хранилище DevicesModel.Alarm" store:Type="Tables" />
           <EntitySet Name="Device" EntityType="Хранилище DevicesModel.Device" store:Type="Tables" />
           <EntitySet Name="Sensor" EntityType="Хранилище DevicesModel.Sensor" store:Type="Tables" />
           <EntitySet Name="Time" EntityType="Хранилище DevicesModel.Time" store:Type="Tables" />
         </EntityContainer>
+        <EntityType Name="Alarm">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="DeviceSerial" Type="int" />
+        </EntityType>
         <EntityType Name="Device">
           <Key>
             <PropertyRef Name="Id" />
@@ -43,11 +51,19 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="DevicesModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityContainer Name="DevicesEntities" p1:LazyLoadingEnabled="true">
+        <EntityContainer Name="DevicesEntities1" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="Alarm" EntityType="DevicesModel.Alarm" />
           <EntitySet Name="Device" EntityType="DevicesModel.Device" />
           <EntitySet Name="Sensor" EntityType="DevicesModel.Sensor" />
           <EntitySet Name="Time" EntityType="DevicesModel.Time" />
         </EntityContainer>
+        <EntityType Name="Alarm">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="DeviceSerial" Type="Int32" />
+        </EntityType>
         <EntityType Name="Device">
           <Key>
             <PropertyRef Name="Id" />
@@ -81,7 +97,15 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="Хранилище DevicesModelContainer" CdmEntityContainer="DevicesEntities">
+        <EntityContainerMapping StorageEntityContainer="Хранилище DevicesModelContainer" CdmEntityContainer="DevicesEntities1">
+          <EntitySetMapping Name="Alarm">
+            <EntityTypeMapping TypeName="DevicesModel.Alarm">
+              <MappingFragment StoreEntitySet="Alarm">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="DeviceSerial" ColumnName="DeviceSerial" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Device">
             <EntityTypeMapping TypeName="DevicesModel.Device">
               <MappingFragment StoreEntitySet="Device">

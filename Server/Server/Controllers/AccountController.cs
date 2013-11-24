@@ -39,6 +39,7 @@ namespace Server.Controllers
                     FormsAuthentication.SetAuthCookie(model.UserName, model.RememberMe);
                     if (Url.IsLocalUrl(returnUrl))
                     {
+                      //  new EmailController().SendEmail(User).Deliver();
                         return Redirect(returnUrl);
                     }
                     else

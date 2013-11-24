@@ -1,0 +1,24 @@
+﻿@model Server.Models.Sensor
+
+@{
+    ViewBag.Title = "TconstSet";
+}
+
+@using (Html.BeginForm())
+{
+
+    <h2>Set Tconst from device sn @Model.DeviceSerial</h2>
+
+    <p>
+        @Html.DisplayNameFor(model => model.tconst)
+        @Html.EditorFor(model => model.tconst)
+    </p>
+
+
+
+    <input type="submit" value="Create" />
+}
+<div>
+   @* @Html.ActionLink("Set Tconst", "SaveTconst")*@
+    @Html.ActionLink("Back to Devices Table", "Index")
+</div>
