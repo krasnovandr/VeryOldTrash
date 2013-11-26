@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Хранилище DevicesModel" Alias="Self" Provider="System.Data.SqlServerCe.4.0" ProviderManifestToken="4.0" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Хранилище DevicesModel" Alias="Self" Provider="System.Data.SqlServerCe.4.0" ProviderManifestToken="4.0" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityContainer Name="Хранилище DevicesModelContainer">
           <EntitySet Name="Alarm" EntityType="Хранилище DevicesModel.Alarm" store:Type="Tables" />
           <EntitySet Name="Device" EntityType="Хранилище DevicesModel.Device" store:Type="Tables" />
@@ -27,6 +27,8 @@
           <Property Name="Type" Type="int" />
           <Property Name="State" Type="int" />
           <Property Name="UserName" Type="nvarchar" MaxLength="100" />
+          <Property Name="mapX" Type="float" />
+          <Property Name="mapY" Type="float" />
         </EntityType>
         <EntityType Name="Sensor">
           <Key>
@@ -46,8 +48,7 @@
           <Property Name="To" Type="datetime" />
           <Property Name="DeviceSerial" Type="int" />
         </EntityType>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="DevicesModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -73,6 +74,8 @@
           <Property Name="Type" Type="Int32" />
           <Property Name="State" Type="Int32" />
           <Property Name="UserName" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Type="Double" Name="mapX" />
+          <Property Type="Double" Name="mapY" />
         </EntityType>
         <EntityType Name="Sensor">
           <Key>
@@ -109,6 +112,8 @@
           <EntitySetMapping Name="Device">
             <EntityTypeMapping TypeName="DevicesModel.Device">
               <MappingFragment StoreEntitySet="Device">
+                <ScalarProperty Name="mapY" ColumnName="mapY" />
+                <ScalarProperty Name="mapX" ColumnName="mapX" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="DeviceSerial" ColumnName="DeviceSerial" />
                 <ScalarProperty Name="Type" ColumnName="Type" />

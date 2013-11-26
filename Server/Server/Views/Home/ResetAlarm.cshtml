@@ -7,6 +7,6 @@
 <h2>ResetAlarm for Device @Model.DeviceSerial </h2>
 
 @Html.ActionLink("Ignore", "ignoreAlarm", new { DeviceSerial = @Model.DeviceSerial })
-@Html.ActionLink("Send a detailed report", "setReport", new { DeviceSerial = @Model.DeviceSerial })
+@Html.ActionLink("Send a detailed report And Ignore", "ignoreAlarmAndMail", new { DeviceSerial = @Model.DeviceSerial })
 @Html.ActionLink("Back", "Index")
    

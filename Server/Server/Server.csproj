@@ -133,7 +133,6 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\EmailController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\TransactionController.cs" />
     <Compile Include="Global.asax.cs">
@@ -161,13 +160,13 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DeviceModel.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\EmailModel.cs" />
     <Compile Include="Models\Sensor.cs">
       <DependentUpon>DeviceModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Time.cs">
       <DependentUpon>DeviceModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Others\MailSender.cs" />
     <Compile Include="Others\Packet.cs" />
     <Compile Include="Others\MySerialize.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -285,9 +284,8 @@
     <Content Include="Views\Home\DeleteShedule.cshtml" />
     <Content Include="Views\Home\emptyDevices.cshtml" />
     <Content Include="Views\Home\TconstSet.cshtml" />
-    <Content Include="Views\Email\SendEmail.html.cshtml" />
-    <Content Include="Views\Home\Send.cshtml" />
     <Content Include="Views\Home\ResetAlarm.cshtml" />
+    <Content Include="Views\Home\setDeviceOnMap.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
