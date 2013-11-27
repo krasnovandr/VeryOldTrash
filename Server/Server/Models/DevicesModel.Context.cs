@@ -13,10 +13,10 @@ namespace Server.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class DevicesEntities1 : DbContext
+    public partial class DevicesEntities : DbContext
     {
-        public DevicesEntities1()
-            : base("name=DevicesEntities1")
+        public DevicesEntities()
+            : base("name=DevicesEntities")
         {
         }
     

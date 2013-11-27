@@ -20,6 +20,7 @@ namespace Server.Others
         {
             MemoryStream stream = new MemoryStream();
             XmlSerializer xml = new XmlSerializer(type);
+            
             try
             {
                 xml.Serialize(stream, obj);

@@ -19,7 +19,7 @@ namespace Server.Models
         public Nullable<int> Type { get; set; }
         public Nullable<int> State { get; set; }
         public string UserName { get; set; }
-        public Nullable<double> mapX { get; set; }
-        public Nullable<double> mapY { get; set; }
+        public string mapX { get; set; }
+        public string mapY { get; set; }
     }
 }

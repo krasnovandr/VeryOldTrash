@@ -140,31 +140,31 @@
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\Alarm.cs">
-      <DependentUpon>DeviceModel.tt</DependentUpon>
+      <DependentUpon>DevicesModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Device.cs">
-      <DependentUpon>DeviceModel.tt</DependentUpon>
+      <DependentUpon>DevicesModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\DeviceModel.Context.cs">
+    <Compile Include="Models\DevicesModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>DeviceModel.Context.tt</DependentUpon>
+      <DependentUpon>DevicesModel.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\DeviceModel.cs">
+    <Compile Include="Models\DevicesModel.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>DeviceModel.tt</DependentUpon>
+      <DependentUpon>DevicesModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\DeviceModel.Designer.cs">
+    <Compile Include="Models\DevicesModel.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>DeviceModel.edmx</DependentUpon>
+      <DependentUpon>DevicesModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\Sensor.cs">
-      <DependentUpon>DeviceModel.tt</DependentUpon>
+      <DependentUpon>DevicesModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Time.cs">
-      <DependentUpon>DeviceModel.tt</DependentUpon>
+      <DependentUpon>DevicesModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Others\MailSender.cs" />
     <Compile Include="Others\Packet.cs" />
@@ -229,22 +229,22 @@
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <EntityDeploy Include="Models\DeviceModel.edmx">
+    <EntityDeploy Include="Models\DevicesModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>DeviceModel.Designer.cs</LastGenOutput>
+      <LastGenOutput>DevicesModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Models\DeviceModel.Context.tt">
+    <Content Include="Models\DevicesModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>DeviceModel.edmx</DependentUpon>
-      <LastGenOutput>DeviceModel.Context.cs</LastGenOutput>
+      <DependentUpon>DevicesModel.edmx</DependentUpon>
+      <LastGenOutput>DevicesModel.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\DeviceModel.edmx.diagram">
-      <DependentUpon>DeviceModel.edmx</DependentUpon>
+    <Content Include="Models\DevicesModel.edmx.diagram">
+      <DependentUpon>DevicesModel.edmx</DependentUpon>
     </Content>
-    <Content Include="Models\DeviceModel.tt">
+    <Content Include="Models\DevicesModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>DeviceModel.edmx</DependentUpon>
-      <LastGenOutput>DeviceModel.cs</LastGenOutput>
+      <DependentUpon>DevicesModel.edmx</DependentUpon>
+      <LastGenOutput>DevicesModel.cs</LastGenOutput>
     </Content>
     <None Include="Properties\PublishProfiles\Profile.pubxml" />
     <None Include="Scripts\jquery-1.7.1.intellisense.js" />

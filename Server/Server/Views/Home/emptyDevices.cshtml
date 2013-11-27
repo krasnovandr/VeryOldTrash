@@ -48,9 +48,8 @@
                 @Html.DisplayFor(modelItem => item.UserName)
             </td>
             <td>
-                   @Html.ActionLink("Add to your devices", "setDeviceOnMap", new { DeviceSerial = item.DeviceSerial })
-           
-                   @Html.ActionLink("Add to your devices", "AddEmptyToYour", new { DeviceSerial = item.DeviceSerial })
+                @Html.ActionLink("Set Device on map", "setDeviceOnMap", new { DeviceSerial = item.DeviceSerial })
+
             </td>
         </tr>
     }
