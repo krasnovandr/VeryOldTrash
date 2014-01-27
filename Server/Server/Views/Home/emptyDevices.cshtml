@@ -4,10 +4,7 @@
     ViewBag.Title = "emptyDevices";
 }
 
-<h2>emptyDevices</h2>
-
-
-<table>
+<table class="simple-little-table">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.DeviceSerial)
@@ -48,7 +45,7 @@
                 @Html.DisplayFor(modelItem => item.UserName)
             </td>
             <td>
-                @Html.ActionLink("Set Device on map", "setDeviceOnMap", new { DeviceSerial = item.DeviceSerial })
+                  @Html.ActionLink("Set Device on map", "setDeviceOnMap", new { DeviceSerial = item.DeviceSerial })
 
             </td>
         </tr>

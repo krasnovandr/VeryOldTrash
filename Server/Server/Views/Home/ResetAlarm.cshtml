@@ -1,12 +1,15 @@
 ﻿@model Server.Models.Alarm
 
 @{
-    ViewBag.Title = "ResetAlarm";
+    ViewBag.Title = "Reset Alarm";
 }
+<fieldset>
+    <legend>Reset Alarm for Device @Model.DeviceSerial</legend>
+    <div class="scheduleLinks">
+        @Html.ActionLink("Ignore", "ignoreAlarm", new { DeviceSerial = @Model.DeviceSerial })
+    </div>
 
-<h2>ResetAlarm for Device @Model.DeviceSerial </h2>
-
-@Html.ActionLink("Ignore", "ignoreAlarm", new { DeviceSerial = @Model.DeviceSerial })
-@Html.ActionLink("Send a detailed report And Ignore", "ignoreAlarmAndMail", new { DeviceSerial = @Model.DeviceSerial })
-@Html.ActionLink("Back", "Index")
-   
+    <div class="scheduleLinks">
+        @Html.ActionLink("Send a detailed report", "ignoreAlarmAndMail", new { DeviceSerial = @Model.DeviceSerial })
+    </div>
+</fieldset>

@@ -1,15 +1,16 @@
 ﻿@model Server.Models.LogModel
 @{
-    ViewBag.Title = "Вход в систему";
+    ViewBag.Title = "Enter the System";
 }
-<h2>Вход в систему</h2>
- 
-@using (Html.BeginForm()) {
+<h2 class="center">Enter the System</h2>
+
+@using (Html.BeginForm())
+{
     @Html.ValidationSummary(true)
  
     <fieldset>
-        <legend>Введите логин и пароль</legend>
- 
+        <legend>Enter UserName and Password</legend>
+
         <div class="editor-label">
             @Html.LabelFor(model => model.UserName)
         </div>
@@ -17,7 +18,7 @@
             @Html.EditorFor(model => model.UserName)
             @Html.ValidationMessageFor(model => model.UserName)
         </div>
- 
+
         <div class="editor-label">
             @Html.LabelFor(model => model.Password)
         </div>
@@ -25,17 +26,19 @@
             @Html.EditorFor(model => model.Password)
             @Html.ValidationMessageFor(model => model.Password)
         </div>
- 
+       
+         @Html.ActionLink("Forgot your password?", "sendPage", new { userName = @Html.EditorFor(model => model.UserName) })
+      
         <div class="editor-label">
             @Html.LabelFor(model => model.RememberMe)
-        </div>
-        <div class="editor-field">
+
             @Html.EditorFor(model => model.RememberMe)
             @Html.ValidationMessageFor(model => model.RememberMe)
         </div>
- 
-        <p>
-            <input type="submit" value="Войти" />
+
+
+          <p>
+            <input type="submit" value="Enter" class="btn btn-6 btn-6a" />
         </p>
     </fieldset>
 }

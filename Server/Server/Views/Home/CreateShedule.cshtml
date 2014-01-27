@@ -4,7 +4,7 @@
     ViewBag.Title = "Add new shedule";
 }
 
-<h2>CreateShedule for @Model.DeviceSerial</h2>
+<h3 class="center">Create Schedule for device with serial  @Model.DeviceSerial</h3>
 
 @using (Html.BeginForm())
 {
@@ -19,7 +19,7 @@
             @Html.Label("Date From")
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.From)
+            @Html.TextBoxFor(model => model.From,new { @Value = "1.1.2013 12:00"})
             @Html.ValidationMessageFor(model => model.From)
         </div>
 
@@ -27,21 +27,20 @@
             @Html.Label("Date To")
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.To)
+            @Html.TextBoxFor(model => model.To,new { @Value = "1.1.2013 14:00"})
             @Html.ValidationMessageFor(model => model.To)
         </div>
 
-        
 
         <p>
-           <input type="submit" value="Create" />
+            <input type="submit" value="Create" class="btn-6 btn-6a" />
         </p>
     </fieldset>
 }
 
-<div>
-    @*@Html.ActionLink("Back to Schedule", "Schedule", new { DeciceSerial = @Model.DeviceSerial})*@
-</div>
+
+
+
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

@@ -1,17 +1,18 @@
 ﻿@model Server.Models.RegisterModel
- 
+
 @{
-    ViewBag.Title = "Регистрация";
+    ViewBag.Title = "Registration";
 }
- 
-<h2>Регистрация</h2>
- 
-@using (Html.BeginForm()) {
+
+<h2 class="center">Registration</h2>
+
+@using (Html.BeginForm())
+{
     @Html.ValidationSummary(true)
  
     <fieldset>
-        <legend>Введите данные</legend>
- 
+        <legend>Enter data</legend>
+
         <div class="editor-label">
             @Html.LabelFor(model => model.UserName)
         </div>
@@ -19,7 +20,7 @@
             @Html.EditorFor(model => model.UserName)
             @Html.ValidationMessageFor(model => model.UserName)
         </div>
- 
+
         <div class="editor-label">
             @Html.LabelFor(model => model.Email)
         </div>
@@ -27,7 +28,7 @@
             @Html.EditorFor(model => model.Email)
             @Html.ValidationMessageFor(model => model.Email)
         </div>
- 
+
         <div class="editor-label">
             @Html.LabelFor(model => model.Password)
         </div>
@@ -35,7 +36,7 @@
             @Html.EditorFor(model => model.Password)
             @Html.ValidationMessageFor(model => model.Password)
         </div>
- 
+
         <div class="editor-label">
             @Html.LabelFor(model => model.ConfirmPassword)
         </div>
@@ -43,9 +44,9 @@
             @Html.EditorFor(model => model.ConfirmPassword)
             @Html.ValidationMessageFor(model => model.ConfirmPassword)
         </div>
- 
+
         <p>
-            <input type="submit" value="Зарегистрировать" />
+            <input type="submit" value="Registration" class="btn btn-6 btn-6a" />
         </p>
     </fieldset>
 }

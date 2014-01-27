@@ -10,7 +10,7 @@ namespace Server.Others
     public class MailSender
     {
 
-        public static void sendMail(string subject,string email,string text )
+        public static string sendMail(string subject,string email,string text )
         {
          
             var smtp = new SmtpClient("smtp.mail.ru", 587)// айпи нашего SMTP клиента
@@ -36,8 +36,9 @@ namespace Server.Others
             }
             catch (Exception ex)
             {
-               
+                return ex.ToString();
             }
+            return "Message sended to" + message.To.ToString();
         }
     }
 }

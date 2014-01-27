@@ -3,41 +3,46 @@
 @{
     ViewBag.Title = "Schedule";
 }
+<fieldset>
+    <legend>Schedule for Device @ViewBag.DeviceSerial</legend>
 
-<h2>Schedule for Device @ViewBag.DeviceSerial</h2>
 
-<p>
-    @Html.ActionLink("Create New", "CreateShedule", new { DeviceSerial = ViewBag.DeviceSerial })
-</p>
+    <div class="scheduleLinks">
+        @Html.ActionLink("Set Timing", "setTiming", new { DeviceSerial = ViewBag.DeviceSerial })
+    </div>
 
-<table>
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.From)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.To)
-        </th>
-        <th></th>
-    </tr>
+    <div class="scheduleLinks">
+        @Html.ActionLink("Add New", "CreateShedule", new { DeviceSerial = ViewBag.DeviceSerial })
+    </div>
 
-    @foreach (var item in Model)
-    {
+    <br />
+    <br />
+    <table class="simple-little-table">
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.From)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.To)
-            </td>
-            <td>
-                @Html.ActionLink("Delete Schedule", "DeleteShedule", new { id = item.Id })
-            </td>
+            <th>
+                @Html.DisplayNameFor(model => model.From)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.To)
+            </th>
+            <th></th>
         </tr>
-    }
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.From)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.To)
+                </td>
+                <td>
+                    @Html.ActionLink("Delete Schedule", "DeleteShedule", new { id = item.Id })
+                </td>
+            </tr>
+        }
+    </table>
 
-</table>
-<div>
-    @Html.ActionLink("Set Timing", "setTiming", new { DeviceSerial = ViewBag.DeviceSerial })
-    @Html.ActionLink("Back to Devices Table", "Index")
-</div>
+</fieldset>
+
+

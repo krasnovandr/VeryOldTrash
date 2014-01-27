@@ -5,30 +5,40 @@
     <meta name="viewport" content="width=device-width" />
     <link  href="~/Content/Site.css"/ type="text/css" rel="stylesheet">
     <title>@ViewBag.Title</title>
+
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-        @Scripts.Render("http://code.jquery.com/jquery-1.9.1.js", "http://code.jquery.com/ui/1.10.3/jquery-ui.js")
+    @Scripts.Render("http://code.jquery.com/jquery-1.9.1.js", "http://code.jquery.com/ui/1.10.3/jquery-ui.js")
     @Styles.Render("http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css")
+
     @*@RenderSection("sTylesInHead",required:false)*@
 </head>
 <body>
-        @Html.Partial("_LoginPartial")
-     <nav>
-          @if (Request.IsAuthenticated)
-          {
-                  <h2 id="Mylink">@Html.ActionLink("Show Your Devices Table", "Index", "Home")</h2>
-                  <h2>@Html.ActionLink("Show empty Devicse Table", "EmptyDevices", "Home")</h2>
-              @*<h2>@Html.ActionLink("Google", "setDeviceOnMap", "Home")</h2>   *@ 
-                 
-          }
-        <ul class="menu">
-        
- @*           <li>@Html.ActionLink("Главная", "Index", "Sample")</li>
-            <li>@Html.ActionLink("Админ", "Index", "Admin")</li>*@
+    <div id="wrapper">
+        <div id="header">
 
-        </ul>
-    </nav>
-    @RenderBody()
+            @Html.Partial("_LoginPartial")
+            @if (Request.IsAuthenticated)
+            {  
+                <ul id="nav">
+                    <li>
+                        <h2 class="mainLink">@Html.ActionLink("Show Your Devices Table", "Index", "Home")</h2>
+                    </li>
+                    <li>
+                        <h2 class="mainLink">@Html.ActionLink("Show empty Devices Table", "EmptyDevices", "Home")</h2>
+                    </li>
+                </ul>
+             
+            }
+        </div>
+        <div class="clear"></div>
+        <div id="main">
+            @RenderBody()
+        </div>
+        <div id="footer">
+            &copy; By Krasnov A.Y. and Kozlov A.A. @DateTime.Now.Year 
+        </div>
+    </div>
 
     @*@Scripts.Render("~/bundles/jquery")*@
     @RenderSection("scripts", required: false)

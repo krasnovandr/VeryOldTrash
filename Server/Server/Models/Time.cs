@@ -11,11 +11,15 @@ namespace Server.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Time
     {
         public int Id { get; set; }
+        [Required(ErrorMessage = "Field must be filled")]
         public Nullable<System.DateTime> From { get; set; }
+        
+        [Required(ErrorMessage = "Field must be filled")]
         public Nullable<System.DateTime> To { get; set; }
         public Nullable<int> DeviceSerial { get; set; }
     }

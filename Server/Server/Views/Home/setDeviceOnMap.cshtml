@@ -2,15 +2,9 @@
     ViewBag.Title = "setDeviceOnMap";
 }
 
-<h2>setDeviceOnMap</h2>
+
 <style>
-    html, body
-    {
-        height: 100%;
-        margin: 0px;
-        padding: 0px;
-    }
-     #panel
+    #panel
     {
         position: absolute;
         top: 5px;
@@ -24,23 +18,26 @@
 
     #map-canvas
     {
-        height: 640px;
-        width: 480px;
+        height: 400px;
+        width:auto;
+        border-left-color: #EDEDED;
+        border-left-style: solid;
+        border-left-width: 5px;
     }
-   
 </style>
+<div id="coords" >
+    <p>Click on the map to add markers</p>
+    @using (Html.BeginForm())
+    {
+        <label>Current latitude and longitude</label><br />
+        <input type="text" id="mapX" name="lat" /><br />
+        <input type="text" id="mapY" name="lng" /><br />
+        <input type="text" id="serial" name="DeviceSerial" hidden="hidden" value="@ViewBag.serial" /><br />
+        <input type="submit" value="Add" name="addOnMap" class="btn btn-6 btn-6a" style="width:240px" />
+    }
+</div>
 <div id="map-canvas"></div>
-<p>Click on the map to add markers.</p>
-@using (Html.BeginForm())
-{
-    <label>Текущие координаты</label>
-
-    <input type="text" id="mapX" name="lat" />
-    <input type="text" id="mapY" name="lng" />
-    <input type="text" id="serial" name="DeviceSerial" hidden="hidden" value="@ViewBag.serial" />
-        <input type="submit" value="Add" name="addOnMap" />
-}
-
+<div class="clear"></div>
 
 
 <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
@@ -54,8 +51,8 @@
     var markers = [];
 
     function initialize() {
-  
-        var haightAshbury = new google.maps.LatLng("37.7699298", "-122.4469157");
+
+        var haightAshbury = new google.maps.LatLng("55.48391181728103", "28.7841796875");
 
         var mapOptions = {
             zoom: 12,

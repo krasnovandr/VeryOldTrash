@@ -6,19 +6,13 @@
 
 @using (Html.BeginForm())
 {
+    <fieldset>
 
-    <h2>Set Tconst from device sn @Model.DeviceSerial</h2>
+        <legend>Set Tconst to device with serial @Model.DeviceSerial</legend>
+        <p>
+            @Html.EditorFor(model => model.tconst)
+        </p>
 
-    <p>
-        @Html.DisplayNameFor(model => model.tconst)
-        @Html.EditorFor(model => model.tconst)
-    </p>
-
-
-
-    <input type="submit" value="Create" />
+        <input type="submit" value="Set" class="btn btn-6 btn-6a" />
+    </fieldset>
 }
-<div>
-   @* @Html.ActionLink("Set Tconst", "SaveTconst")*@
-    @Html.ActionLink("Back to Devices Table", "Index")
-</div>

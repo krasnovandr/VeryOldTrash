@@ -2,16 +2,6 @@
 @{
     ViewBag.Title = "Index";
 }
-@*@section sTylesInHead
-{
-    @Scripts.Render("http://code.jquery.com/jquery-1.9.1.js", "http://code.jquery.com/ui/1.10.3/jquery-ui.js")
-    @Styles.Render("http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css")
-}*@
-<h2>Your Devices</h2>
-@ViewBag.state
-@ViewBag.dev
-@ViewBag.temperature
-@ViewBag.type
 
 <script>
     $(document).ready(function () {
@@ -19,6 +9,8 @@
         setInterval(ajaxAlarms, 300);
         setInterval(ajaxTemp, 300);
         var massiv = $(".alarm").hide();
+
+
         //initialize();
 
     });
@@ -36,12 +28,12 @@
             httpRequest = new ActiveXObject("Microsoft.XMLHTTP");
         }
         // httpRequest.open("GET", "@Request.Url.AbsoluteUri" + "/Home/GetState");
-        httpRequest.open("GET", "http://localhost:81/Server/Home/GetTemperature");
-        var res = document.getElementById("res");
+        httpRequest.open("GET", "http://localhost:7808/Home/GetTemperature");
+        //var res = document.getElementById("res");
         httpRequest.onreadystatechange = function () {
             if (httpRequest.readyState == 4 && httpRequest.status == 200) {
                 var massiv = $(".temperatures");
-                res.value = httpRequest.responseText;
+                //res.value = httpRequest.responseText;
                 for (var i = 0; i < massiv.length; i++) {
                     massiv[i].textContent = "";
                     for (var j = 0; j < httpRequest.responseText.length; j++) {
@@ -68,16 +60,19 @@
             httpRequest = new ActiveXObject("Microsoft.XMLHTTP");
         }
         // httpRequest.open("GET", "@Request.Url.AbsoluteUri" + "/Home/GetState");
-        httpRequest.open("GET", "http://localhost:81/Server/Home/GetState");
+        httpRequest.open("GET", "http://localhost:7808/Home/GetState");
         httpRequest.onreadystatechange = function () {
             if (httpRequest.readyState == 4 && httpRequest.status == 200) {
                 var massiv = $(".state");
                 for (var i = 0; i < massiv.length; i++) {
                     if (httpRequest.responseText[i] == 0) {
                         massiv[i].textContent = "Off";
+                        massiv.eq(i).attr("class", "state red");
+
                     }
                     else {
                         massiv[i].textContent = "On";
+                        massiv.eq(i).attr("class", "state blue");
                     }
                 }
             }
@@ -95,7 +90,7 @@
 
         var res = document.getElementById("res");
         // httpRequest.open("GET", "@Request.Url.AbsoluteUri" + "/Home/GetState");
-        httpRequest.open("GET", "http://localhost:81/Server/Home/GetAlarm");
+        httpRequest.open("GET", "http://localhost:7808/Home/GetAlarm");
         httpRequest.onreadystatechange = function () {
             if (httpRequest.readyState == 4 && httpRequest.status == 200) {
                 var massiv = $(".alarm");
@@ -111,139 +106,19 @@
         httpRequest.send();
     }
 </script>
-
-
-
-<input type="text" id="res" />
-<input type="text" id="jsonSer" value="@ViewBag.jsonSer"  hidden="hidden" />
-
-<table id="MainTable">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.DeviceSerial)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Type)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.State)
-        </th>
-        <th>Temperatura
-        </th>
-        <th>Tconst
-        </th>
-        <th>Settings
-        </th>
-        <th>Alarm
-        </th>
-        <th>Show on the map
-        </th>
-    </tr>
-
-
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-
-                @Html.DisplayFor(modelItem => item.DeviceSerial)
-            </td>
-            <td>
-                @((Server.Controllers.DeviceType)item.Type)
-
-            </td>
-            <td class="state">
-                @if (item.State == 0)
-                {
-                    @Html.Label("Off")
-                }
-                else
-                {
-                    @Html.Label("On")
-                }
-
-            </td>
-
-            <td>
-                @if (item.Type != 4)
-                {
-                    <h4>-</h4>
-                }
-                else
-                {
-                    <div class="temperatures">
-                        @for (int j = 0; j < ViewBag.listSensor.Count; j++)
-                        {
-                            if (item.DeviceSerial == ViewBag.listSensor[j].DeviceSerial)
-                            { 
-                            <h4>@ViewBag.listSensor[j].temperature</h4>
-                            }
-                        }
-                    </div>
-                }
-            </td>
-            <td>
-                @if (item.Type != 4)
-                {
-                    <h4>-</h4>
-                }
-                else
-                {
-                    for (int j = 0; j < ViewBag.listSensor.Count; j++)
-                    {
-                        if (item.DeviceSerial == ViewBag.listSensor[j].DeviceSerial)
-                        { 
-                    <h4>@ViewBag.listSensor[j].tconst</h4>
-                        }
-                    }
-                }
-            </td>
-            <td>
-                @if (item.Type != 4)
-                {
-                    @Html.ActionLink("Turn On/Off", "TurnOnOff", new { DeviceSerial = item.DeviceSerial })<br />
-
-                    @Html.ActionLink("Set up Schedule", "Schedule", new { DeviceSerial = item.DeviceSerial })            
-                }
-                else
-                {
-                    @Html.ActionLink("Set up Tconst", "TconstSet", new { DeviceSerial = item.DeviceSerial }) 
-                }
-
-            </td>
-
-            <td>
-                <div class="alarm" id="@item.DeviceSerial">
-                    @if (item.Type == 4 || item.Type == 1)
-                    {
-                        @Html.ActionLink("Alarm", "ResetAlarm", new { DeviceSerial = item.DeviceSerial })
-                    }
-                </div>
-            </td>
-            <td>
-                <input type="button"  value="Show on the map" class="showButton" id="@(item.DeviceSerial + 100)"  />
-            </td>
-        </tr>
-    }
-
-</table>
-
-
-
 <style>
-    html, body
-    {
-        height: 100%;
-        margin: 0px;
-        padding: 0px;
-    }
-
     #map-canvas
     {
         height: 400px;
-        width: 400px;
+        width:auto;
+        border-left-color: #EDEDED;
+        border-left-style: solid;
+        border-left-width: 5px;
     }
+
+
 </style>
+
 <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
 <script>
     var map;
@@ -328,6 +203,122 @@
     google.maps.event.addDomListener(window, 'load', initialize);
 
 </script>
+
+
+<input type="text" id="jsonSer" value="@ViewBag.jsonSer"  hidden="hidden" />
+<div id="tableWrapper">
+    <table id="MainTable" class="simple-little-table">
+        @*class="simple-little-table"*@
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.DeviceSerial)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Type)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.State)
+            </th>
+            <th class="lol">Temperatura
+            </th>
+            <th>Tconst
+            </th>
+            <th>Settings
+            </th>
+            <th>Alarm
+            </th>
+            <th>Show on the map
+            </th>
+        </tr>
+
+
+        @foreach (var item in Model)
+        {
+       
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DeviceSerial)
+                </td>
+                <td>
+                    @((Server.Controllers.DeviceType)item.Type)
+
+                </td>
+                <td class="state">
+                    @if (item.State == 0)
+                    {
+                        @Html.Label("Off")
+                    }
+                    else
+                    {
+                        @Html.Label("On")
+                    }
+
+                </td>
+
+                <td>
+                    @if (item.Type != 4)
+                    {
+                        <h4>-</h4>
+                    }
+                    else
+                    {
+                        <div class="temperatures">
+                            @for (int j = 0; j < ViewBag.listSensor.Count; j++)
+                            {
+                                if (item.DeviceSerial == ViewBag.listSensor[j].DeviceSerial)
+                                { 
+                                <h4>@ViewBag.listSensor[j].temperature</h4>
+                                }
+                            }
+                        </div>
+                    }
+                </td>
+                <td>
+                    @if (item.Type != 4)
+                    {
+                        <h4>-</h4>
+                    }
+                    else
+                    {
+                        for (int j = 0; j < ViewBag.listSensor.Count; j++)
+                        {
+                            if (item.DeviceSerial == ViewBag.listSensor[j].DeviceSerial)
+                            { 
+                        <h4>@ViewBag.listSensor[j].tconst</h4>
+                            }
+                        }
+                    }
+                </td>
+                <td>
+                    @if (item.Type != 4)
+                    {
+                        @Html.ActionLink("Turn On/Off", "TurnOnOff", new { DeviceSerial = item.DeviceSerial })<br />
+
+                        @Html.ActionLink("Set up Schedule", "Schedule", new { DeviceSerial = item.DeviceSerial })            
+                    }
+                    else
+                    {
+                        @Html.ActionLink("Set up Tconst", "TconstSet", new { DeviceSerial = item.DeviceSerial }) 
+                    }
+
+                </td>
+
+                <td>
+                    <div class="alarm" id="@item.DeviceSerial">
+                        @if (item.Type == 4 || item.Type == 1)
+                        {
+                            @Html.ActionLink("Alarm", "ResetAlarm", new { DeviceSerial = item.DeviceSerial })
+                        }
+                    </div>
+                </td>
+                <td>
+                    <input type="button"  value="Show on the map" class="showButton btn-6 btn-6a" id="@(item.DeviceSerial + 100)"  />
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>
 <div id="map-canvas"></div>
 
 

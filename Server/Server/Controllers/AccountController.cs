@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
 using Server.Models;
+using Server.Others;
 using WebMatrix.WebData;
 namespace Server.Controllers
 {
@@ -19,7 +20,7 @@ namespace Server.Controllers
 
         public ActionResult Index()
         {
-           return View();
+            return View();
         }
 
         public ActionResult Login()
@@ -39,7 +40,7 @@ namespace Server.Controllers
                     FormsAuthentication.SetAuthCookie(model.UserName, model.RememberMe);
                     if (Url.IsLocalUrl(returnUrl))
                     {
-                      //  new EmailController().SendEmail(User).Deliver();
+                        //  new EmailController().SendEmail(User).Deliver();
                         return Redirect(returnUrl);
                     }
                     else
@@ -49,7 +50,7 @@ namespace Server.Controllers
                 }
                 else
                 {
-                    ModelState.AddModelError("", "Неправильный пароль или логин");
+                    ModelState.AddModelError("", "Wrong Password or User Name");
                 }
             }
             return View(model);
@@ -90,6 +91,40 @@ namespace Server.Controllers
             }
 
             return View(model);
+        }
+
+
+        [HttpGet]
+        public ActionResult sendPage()
+        {
+            return View();
+        }
+        [HttpPost]
+
+        public ActionResult sendPage(userNameModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = Membership.GetUser(model.UserName);
+                if (user == null)
+                {
+                    ModelState.AddModelError("", "Invalid userName");
+                    return View(model);
+                }
+                var email = user.Email;
+
+                var subject = "your password";
+                //user.UnlockUser();
+                var text = "User name: " + model.UserName + "\n Password: <" + user.GetPassword() + ">";
+                MailSender.sendMail(subject, email, text);
+                return RedirectToAction("Login");
+            }
+            else
+            {
+                ModelState.AddModelError("", "Invalid userName");
+                return View(model);
+            }
+
         }
 
         public string GetErrorMessage(MembershipCreateStatus status)
