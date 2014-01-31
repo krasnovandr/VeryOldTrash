@@ -20,11 +20,25 @@ namespace Gun
             Camera = new Camera();
         }
 
+        public void checkBoders()
+        {
+            if (Player.PlayerInfo.Position.X <= 0)
+            {
+                Player.PlayerInfo.Position.X = 0;
+            }
+
+            if (Player.PlayerInfo.Position.X >= 800)
+            {
+                Player.PlayerInfo.Position.X = 800;
+            }
+
+        }
+
         public void update()
         {
             Player.move();
             Player.CoolDown.addTime();
-     
+            checkBoders();
             if (GameConstants.mouseState.LeftButton == Microsoft.Xna.Framework.Input.ButtonState.Pressed)
             {
                 if (Player.CoolDown.isReload() == true)
@@ -42,8 +56,8 @@ namespace Gun
                         Bullet.BulletInfo.Position = new Microsoft.Xna.Framework.Vector2(Player.PlayerInfo.Position.X + 31, Player.PlayerInfo.Position.Y + 15);
                     }
                     Player.CoolDown.clear();
-                }    
-               
+                }
+
 
             }
             Camera.Update(Player.PlayerInfo.Position);

@@ -76,6 +76,8 @@
   <ItemGroup>
     <Compile Include="FpsCounter.cs" />
     <Compile Include="Map\Camera.cs" />
+    <Compile Include="Map\Map.cs" />
+    <Compile Include="Map\MapObject.cs" />
     <Compile Include="NetWork\Client.cs" />
     <Compile Include="GameSession.cs" />
     <Compile Include="MySerialize.cs" />

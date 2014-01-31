@@ -29,12 +29,12 @@ namespace Gun
 
         Client client;
         Thread Thread;
-       // PlayerInfo hero;
+        // PlayerInfo hero;
         Texture2D groundTexture;
-       // Vector2 groundVector;
+        // Vector2 groundVector;
         Form form;
         FpsCounter fpsCounter;
-     
+
         SpriteFont spriteFont;
 
 
@@ -48,20 +48,20 @@ namespace Gun
             client.GameSession.Player = new Player();
             client.GameSession.Player.PlayerInfo.HP = 10000;
             Random rnd = new Random(System.DateTime.Now.Second * System.DateTime.Now.Minute);
-            
-            client.GameSession.Player.PlayerInfo.teamNumber = rnd.Next(1,100);
-       
+
+            client.GameSession.Player.PlayerInfo.teamNumber = rnd.Next(1, 100);
+
             this.Exiting += new EventHandler<EventArgs>(Game1_Exiting);
 
-           // button.BackColor = System.Drawing.Color.White;
-             IsFixedTimeStep = false;
-             graphics.SynchronizeWithVerticalRetrace = false;
-           // button.Click += new EventHandler(button_Click);
-           
+            // button.BackColor = System.Drawing.Color.White;
+            IsFixedTimeStep = false;
+            graphics.SynchronizeWithVerticalRetrace = true;
+            // button.Click += new EventHandler(button_Click);
+
             graphics.PreferredBackBufferWidth = 800;//800
             graphics.PreferredBackBufferHeight = 600;//600
             Thread = new Thread(client.startGameSession);
-          
+
             Thread.Start();
         }
 
@@ -72,7 +72,7 @@ namespace Gun
 
         void button_Click(object sender, EventArgs e)
         {
-          
+
         }
 
         /// <summary>
@@ -96,10 +96,10 @@ namespace Gun
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-          
+
             GameConstants.bullet = Content.Load<Texture2D>("Texture//bullet");
             GameConstants.playerL = Content.Load<Texture2D>("Texture//playerL");
-            
+
             GameConstants.playerR = Content.Load<Texture2D>("Texture//playerR");
             groundTexture = Content.Load<Texture2D>("Texture//ground");
             spriteFont = Content.Load<SpriteFont>("base");
@@ -130,7 +130,7 @@ namespace Gun
             client.GameSession.update();
 
             fpsCounter.update(gameTime);
-            
+
             base.Update(gameTime);
         }
 
@@ -140,12 +140,15 @@ namespace Gun
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-           // spriteBatch.Begin();
-            spriteBatch.Begin(SpriteSortMode.Deferred,
-               BlendState.NonPremultiplied, null, null, null, null, client.GameSession.Camera.Transform);
+            // spriteBatch.Begin();
 
+            //spriteBatch.Begin();
+     
+            //spriteBatch.End();
+
+            spriteBatch.Begin(SpriteSortMode.Deferred,
+            BlendState.NonPremultiplied, null, null, null, null, client.GameSession.Camera.Transform);
             spriteBatch.Draw(groundTexture, new Vector2(0, 0), Color.White);
-            
             if (client.GameSession.PlayersList != null)
             {
                 for (int i = 0; i < client.GameSession.PlayersList.Count; i++)
@@ -159,15 +162,18 @@ namespace Gun
                 for (int i = 0; i < client.GameSession.BulletsList.Count; i++)
                 {
                     client.GameSession.BulletsList[i].draw(spriteBatch);
-                }                
+                }
             }
-            //lock (IpPort.locker)
-            //{
-            //    client.stringTable.draw(spriteBatch, spriteFont);
-            //}
-            fpsCounter.draw(spriteBatch, new Vector2(10, 10));
+            lock (IpPort.locker)
+            {
+                client.stringTable.draw(spriteBatch, spriteFont);
+            }
+
             spriteBatch.End();
 
+            spriteBatch.Begin();
+            fpsCounter.draw(spriteBatch, new Vector2(10, 10));
+            spriteBatch.End();
             base.Draw(gameTime);
         }
     }

@@ -138,7 +138,7 @@ namespace ClassesForSerialize
         public static float moveSpeed = 5f;
         public static float bulletSpeed = 10f;
         public static int Damage = 10;
-        public static int reloadTime = 40;
+        public static int reloadTime = 20;
     }
 
 

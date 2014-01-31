@@ -19,7 +19,7 @@ namespace TestNetWork
     {
         public static int port = 5000;
         public static int recievePort;
-        public static String IP = "192.168.43.225";
+        public static String IP = "192.168.1.5";
         public static Object locker = new object();
     }
 
@@ -28,7 +28,8 @@ namespace TestNetWork
     public class Client
     {
         public GameSession GameSession { get; set; }
-        public Thread RecieveThread { get; set; }
+        public Thread RecieveThreadUDP { get; set; }
+        public Thread RecieveThreadTCP { get; set; }
         public int TimeTick { get; set; }
         public StringTable stringTable { get; set; }
         // MyDelegate delege;
@@ -39,6 +40,16 @@ namespace TestNetWork
             stringTable = new StringTable(new Vector2(20, 50));
             // this.delege = delege;
         }
+
+        public void recieveServiceInfo()
+        {
+            while (true)
+            {
+                Sockets.recieveTCPMeassage();
+            }
+
+        }
+
 
         public void recievePlayersListInfo()
         {
@@ -102,8 +113,10 @@ namespace TestNetWork
                     //MessageBox.Show("Ну что можно начинать игру");
                     IpPort.recievePort = recieveTCPPacket.port;
                     Sockets.connectUDPRecieve();
-                    RecieveThread = new Thread(recievePlayersListInfo);
-                    RecieveThread.Start();
+                    RecieveThreadUDP = new Thread(recievePlayersListInfo);
+                    RecieveThreadUDP.Start();
+                    RecieveThreadTCP = new Thread(recieveServiceInfo);
+                    RecieveThreadTCP.Start();
 
                     while (true)
                     {
