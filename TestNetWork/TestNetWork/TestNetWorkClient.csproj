@@ -84,6 +84,10 @@
       <Project>{BCBF13CA-3827-4949-9BDF-A879EBB5C8E6}</Project>
       <Name>ClassesForSerialize</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Gun\Gun\Gun.csproj">
+      <Project>{E6852A9E-ED2D-4B53-9FCA-6A071DB95DD2}</Project>
+      <Name>Gun</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

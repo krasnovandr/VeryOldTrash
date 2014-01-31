@@ -42,7 +42,7 @@ namespace TestNetWork
         }
         public static Object recieveTCPMeassage()
         {
-            byte[] bytes = new byte[1500];
+            byte[] bytes = new byte[15000];
             Object obj = null;
             try
             {
@@ -99,7 +99,7 @@ namespace TestNetWork
         public static Object recieveUDPMeassage()
         {
           
-            byte[] bytes = new byte[150000];
+            byte[] bytes = new byte[15000];
             Object obj = null;
             try
             {

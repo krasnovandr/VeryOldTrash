@@ -17,13 +17,13 @@ namespace TestNetWork
     public partial class Form1 : Form
     {
         Client client;
-        MyDelegate del;
+        //MyDelegate del;
         Thread gameThread;
         public Form1()
         {
        
-            del= new MyDelegate(MyHandler);
-            client = new Client(del);
+           // del= new MyDelegate(MyHandler);
+            //client = new Client(del);
             System.Windows.Forms.Control.CheckForIllegalCrossThreadCalls = false;
             InitializeComponent();
         }
@@ -41,9 +41,9 @@ namespace TestNetWork
 
         private void button1_Click(object sender, EventArgs e)
         {
-            gameThread.Abort();
-            client.RecieveThread.Abort();
-            this.Close();
+            //gameThread.Abort();
+            //client.RecieveThread.Abort();
+            //this.Close();
             System.Diagnostics.Process.GetCurrentProcess().Kill();
         }
        
