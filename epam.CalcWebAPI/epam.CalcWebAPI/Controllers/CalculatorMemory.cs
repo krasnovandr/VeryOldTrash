@@ -8,7 +8,7 @@ namespace epam.CalcWebAPI.Controllers
     public static class CalculatorMemory
     {
         public static int memory;
-        public static List<int> digits = new List<int>();
+        //public static List<int> digits = new List<int>();
 
     }
 }

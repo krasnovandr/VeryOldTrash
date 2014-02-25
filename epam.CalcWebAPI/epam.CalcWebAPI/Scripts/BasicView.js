@@ -58,18 +58,18 @@ var View = _.extend(BasicView, {
         }
         if (pushedButton == 'MS') {
             model.MS();
-            model.current = 0;
+            model.C();
         }
         if (pushedButton == 'M+') {
             model.Mplus();
-            model.current = 0;
+            model.C();
         }
         if (pushedButton == 'MC') {
             model.MC();
         }
         if (pushedButton == 'M-') {
             model.Mminus();
-
+            model.C();
         }
         if (pushedButton == 'C') {
             model.C();
