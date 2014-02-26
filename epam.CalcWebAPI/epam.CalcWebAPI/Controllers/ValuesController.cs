@@ -15,10 +15,10 @@ namespace epam.CalcWebAPI.Controllers
 
         //private ServiceCalculatorMemory service;
         private IServiceCalculatorMemory service;
-        public ValuesController()
-        {
-            this.service = new ServiceCalculatorMemory();
-        }
+        //public ValuesController(IServiceCalculatorMemory service)
+        //{
+        //    this.service = service;
+        //}
 
         public ValuesController(IServiceCalculatorMemory service)
         {
