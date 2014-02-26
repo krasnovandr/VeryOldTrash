@@ -5,48 +5,52 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using epam.CalcWebAPI.Models;
+using epam.CalcWebAPI.Services;
 
 namespace epam.CalcWebAPI.Controllers
 {
     public class ValuesController : ApiController
     {
-  
+        //private ICalculatorMemoryRepository _repository;
+
+        //private ServiceCalculatorMemory service;
+        private IServiceCalculatorMemory service;
+        public ValuesController()
+        {
+            this.service = new ServiceCalculatorMemory();
+        }
+
+        public ValuesController(IServiceCalculatorMemory service)
+        {
+            this.service = service;
+        }
+
         public string PostMS([FromBody]Model model)
         {
-            CalculatorMemory.memory = model.Current;
-            return model.Current.ToString();
+            return service.PostMS(model);
         }
 
         public string PostMC([FromBody]Model model)
         {
-            CalculatorMemory.memory = model.Current;
-            return model.Current.ToString();
+            return service.PostMC(model);
         }
-
 
         public string PostMplus([FromBody]Model model)
         {
-            return (CalculatorMemory.memory += model.Current).ToString();
+            return service.PostMplus(model);
         }
 
         public string PostMinus([FromBody]Model model)
         {
-            return (CalculatorMemory.memory -= model.Current).ToString();
+            return service.PostMinus(model);
         }
-
 
         public string GetMR()
         {
-            return CalculatorMemory.memory.ToString();
+            return service.GetMR();
         }
 
 
-        public string PostDigit([FromBody]Model model)
-        {
-
-
-            return model.Current.ToString();
-        }
 
         //// PUT api/values/5
         //public void Put(int id, [FromBody]string value)

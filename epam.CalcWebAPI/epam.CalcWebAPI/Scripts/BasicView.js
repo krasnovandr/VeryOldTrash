@@ -7,6 +7,7 @@
             var handler = this[this.events[e]];
             $('#Container').on(eventName, selector, handler.bind(this));
         }
+        this.subscribe();
         this.render();
     },
 };
@@ -18,23 +19,23 @@ var View = _.extend(BasicView, {
         "click .digit": "onDigitClick",
         "click .operator": "onOperatorClick"
     },
-  
-  
+
+
     render: function () {
-    
+
         this.baseContainer = $('#Container');
         var templateHtml = $('#calculatorTemplate').html();
         var calculatorHtml = _.template(templateHtml, this.model);
         this.baseContainer.html(calculatorHtml);
-     
+
     },
- 
+
     subscribe: function () {
         var model = this['model'];
         var handler = this['update'];
         model.ev.on('modelChanged', handler, this);
     },
-    update:function(){
+    update: function () {
         this.render();
     },
 
@@ -52,7 +53,7 @@ var View = _.extend(BasicView, {
 
         var pushedButton = e.target.innerHTML;
         var model = this.model;
-    
+
         if (pushedButton == 'MR') {
             model.MR();
         }

@@ -21,7 +21,7 @@
         }
     },
 
-    trigger: function (eventName) {
+    trigger: function (eventName, context) {
 
         if (!this._eventHandlers[eventName]) {
             return;

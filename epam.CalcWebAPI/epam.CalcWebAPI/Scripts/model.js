@@ -1,14 +1,14 @@
 ﻿var calcModel = {
     current: 0,
-    dataInMem : "",
-    ev:EventMixin,
+    dataInMem: "",
+    ev: EventMixin,
 
-    MS:function(){
+    MS: function () {
         var inf = { "current": this.current }
         var context = this;
         $.ajax({
             type: 'POST',
-            url: 'http://localhost:63769/api/values/PostMS',
+            url: '/api/values/PostMS',
             data: inf,
             dataType: 'json',
             success: onAjaxSuccess
@@ -21,13 +21,13 @@
 
     },
 
-    MC:function(){
-        
+    MC: function () {
+
         var inf = { "current": 0 }
         var context = this;
         $.ajax({
             type: 'POST',
-            url: 'http://localhost:63769/api/values/PostMC',
+            url: '/api/values/PostMC',
             data: inf,
             dataType: 'json',
             success: onAjaxSuccess
@@ -44,7 +44,7 @@
         var context = this;
         $.ajax({
             type: 'GET',
-            url: 'http://localhost:63769/api/values/GetMR',
+            url: '/api/values/GetMR',
             success: onAjaxSuccess
         });
         function onAjaxSuccess(data) {
@@ -61,7 +61,7 @@
         var context = this;
         $.ajax({
             type: 'POST',
-            url: 'http://localhost:63769/api/values/PostMplus',
+            url: '/api/values/PostMplus',
             data: inf,
             dataType: 'json',
             success: onAjaxSuccess
@@ -74,7 +74,7 @@
         }
     },
 
-    C:function(){
+    C: function () {
         this.current = 0;
         //console.log(context.current);
         this.ev.trigger('modelChanged');
@@ -85,7 +85,7 @@
         var context = this;
         $.ajax({
             type: 'POST',
-            url: 'http://localhost:63769/api/values/PostMinus',
+            url: '/api/values/PostMinus',
             data: inf,
             dataType: 'json',
             success: onAjaxSuccess
