@@ -20,7 +20,7 @@ namespace epam.CalcWebAPI
             container.RegisterType<IServiceCalculatorMemory, ServiceCalculatorMemory>(new HierarchicalLifetimeManager());
             container.RegisterType<ICalculatorMemoryRepository, CalculatorMemoryRepository>(new HierarchicalLifetimeManager());
             config.DependencyResolver = new UnityResolver(container);
-            
+      
         }
     }
 }

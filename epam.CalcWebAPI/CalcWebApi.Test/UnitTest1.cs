@@ -4,37 +4,57 @@ using CalcWebAPI.Models;
 using CalcWebAPI.Services;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Web;
+using Microsoft.Practices.Unity;
 namespace CalcWebApi.Test
 {
     [TestClass]
     public class UnitTest1
     {
+        private UnityContainer unityContainer;
+        private IServiceCalculatorMemory service;
+        private Model model;
+        ValuesController controller;
+       
+        [TestInitialize()]
+        public void MyTestInitialize()
+        {
+            unityContainer = new UnityContainer();
+            unityContainer.RegisterType<IServiceCalculatorMemory, ServiceCalculatorMemory>();
+            unityContainer.RegisterType<ICalculatorMemoryRepository, CalculatorMemoryRepository>();
+            IServiceCalculatorMemory service = unityContainer.Resolve<ServiceCalculatorMemory>();
+            model = new Model();
+            controller = new ValuesController(service);
+
+        }
+
         [TestMethod]
         public void GeTMR_ShouldReturnedValueFromMemory()
         {
-            var rep = new CalculatorMemoryRepository();
-            var service = new ServiceCalculatorMemory(rep);
-            var model = new Model();
             model.Current = 2;
-
-            var controller = new ValuesController(service);
             controller.PostMS(model);
 
             var result = controller.GetMR();
             Assert.AreEqual(model.Current, result);
         }
 
+        [TestMethod]
+        public void GeTMR_ShouldFailed()
+        {
+            model.Current = 2;
+            controller.PostMS(model);
+
+            var result = controller.GetMR();
+            model.Current = 3;
+            Assert.AreEqual(model.Current, result);
+        }
+
+
 
         [TestMethod]
         public void PostMplus_ShouldReturnedAdditedValue()
         {
-            var rep = new CalculatorMemoryRepository();
-            var service = new ServiceCalculatorMemory(rep);
-            var model = new Model();
             int test = model.Current = 2;
-            test += test; 
-
-            var controller = new ValuesController(service);
+            test += test;
             controller.PostMS(model);
 
             var result = controller.PostMplus(model);
@@ -44,13 +64,9 @@ namespace CalcWebApi.Test
         [TestMethod]
         public void PostMminus_ShouldReturnedSubtractingValue()
         {
-            var rep = new CalculatorMemoryRepository();
-            var service = new ServiceCalculatorMemory(rep);
-            var model = new Model();
             int test = model.Current = 2;
             test -= test;
 
-            var controller = new ValuesController(service);
             controller.PostMS(model);
 
             var result = controller.PostMinus(model);
@@ -60,13 +76,7 @@ namespace CalcWebApi.Test
         [TestMethod]
         public void PostMC_ShouldReturnedNull()
         {
-            var rep = new CalculatorMemoryRepository();
-            var service = new ServiceCalculatorMemory(rep);
-            var model = new Model();
             model.Current = 0;
-            var controller = new ValuesController(service);
-
-
             var result = controller.PostMC(model);
             Assert.AreEqual(0, result);
         }
