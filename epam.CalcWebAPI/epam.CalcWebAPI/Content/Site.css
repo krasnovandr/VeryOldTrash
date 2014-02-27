@@ -754,3 +754,12 @@ tr.pager td {
             margin: 0;
         }
 }
+
+
+.tblCalc{
+ 		border:1px solid gray;
+ 		margin:0;
+ 		padding:0;
+ 		width:auto;
+ 		text-align:center;
+ 	}
