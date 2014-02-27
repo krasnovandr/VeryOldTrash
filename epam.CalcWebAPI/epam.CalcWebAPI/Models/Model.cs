@@ -8,6 +8,5 @@ namespace CalcWebAPI.Models
     public class Model
     {
         public int Current { get; set; }
-        //public int Memory { get; set; }
     }
 }
