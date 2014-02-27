@@ -2,64 +2,69 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using epam.CalcWebAPI.Models;
+using CalcWebAPI.Models;
 
-namespace epam.CalcWebAPI.Services
+namespace CalcWebAPI.Services
 {
     public interface IServiceCalculatorMemory
     {
-        string PostMS(Model model);
+        int PostMS(Model model);
 
-        string PostMC(Model model);
+        int PostMC(Model model);
 
-        string PostMplus(Model model);
+        int PostMplus(Model model);
 
-        string PostMinus(Model model);
+        int PostMinus(Model model);
 
-        string GetMR();
+        int GetMR();
     }
 
     public class ServiceCalculatorMemory : IServiceCalculatorMemory
     {
-        private CalculatorMemoryRepository repository;
+        private ICalculatorMemoryRepository repository;
 
-        public ServiceCalculatorMemory()
+        //public ServiceCalculatorMemory()
+        //{
+        //    this.repository = new CalculatorMemoryRepository();
+        //}
+        
+        public ServiceCalculatorMemory(ICalculatorMemoryRepository repository)
         {
-            this.repository = new CalculatorMemoryRepository();
+            this.repository = repository;
         }
 
-        public string PostMS(Model model)
+        public int PostMS(Model model)
         {
             repository.SetMemory(model.Current);
-            return repository.GetMemory().ToString();
+            return repository.GetMemory();
         }
 
-        public string PostMC(Model model)
+        public int PostMC(Model model)
         {
             repository.SetMemory(model.Current);
-            return repository.GetMemory().ToString();
+            return repository.GetMemory();
         }
 
 
-        public string PostMplus(Model model)
+        public int PostMplus(Model model)
         {
             int value = repository.GetMemory();
             value += model.Current;
             repository.SetMemory(value);
-            return repository.GetMemory().ToString();
+            return repository.GetMemory();
         }
 
-        public string PostMinus(Model model)
+        public int PostMinus(Model model)
         {
             int value = repository.GetMemory();
             value -= model.Current;
             repository.SetMemory(value);
-            return repository.GetMemory().ToString();
+            return repository.GetMemory();
         }
 
-        public string GetMR()
+        public int GetMR()
         {
-            return repository.GetMemory().ToString();
+            return repository.GetMemory();
         }
 
     }

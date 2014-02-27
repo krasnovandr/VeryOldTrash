@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
-using epam.CalcWebAPI.Services;
+using CalcWebAPI.Services;
 using Microsoft.Practices.Unity;
 
 namespace epam.CalcWebAPI
@@ -18,8 +18,9 @@ namespace epam.CalcWebAPI
             );
             var container = new UnityContainer();
             container.RegisterType<IServiceCalculatorMemory, ServiceCalculatorMemory>(new HierarchicalLifetimeManager());
+            container.RegisterType<ICalculatorMemoryRepository, CalculatorMemoryRepository>(new HierarchicalLifetimeManager());
             config.DependencyResolver = new UnityResolver(container);
-
+            
         }
     }
 }

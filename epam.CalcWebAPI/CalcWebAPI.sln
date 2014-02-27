@@ -1,7 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "epam.CalcWebAPI", "epam.CalcWebAPI\epam.CalcWebAPI.csproj", "{CBFC2B87-1A37-464B-8DB3-4845E3C3F5EC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CalcWebAPI", "epam.CalcWebAPI\CalcWebAPI.csproj", "{CBFC2B87-1A37-464B-8DB3-4845E3C3F5EC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CalcWebApi.Test", "CalcWebApi.Test\CalcWebApi.Test.csproj", "{6E8BB005-092A-480B-B620-A941DD0C708E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,6 +15,10 @@ Global
 		{CBFC2B87-1A37-464B-8DB3-4845E3C3F5EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CBFC2B87-1A37-464B-8DB3-4845E3C3F5EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CBFC2B87-1A37-464B-8DB3-4845E3C3F5EC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6E8BB005-092A-480B-B620-A941DD0C708E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6E8BB005-092A-480B-B620-A941DD0C708E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6E8BB005-092A-480B-B620-A941DD0C708E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6E8BB005-092A-480B-B620-A941DD0C708E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

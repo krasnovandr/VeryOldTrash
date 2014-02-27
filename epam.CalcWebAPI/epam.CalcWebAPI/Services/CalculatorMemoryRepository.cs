@@ -3,23 +3,23 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace epam.CalcWebAPI.Services
-{
-    //public interface ICalculatorMemoryRepository
-    //{
-    //    int GetMemory();
-    //    void SetMemory(int value);
-    //}
+namespace CalcWebAPI.Services
+{  
     public static class CalculatorMemory
     {
         public static int memory;
     }
-
-
-    public class CalculatorMemoryRepository
+    
+    public interface ICalculatorMemoryRepository
     {
+        int GetMemory();
+        void SetMemory(int value);
+    }
+  
 
 
+    public class CalculatorMemoryRepository : ICalculatorMemoryRepository
+    {
         public int GetMemory()
         {
             return CalculatorMemory.memory;
@@ -29,6 +29,5 @@ namespace epam.CalcWebAPI.Services
         {
             CalculatorMemory.memory = value;
         }
-
     }
 }
