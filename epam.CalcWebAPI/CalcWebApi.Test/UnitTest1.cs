@@ -38,6 +38,7 @@ namespace CalcWebApi.Test
         }
 
         [TestMethod]
+        [ExpectedException(typeof(AssertFailedException ))]
         public void GeTMR_ShouldFailed()
         {
             model.Current = 2;

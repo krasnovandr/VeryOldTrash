@@ -756,10 +756,32 @@ tr.pager td {
 }
 
 
-.tblCalc{
- 		border:1px solid gray;
- 		margin:0;
- 		padding:0;
- 		width:auto;
- 		text-align:center;
- 	}
+
+.calculator {
+    background: #e2e2e2; /* Old browsers */
+   
+    display: block;
+    margin: 20px auto 0;
+    padding: 20px;
+    position: relative;
+    width: 340px;
+
+
+    border-radius: 5px;
+}
+
+.calculator button {
+    background-color: #eeeeee;
+   
+    border: 1px solid #ccc;
+    border-bottom: 1px solid #bbb;
+    border-radius: 3px;
+
+    color: #333;
+    font: bold 11px/1 "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Geneva, Verdana, sans-serif;
+    margin: 5px;
+    padding: 8px 0;
+    text-align: center;
+    text-shadow: 0 1px 0 #eee;
+    width: 100px;
+}

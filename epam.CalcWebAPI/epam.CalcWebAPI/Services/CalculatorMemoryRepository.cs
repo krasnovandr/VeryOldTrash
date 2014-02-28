@@ -29,17 +29,6 @@ namespace CalcWebAPI.Services
     public class CalculatorMemoryRepository : ICalculatorMemoryRepository
     {
 
-        //public CalculatorMemoryRepository()
-        //{
-        //    using (var db = new MemoryContext())
-        //    {
-        //        Memory mem = new Memory();
-        //        mem.memory = 0;
-        //        db.Memory.Add(mem);
-        //        db.SaveChanges();
-        //    }
-        //}
-
 
         public int GetMemory()
         {
