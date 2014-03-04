@@ -17,8 +17,8 @@ namespace epam.CalcWebAPI
                 defaults: new { id = RouteParameter.Optional }
             );
             var container = new UnityContainer();
-            container.RegisterType<IServiceCalculatorMemory, ServiceCalculatorMemory>(new HierarchicalLifetimeManager());
-            container.RegisterType<ICalculatorMemoryRepository, CalculatorMemoryRepository>(new HierarchicalLifetimeManager());
+            container.RegisterType<IServiceCalculatorMemory, ServiceCalculatorMemory>();
+            container.RegisterType<ICalculatorMemoryRepository, CalculatorMemoryRepository>();
             config.DependencyResolver = new UnityResolver(container);
       
         }

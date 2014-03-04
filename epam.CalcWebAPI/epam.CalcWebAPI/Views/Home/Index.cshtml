@@ -1,18 +1,18 @@
 ﻿
-<div class="calculator">
+<div class="calculator",id="main">
     <p>Math Calculator</p>
     <!-- <h3 data-bind="text: output"></h3> -->
-    <input type="text" data-bind="value: current" disabled="disabled" /><input type="text" data-bind="value: dataInMem" style="width:20px" disabled="disabled"  />
-    <div data-bind="foreach: numbers" >
-         <button data-bind="value: $data.val, text: $data.val, click: $parent.addNumber"></button>
+    <input type="text" data-bind="value: Model.current" disabled="disabled" /><input type="text" data-bind="value: Model.dataInMem" style="width:20px" disabled="disabled"  />
+    <div data-bind="foreach: Model.numbers" >
+         <input type="button"  class="buttons"data-bind="value: $data.val,  click: $root.addNumber"/>
     </div>
-    <div data-bind="foreach: commands" >
-        <button data-bind="value: command, text: command, click: $parent.newCommand"></button>
+    <div data-bind="foreach: Model.commands" >
+        <input type="button" class="buttons" data-bind="value: command, click: $root.newCommand"/>
     </div>
 </div>
 
 <script>
     $(function () {
-        ko.applyBindings(new CalculatorModel());
+        ko.applyBindings(new ViewModel(),document.getElementById("main"));
     });
 </script>

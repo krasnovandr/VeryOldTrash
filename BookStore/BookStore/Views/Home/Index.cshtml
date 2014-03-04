@@ -1,0 +1,115 @@
+﻿@model BookStore.Models.Book
+
+@{
+    ViewBag.Title = "Index";
+}
+@section scripts{
+    <script src="~/Scripts/knockout-2.1.0.js"></script>
+    <script src="~/Scripts/jquery-1.7.1.js"></script>
+   @* <script src="~/Scripts/EventsFactory.js"></script>*@
+    <script src="~/Scripts/BaseModel.js"></script>
+    <script src="~/Scripts/ViewModelAdd.js"></script>
+    <script src="~/Scripts/ViewModelShow.js"></script>
+
+}
+
+<h2>Book Store</h2>
+<div id="AddView">
+
+    <div class="editor-label">
+        @Html.LabelFor(model => model.Author)
+    </div>
+    <div class="editor-field">
+        <input type="text" data-bind="value: Model.author,visible: isEditMode" />
+    </div>
+
+    <div class="editor-label">
+        @Html.LabelFor(model => model.Title)
+    </div>
+    <div class="editor-field">
+        <input type="text" data-bind="value: Model.title,visible: isEditMode" />
+    </div>
+
+    <div class="editor-label">
+        @Html.LabelFor(model => model.Year)
+    </div>
+    <div class="editor-field">
+        <input type="text" data-bind="value: Model.year,visible: isEditMode" />
+    </div>
+    <div class="editor-label">
+        @Html.LabelFor(model => model.PageCount)
+    </div>
+    <div class="editor-field">
+        <input type="text" data-bind="value: Model.pageCount,visible: isEditMode" />
+    </div>
+
+
+
+    <p>
+        <input type="button" value="Create" data-bind="click: $root.createBook, visible: isReadMode" />
+    </p>
+    <div data-bind="visible: isEditMode">
+        <p>
+            <input type="button" value="Add Book" data-bind="click: $root.AddBook" />
+        </p>
+       @* <p>
+            <input type="button" value="Show All" data-bind="click: $root.AllBooks" />
+        </p>*@
+        <p>
+            <input type="button" value="Cancel" data-bind="click: $root.Cancel" />
+        </p>
+
+    </div>
+</div>
+
+<div id="ShowView">
+    <table class="simple-little-table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Author)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Year)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PageCount)
+            </th>
+
+
+        </tr>
+        <tbody data-bind="foreach: arr">
+            <tr>
+                <td>
+                    <span data-bind="text: $data.Author"></span>
+                </td>
+                <td>
+                    <span data-bind="text: $data.Title"></span>
+                </td>
+                <td>
+                    <span data-bind="text: $data.Year"></span>
+                </td>
+                <td>
+                    <span data-bind="text: $data.PageCount"></span>
+                </td>
+            </tr>
+
+    </table>
+</div>
+
+
+
+<script>
+    $(function () {
+        var viewModelAdd = new ViewModelAdd();
+        var viewModelShow = new ViewModelShow();
+        viewModelShow.subscribe();
+        ko.applyBindings(viewModelAdd, document.getElementById("AddView"));
+        ko.applyBindings(viewModelShow, document.getElementById("ShowView"));
+        
+    });
+</script>
+
+
