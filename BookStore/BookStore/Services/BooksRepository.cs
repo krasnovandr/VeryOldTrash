@@ -20,7 +20,7 @@ namespace BookStore.Services
     }
 
 
-    public class BooksRepository:IBooksRepository
+    public class BooksRepository : IBooksRepository
     {
         public List<Book> GetBooks()
         {
@@ -36,8 +36,12 @@ namespace BookStore.Services
         {
             using (var db = new BooksContext())
             {
+
+
+
                 db.Books.Add(book);
                 db.SaveChanges();
+
             }
         }
     }

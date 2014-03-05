@@ -6,41 +6,48 @@
 @section scripts{
     <script src="~/Scripts/knockout-2.1.0.js"></script>
     <script src="~/Scripts/jquery-1.7.1.js"></script>
-   @* <script src="~/Scripts/EventsFactory.js"></script>*@
     <script src="~/Scripts/BaseModel.js"></script>
     <script src="~/Scripts/ViewModelAdd.js"></script>
     <script src="~/Scripts/ViewModelShow.js"></script>
+    @Scripts.Render("~/bundles/jqueryval")
 
 }
 
 <h2>Book Store</h2>
 <div id="AddView">
-
+    <ul data-bind="foreach: Model.errors">
+        <li data-bind="text:$data.ErrorMessage"></li>
+    </ul>
+  
     <div class="editor-label">
         @Html.LabelFor(model => model.Author)
     </div>
     <div class="editor-field">
-        <input type="text" data-bind="value: Model.author,visible: isEditMode" />
+        @*<input type="text" data-bind="value: Model.author,visible: isEditMode" />*@
+        @Html.TextBoxFor(model => model.Author, new { data_bind = "value: Model.author,visible: isEditMode" })
     </div>
 
     <div class="editor-label">
         @Html.LabelFor(model => model.Title)
     </div>
     <div class="editor-field">
-        <input type="text" data-bind="value: Model.title,visible: isEditMode" />
+        @*<input type="text" data-bind="value: Model.title,visible: isEditMode" />*@
+        @Html.TextBoxFor(model => model.Title, new { data_bind = "value: Model.title,visible: isEditMode" })
     </div>
 
     <div class="editor-label">
         @Html.LabelFor(model => model.Year)
     </div>
     <div class="editor-field">
-        <input type="text" data-bind="value: Model.year,visible: isEditMode" />
+        @*<input type="text" data-bind="value: Model.year,visible: isEditMode" />*@
+        @Html.TextBoxFor(model => model.Year, new { data_bind = "value: Model.year,visible: isEditMode" })
     </div>
     <div class="editor-label">
         @Html.LabelFor(model => model.PageCount)
     </div>
     <div class="editor-field">
-        <input type="text" data-bind="value: Model.pageCount,visible: isEditMode" />
+        @*<input type="text" data-bind="value: Model.pageCount,visible: isEditMode" />*@
+        @Html.TextBoxFor(model => model.PageCount, new { data_bind = "value: Model.pageCount,visible: isEditMode" })
     </div>
 
 
@@ -52,9 +59,6 @@
         <p>
             <input type="button" value="Add Book" data-bind="click: $root.AddBook" />
         </p>
-       @* <p>
-            <input type="button" value="Show All" data-bind="click: $root.AllBooks" />
-        </p>*@
         <p>
             <input type="button" value="Cancel" data-bind="click: $root.Cancel" />
         </p>
@@ -80,7 +84,7 @@
 
 
         </tr>
-        <tbody data-bind="foreach: arr">
+        <tbody data-bind="foreach: Model.arr">
             <tr>
                 <td>
                     <span data-bind="text: $data.Author"></span>
@@ -102,14 +106,23 @@
 
 
 <script>
+    var options = {
+        urlAdd: '@Url.Action("AddBook")',
+        urlGet: '@Url.Action("GetBooks")'
+    }
+    var viewModelShow = new ViewModelShow(options);
+    var viewModelAdd = new ViewModelAdd(options);
+
     $(function () {
-        var viewModelAdd = new ViewModelAdd();
-        var viewModelShow = new ViewModelShow();
-        viewModelShow.subscribe();
         ko.applyBindings(viewModelAdd, document.getElementById("AddView"));
         ko.applyBindings(viewModelShow, document.getElementById("ShowView"));
-        
     });
 </script>
+
+
+@*@section valid {
+ 
+}*@
+
 
 

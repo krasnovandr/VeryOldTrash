@@ -6,7 +6,8 @@
     self.year = ko.observable('');
     self.pageCount = ko.observable('');
 
-   
+    self.arr = ko.observableArray([]);
   
-
+    self.errors = ko.observableArray([]);
+    
 }

@@ -1,10 +1,9 @@
-﻿var ViewModelAdd = function () {
+﻿var ViewModelAdd = function (options) {
 
     var self = this;
     self.Model = new BaseModel();
-  
 
-    window.flg = false;
+
     self.isReadMode = ko.observable(true);
     self.isEditMode = ko.computed(function () {
         return !(self.isReadMode());
@@ -20,12 +19,17 @@
 
     self.AddBook = function (data) {
         var jsonData = ko.toJS(self.Model);
-        $.post("/Home/AddBook", jsonData, function (returnedData) {
-            console.log("POST Recieved: " + returnedData);
-             window.flg = true;
 
+        $.post(options.urlAdd, jsonData, function (returnedData) {
+            if (returnedData["item"] == "Added") {
+                self.Model.errors([]);
+                window.viewModelShow.AllBooks();
+            }
+            else {
+                self.Model.errors(returnedData);
+            }
         })
     };
 
-   
+
 }

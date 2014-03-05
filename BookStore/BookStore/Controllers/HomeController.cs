@@ -24,13 +24,18 @@ namespace BookStore.Controllers
             return View();
         }
 
-        //[HttpPost]
-        public string AddBook(Book book)
+        public JsonResult AddBook(Book book)
         {
-            repository.AddBook(book);
-            return "All is good";
-        }
 
+            if (ModelState.IsValid)
+            {
+                repository.AddBook(book);
+                return Json(new { item = "Added" }, JsonRequestBehavior.AllowGet);
+            }
+            var allErrors = ModelState.Values.SelectMany(v => v.Errors);
+
+            return Json(allErrors); ;
+        }
         public JsonResult GetBooks()
         {
             //var a = Json(repository.GetBooks(),JsonRequestBehavior.AllowGet));

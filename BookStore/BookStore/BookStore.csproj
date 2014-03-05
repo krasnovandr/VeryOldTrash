@@ -126,6 +126,15 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201403031640013_InitialCreate.cs" />
+    <Compile Include="Migrations\201403031640013_InitialCreate.Designer.cs">
+      <DependentUpon>201403031640013_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201403040932573_AddBook.cs" />
+    <Compile Include="Migrations\201403040932573_AddBook.Designer.cs">
+      <DependentUpon>201403040932573_AddBook.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Book.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\BooksRepository.cs" />
@@ -225,6 +234,14 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201403031640013_InitialCreate.resx">
+      <DependentUpon>201403031640013_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201403040932573_AddBook.resx">
+      <DependentUpon>201403040932573_AddBook.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
