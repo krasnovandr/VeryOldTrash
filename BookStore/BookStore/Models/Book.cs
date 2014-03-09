@@ -10,19 +10,19 @@ namespace BookStore.Models
     {
         [Key]
         public int Id { get; set; }
-        
+
         [Required(ErrorMessage = "Поле должно быть установлено")]
         [Display(Name = "Название")]
         [StringLength(50, MinimumLength = 3, ErrorMessage = "Длина строки должна быть от 3 до 50 символов")]
         public string Title { get; set; }
-        
+
         [Required(ErrorMessage = "Поле должно быть установлено")]
         [Display(Name = "Автор")]
-        [StringLength(50, MinimumLength = 3, ErrorMessage = "Длина строки должна быть от 3 до 50 символов")]
+        [StringLength(50, MinimumLength = 4, ErrorMessage = "Длина строки должна быть от 4 до 50 символов")]
         public string Author { get; set; }
-        
+
         [Required(ErrorMessage = "Поле должно быть установлено")]
-        [Range(1700, 2014, ErrorMessage = "Недопустимый год")]
+        [Range(0, 2014, ErrorMessage = "Недопустимый год")]
         [Display(Name = "Год")]
         public int Year { get; set; }
 
@@ -31,5 +31,8 @@ namespace BookStore.Models
         [Display(Name = "Число страниц")]
         public int PageCount { get; set; }
 
+        [Required(ErrorMessage = "Поле должно быть установлено")]
+        [Display(Name = "Описание")]
+        public string Description { get; set; }
     }
 }

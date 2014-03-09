@@ -134,6 +134,10 @@
     <Compile Include="Migrations\201403040932573_AddBook.Designer.cs">
       <DependentUpon>201403040932573_AddBook.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201403052045203_AddBook1.cs" />
+    <Compile Include="Migrations\201403052045203_AddBook1.Designer.cs">
+      <DependentUpon>201403052045203_AddBook1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Book.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -241,6 +245,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201403040932573_AddBook.resx">
       <DependentUpon>201403040932573_AddBook.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201403052045203_AddBook1.resx">
+      <DependentUpon>201403052045203_AddBook1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

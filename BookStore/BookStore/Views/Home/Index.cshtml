@@ -18,7 +18,7 @@
     <ul data-bind="foreach: Model.errors">
         <li data-bind="text:$data.ErrorMessage"></li>
     </ul>
-  
+
     <div class="editor-label">
         @Html.LabelFor(model => model.Author)
     </div>
@@ -49,7 +49,13 @@
         @*<input type="text" data-bind="value: Model.pageCount,visible: isEditMode" />*@
         @Html.TextBoxFor(model => model.PageCount, new { data_bind = "value: Model.pageCount,visible: isEditMode" })
     </div>
-
+    <div class="editor-label">
+        @Html.LabelFor(model => model.Description)
+    </div>
+    <div class="editor-field">
+        @*<input type="text" data-bind="value: Model.pageCount,visible: isEditMode" />*@
+        @Html.TextBoxFor(model => model.Description, new { data_bind = "value: Model.description,visible: isEditMode" })
+    </div>
 
 
     <p>
@@ -81,6 +87,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.PageCount)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
 
 
         </tr>
@@ -97,6 +106,9 @@
                 </td>
                 <td>
                     <span data-bind="text: $data.PageCount"></span>
+                </td>
+                <td>
+                    <span data-bind="text: $data.Description"></span>
                 </td>
             </tr>
 

@@ -13,6 +13,14 @@
 
 <script>
     $(function () {
-        ko.applyBindings(new ViewModel(),document.getElementById("main"));
+        var options = {
+            urlMS:   '@Url.HttpRouteUrl("DefaultApi", new { controller = "Values", action = "PostMS" })',
+            urlMC:   '@Url.HttpRouteUrl("DefaultApi", new { controller = "Values", action = "PostMC" })',
+            urlMplus:'@Url.HttpRouteUrl("DefaultApi", new { controller = "Values", action = "PostMplus" })',
+            urlMinus:'@Url.HttpRouteUrl("DefaultApi", new { controller = "Values", action = "PostMinus" })',
+            urlMR:   '@Url.HttpRouteUrl("DefaultApi", new { controller = "Values", action = "GetMR" })'
+
+        };
+        ko.applyBindings(new ViewModel(options), document.getElementById("main"));
     });
 </script>

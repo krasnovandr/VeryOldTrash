@@ -1,0 +1,182 @@
+﻿
+
+.slider__radio, .slider_playStop
+{
+    display: none;
+}
+
+
+label
+{
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+}
+
+    label.pict
+    {
+        background-color: darkgray;
+    }
+
+    label.play
+    {
+    
+       background-color:blue;
+   
+    }
+
+.slider_playStop:checked + label
+{
+    background-color:lawngreen;
+}
+
+.slider__radio:checked + label
+{
+    background-color: darkcyan;
+}
+
+.slides
+{
+    height: 500px;
+    margin: 50px auto;
+    overflow: hidden;
+    position: relative;
+    width: 700px;
+
+}
+
+    .slides ul
+    {
+        list-style: none;
+        position: relative;
+    }
+
+@-webkit-keyframes anim_slides
+{
+    0%
+    {
+        opacity: 0;
+    }
+
+    6%
+    {
+        opacity: 1;
+    }
+
+    24%
+    {
+        opacity: 1;
+    }
+
+    30%
+    {
+        opacity: 0;
+    }
+
+    100%
+    {
+        opacity: 0;
+    }
+}
+
+
+.slides ul li
+{
+    opacity: 1;
+    position: absolute;
+    top: 0;
+    -webkit-animation: anim_slides 16.0s infinite;
+}
+
+
+    .slides ul li:nth-child(2)
+    {
+        -webkit-animation-delay: 4.0s;
+    }
+
+    .slides ul li:nth-child(3)
+    {
+        -webkit-animation-delay: 8.0s;
+    }
+
+    .slides ul li:nth-child(4)
+    {
+        -webkit-animation-delay: 12.0s;
+    }
+
+    .slides ul li img
+    {
+        display: block;
+    }
+
+
+
+.slider__radio:nth-of-type(1) ~ ul li:nth-child(1)
+{
+    opacity: 0.0;
+}
+
+.slider__radio:nth-of-type(1):checked ~ ul li:nth-child(1)
+{
+    opacity: 1.0;
+}
+
+.slider__radio:nth-of-type(2) ~ ul li:nth-child(2)
+{
+    opacity: 0.0;
+}
+
+.slider__radio:nth-of-type(2):checked ~ ul li:nth-child(2)
+{
+    opacity: 1.0;
+}
+
+.slider__radio:nth-of-type(3) ~ ul li:nth-child(3)
+{
+    opacity: 0.0;
+}
+
+.slider__radio:nth-of-type(3):checked ~ ul li:nth-child(3)
+{
+    opacity: 1.0;
+}
+
+.slider__radio:nth-of-type(4) ~ ul li:nth-child(4)
+{
+    opacity: 0.0;
+}
+
+.slider__radio:nth-of-type(4):checked ~ ul li:nth-child(4)
+{
+    opacity: 1.0;
+}
+
+.slider__radio:checked ~ ul li
+{
+    -webkit-animation: none;
+}
+
+.slider_playStop:checked ~ ul li
+{
+    -webkit-animation: anim_slides 15.0s infinite;
+}
+
+    .slider_playStop:checked ~ ul li:nth-child(1)
+    {
+        -webkit-animation-delay: 0.0s;
+    }
+
+    .slider_playStop:checked ~ ul li:nth-child(2)
+    {
+        -webkit-animation-delay: 4.0s;
+    }
+
+    .slider_playStop:checked ~ ul li:nth-child(3)
+    {
+        -webkit-animation-delay: 8.0s;
+    }
+
+    .slider_playStop:checked ~ ul li:nth-child(4)
+    {
+        -webkit-animation-delay: 12.0s;
+    }

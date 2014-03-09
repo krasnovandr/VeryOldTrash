@@ -1,4 +1,4 @@
-﻿var ViewModel = function () {
+﻿var ViewModel = function (options) {
 
     var self = this;
     this.Model = new BaseModel();
@@ -37,7 +37,7 @@
         var inf = { "current": self.Model.current() }
         $.ajax({
             type: 'POST',
-            url: '/api/values/PostMS',
+            url: options.urlMS,
             data: inf,
             dataType: 'json',
             success: onAjaxSuccess
@@ -51,10 +51,10 @@
 
 
     self.McFunction = function () {
-        var inf = { "current": 0 }
+        var inf = { "current": 0 };
         $.ajax({
             type: 'POST',
-            url: '/api/values/PostMC',
+            url: options.urlMC,
             data: inf,
             dataType: 'json',
             success: onAjaxSuccess
@@ -70,7 +70,7 @@
     self.MrFunction = function () {
         $.ajax({
             type: 'GET',
-            url: '/api/values/GetMR',
+            url: options.urlMR,
             success: onAjaxSuccess
         });
         function onAjaxSuccess(data) {
@@ -81,11 +81,11 @@
     };
 
     self.MplusFunction = function () {
-        var inf = { "current": self.Model.current() }
-        var context = this;
+        var inf = { "current": self.Model.current() };
+   
         $.ajax({
             type: 'POST',
-            url: '/api/values/PostMplus',
+            url: options.urlMplus,
             data: inf,
             dataType: 'json',
             success: onAjaxSuccess
@@ -101,10 +101,10 @@
     };
 
     self.MminusFunction = function () {
-        var inf = { "current": self.Model.current() }
+        var inf = { "current": self.Model.current() };
         $.ajax({
             type: 'POST',
-            url: '/api/values/PostMinus',
+            url: options.urlMinus,
             data: inf,
             dataType: 'json',
             success: onAjaxSuccess
