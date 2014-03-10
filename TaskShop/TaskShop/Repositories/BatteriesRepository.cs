@@ -7,7 +7,7 @@ using TaskShop.Models;
 
 namespace TaskShop.Repositories
 {
-  
+
     public interface IBatteriesRepository
     {
         void AddBattery(Battery battery);
@@ -32,7 +32,7 @@ namespace TaskShop.Repositories
             using (var db = new Context())
             {
                 var batteries = (from entity in db.Batteries
-                             select entity).ToList();
+                                 select entity).ToList();
                 return batteries;
             }
         }

@@ -5,12 +5,17 @@
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
     @Styles.Render("~/Content/css")
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
 
 </head>
 <body>
     @RenderSection("scripts", required: false)
 
     @RenderBody()
-  
+
 </body>
 </html>
+@{
+    ViewBag.Title = "Index";
+}
+
