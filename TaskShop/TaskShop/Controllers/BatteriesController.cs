@@ -16,11 +16,11 @@ namespace TaskShop.Controllers
 
         //
         // GET: /Batteries/
-        public BatteriesController()
+   
+        public BatteriesController(IBatteriesRepository repository)
         {
-            _repository = new BatteriesRepository();
+            this._repository = repository;
         }
-
         public JsonResult GetResult()
         {
             var batteries = _repository.GetBatteries();

@@ -1,0 +1,47 @@
+﻿@model TaskShop.Models.MemoryCard
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.Producer)
+</div>
+<div class="editor-field">
+    @*@Html.EditorFor(model => model.Producer,new { data_bind = "value: $root.Model.Producer" })*@
+    <input type="text" data-bind="value: MemoryCardModel.Producer" />
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.Size)
+</div>
+<div class="editor-field">
+
+    <input type="text" data-bind="value: MemoryCardModel.Size" />
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.ReadSpeed)
+</div>
+<div class="editor-field">
+
+    <input type="text" data-bind="value: MemoryCardModel.ReadSpeed" />
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.WriteSpeed)
+</div>
+<div class="editor-field">
+    <input type="text" data-bind="value: MemoryCardModel.WriteSpeed" />
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.Price)
+
+</div>
+<div class="editor-field">
+    @*@Html.EditorFor(model => model.Price,new { data_bind = "value: Model.Price" })*@
+    <input type="text" data-bind="value: MemoryCardModel.Price" />
+</div>
+
+
+<p>
+    <input type="button" value="Add" data-bind="click: $root.Add" />
+</p>
+

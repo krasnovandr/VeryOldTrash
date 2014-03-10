@@ -1,4 +1,4 @@
-﻿@model IEnumerable<TaskShop.Models.Battery>
+﻿@model IEnumerable<TaskShop.Models.Monitor>
 
 <table class="simple-little-table">
     <tr>
@@ -9,19 +9,22 @@
             @Html.DisplayNameFor(model => model.Producer)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Capacity)
+            @Html.DisplayNameFor(model => model.MatrixType)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Voltage)
+            @Html.DisplayNameFor(model => model.Resolution)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Frequency)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Price)
         </th>
-       
+
     </tr>
 
 
-    <tbody data-bind="foreach: BatteryModel.arr">
+    <tbody data-bind="foreach: MonitorModel.arr">
         <tr>
             <td>
                 <span data-bind="text: $data.Id"></span>
@@ -30,10 +33,13 @@
                 <span data-bind="text: $data.Producer"></span>
             </td>
             <td>
-                <span data-bind="text: $data.Capacity"></span>
+                <span data-bind="text: $data.MatrixType"></span>
             </td>
             <td>
-                <span data-bind="text: $data.Voltage"></span>
+                <span data-bind="text: $data.Resolution"></span>
+            </td>
+            <td>
+                <span data-bind="text: $data.Frequency"></span>
             </td>
             <td>
                 <span data-bind="text: $data.Price"></span>

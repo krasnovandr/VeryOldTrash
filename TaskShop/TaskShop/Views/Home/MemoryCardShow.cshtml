@@ -1,4 +1,4 @@
-﻿@model IEnumerable<TaskShop.Models.Battery>
+﻿@model IEnumerable<TaskShop.Models.MemoryCard>
 
 <table class="simple-little-table">
     <tr>
@@ -9,19 +9,22 @@
             @Html.DisplayNameFor(model => model.Producer)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Capacity)
+            @Html.DisplayNameFor(model => model.Size)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Voltage)
+            @Html.DisplayNameFor(model => model.ReadSpeed)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.WriteSpeed)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Price)
         </th>
-       
+
     </tr>
 
 
-    <tbody data-bind="foreach: BatteryModel.arr">
+    <tbody data-bind="foreach: MemoryCardModel.arr">
         <tr>
             <td>
                 <span data-bind="text: $data.Id"></span>
@@ -30,10 +33,13 @@
                 <span data-bind="text: $data.Producer"></span>
             </td>
             <td>
-                <span data-bind="text: $data.Capacity"></span>
+                <span data-bind="text: $data.Size"></span>
             </td>
             <td>
-                <span data-bind="text: $data.Voltage"></span>
+                <span data-bind="text: $data.ReadSpeed"></span>
+            </td>
+            <td>
+                <span data-bind="text: $data.WriteSpeed"></span>
             </td>
             <td>
                 <span data-bind="text: $data.Price"></span>

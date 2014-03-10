@@ -5,7 +5,7 @@
 </div>
 <div class="editor-field">
     @*@Html.EditorFor(model => model.Producer,new { data_bind = "value: $root.Model.Producer" })*@
-    <input type="text"  data-bind="value: Model.Producer" />
+    <input type="text"  data-bind="value: BatteryModel.Producer" />
 </div>
 
 <div class="editor-label">
@@ -13,7 +13,7 @@
 </div>
 <div class="editor-field">
     @*@Html.EditorFor(model => model.Capacity,new { data_bind = "value: Model.Capacity" })*@
-    <input type="text"  data-bind="value: Model.Capacity" />
+    <input type="text"  data-bind="value: BatteryModel.Capacity" />
 </div>
 
 <div class="editor-label">
@@ -21,7 +21,7 @@
 </div>
 <div class="editor-field">
     @*@Html.EditorFor(model => model.Voltage,new { data_bind = "value:$Voltage" })*@
-    <input type="text"  data-bind="value: Model.Voltage" />
+    <input type="text"  data-bind="value: BatteryModel.Voltage" />
 </div>
 
 <div class="editor-label">
@@ -30,7 +30,7 @@
 </div>
 <div class="editor-field">
     @*@Html.EditorFor(model => model.Price,new { data_bind = "value: Model.Price" })*@
-    <input type="text"  data-bind="value: Model.Price" />
+    <input type="text"  data-bind="value: BatteryModel.Price" />
 </div>
 
 
