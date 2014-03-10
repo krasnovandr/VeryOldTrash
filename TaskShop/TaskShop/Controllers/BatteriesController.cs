@@ -23,12 +23,12 @@ namespace TaskShop.Controllers
 
         public JsonResult GetResult()
         {
-            var books = _repository.GetBatteries();
-            return Json(books, JsonRequestBehavior.AllowGet);
+            var batteries = _repository.GetBatteries();
+            return Json(batteries, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
-        public JsonResult AddBook(Battery battery)
+        public JsonResult AddBattery(Battery battery)
         {
             if (ModelState.IsValid)
             {

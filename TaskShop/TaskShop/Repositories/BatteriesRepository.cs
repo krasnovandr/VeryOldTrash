@@ -20,7 +20,7 @@ namespace TaskShop.Repositories
 
         public void AddBattery(Battery battery)
         {
-            using (var db = new Context())
+            using (var db = new ShopContext())
             {
                 db.Batteries.Add(battery);
                 db.SaveChanges();
@@ -29,7 +29,7 @@ namespace TaskShop.Repositories
 
         public List<Battery> GetBatteries()
         {
-            using (var db = new Context())
+            using (var db = new ShopContext())
             {
                 var batteries = (from entity in db.Batteries
                                  select entity).ToList();

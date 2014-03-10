@@ -8,53 +8,67 @@
     <script src="~/Scripts/knockout-2.1.0.js"></script>
     <script src="~/Scripts/jquery-1.7.1.js"></script>
     <script src="~/Scripts/sammy-latest.min.js"></script>
+
     <script src="~/Scripts/ViewModel.js"></script>
     @Scripts.Render("~/bundles/jqueryval")
 
 }
 
-
-<ul class="nav nav-pills" data-bind="foreach:views">
-    <li data-bind="css: {active: $root.currentView() == $data}">
+<div id="Main">
+    <div class="span12" data-bind="foreach:views">
+        @*<li data-bind="css: {active: $root.currentView() == $data}">*@
+        <div class="row">
+            <input type="button" class="btn btn-link" data-bind="value: $data, click: $root.goTopage" />
+        </div>
         @*<a data-bind="text:$data, attr:{href:'#' + $data}"></a>*@
-    </li>
-</ul>
+        @*</li>*@
 
-<div class="container">
-    <div class="row">
-        <div class="span12">
-            <div data-bind="template: {name: currentView()}"></div>
+
+    </div>
+
+    <div class="container ">
+        <div class="row">
+            <div class="span12">
+                <div id="Home" data-bind="visible: show_Home">
+                    <div>
+                        <h2>Home</h2>
+                    </div>
+                </div>
+
+                <div id="About" data-bind="visible: show_About">
+                    <div>
+                        <h2>About</h2>
+                    </div>
+                </div>
+
+                <div id="Battery" data-bind="visible: show_Battery">
+                    <div>
+                        <h2>Battery</h2>
+                        @*<input type="button" value="Add" data-bind="click: $root.Add" />*@
+                        <input type="button" value="Show" data-bind="click: $root.AllBooks" />
+
+                        @*@Html.Partial("BatteryAdd")*@
+                        @Html.Partial("BatteryShow")
+
+                        @*        <input type="text" value="Add" data-bind="value: Model.Producer" />*@
+                        @*         <input type="button" value="Add" data-bind="click: $root.Add" />*@
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
-
-<script type="text/html" id="Home">
-    <div>
-        <h2>Home</h2>
-    </div>
-</script>
-<script type="text/html" id="About">
-    <div>
-        <h2>About</h2>
-    </div>
-</script>
-<script type="text/html" id="Contact">
-    <div>
-        <h2>Contact</h2>
-    </div>
-</script>
-
-
 <script>
-  
 
     $(function () {
         var vm = new ViewModel();
-        ko.applyBindings(vm);
+
+        ko.applyBindings(vm, document.getElementById("Main"));
 
         Sammy(function () {
             this.get('#:view', function () {
                 vm.currentView(this.params.view);
+
             });
         }).run('#Home');
     });

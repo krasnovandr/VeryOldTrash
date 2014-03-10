@@ -1,0 +1,40 @@
+﻿@model TaskShop.Models.Battery
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.Producer)
+</div>
+<div class="editor-field">
+    @*@Html.EditorFor(model => model.Producer,new { data_bind = "value: $root.Model.Producer" })*@
+    <input type="text"  data-bind="value: Model.Producer" />
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.Capacity)
+</div>
+<div class="editor-field">
+    @*@Html.EditorFor(model => model.Capacity,new { data_bind = "value: Model.Capacity" })*@
+    <input type="text"  data-bind="value: Model.Capacity" />
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.Voltage)
+</div>
+<div class="editor-field">
+    @*@Html.EditorFor(model => model.Voltage,new { data_bind = "value:$Voltage" })*@
+    <input type="text"  data-bind="value: Model.Voltage" />
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.Price)
+    @*<input type="text"  data-bind="value: Model.Producer" />*@
+</div>
+<div class="editor-field">
+    @*@Html.EditorFor(model => model.Price,new { data_bind = "value: Model.Price" })*@
+    <input type="text"  data-bind="value: Model.Price" />
+</div>
+
+
+<p>
+    <input type="button" value="Add" data-bind="click: $root.Add" />
+</p>
+

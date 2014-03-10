@@ -8,12 +8,12 @@ using System.Web;
 
 namespace TaskShop.Models
 {
-    public class Context : DbContext
+    public class ShopContext : DbContext
     {
-        public Context()
-            : base("TaskShopConnection")
-        {
-        }
+        //public ShopContext()
+        //    : base("TaskShopConnection")
+        //{
+        //}
         public DbSet<Battery> Batteries { get; set; }
         public DbSet<Earphone> Earphones { get; set; }
         public DbSet<MemoryCard> MemoryCards { get; set; }
