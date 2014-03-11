@@ -28,6 +28,7 @@ namespace TaskShop
             container.RegisterType<IMonitorsRepository, MonitorsRepository>();
             container.RegisterType<IMemoryCardsRepository, MemoryCardsRepository>();
             container.RegisterType<IEarphonesRepository, EarphonesRepository>();
+            container.RegisterType<ICartRepository, CartRepository>();
             //container.RegisterType<IController, StoreController>("Store");
             return container;
         }

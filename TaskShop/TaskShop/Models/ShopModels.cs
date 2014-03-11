@@ -18,6 +18,7 @@ namespace TaskShop.Models
         public DbSet<Earphone> Earphones { get; set; }
         public DbSet<MemoryCard> MemoryCards { get; set; }
         public DbSet<Monitor> Monitors { get; set; }
+        public DbSet<Cart> Carts { get; set; }
     }
 
     public class Battery
@@ -61,6 +62,17 @@ namespace TaskShop.Models
         public int Frequency { get; set; }
         public string MatrixType { get; set; }
         public int Price { get; set; }
+    }
+
+    public class Cart
+    {
+        [Key]
+        public int Id { get; set; }
+        public int GoodsId { get; set; }
+        public string GoodsCategory { get; set; }
+        public int Price { get; set; }
+        
+
     }
 
 }

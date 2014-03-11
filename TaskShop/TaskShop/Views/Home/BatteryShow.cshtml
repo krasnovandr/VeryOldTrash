@@ -1,44 +1,49 @@
 ﻿@model IEnumerable<TaskShop.Models.Battery>
-
-<table class="simple-little-table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Id)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Producer)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Capacity)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Voltage)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Price)
-        </th>
-       
-    </tr>
-
-
-    <tbody data-bind="foreach: BatteryModel.arr">
+<div id="Show" data-bind="visible:BatteryViewModel.isReadMode">
+    <table class="simple-little-table">
         <tr>
-            <td>
-                <span data-bind="text: $data.Id"></span>
-            </td>
-            <td>
-                <span data-bind="text: $data.Producer"></span>
-            </td>
-            <td>
-                <span data-bind="text: $data.Capacity"></span>
-            </td>
-            <td>
-                <span data-bind="text: $data.Voltage"></span>
-            </td>
-            <td>
-                <span data-bind="text: $data.Price"></span>
-            </td>
-
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Producer)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Capacity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Voltage)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th>
+                
+            </th>
         </tr>
 
-</table>
+
+        <tbody data-bind="foreach: BatteryViewModel.BatteryModel.arr">
+            <tr>
+                <td>
+                    <span data-bind="text: $data.Id"></span>
+                </td>
+                <td>
+                    <span data-bind="text: $data.Producer"></span>
+                </td>
+                <td>
+                    <span data-bind="text: $data.Capacity"></span>
+                </td>
+                <td>
+                    <span data-bind="text: $data.Voltage"></span>
+                </td>
+                <td>
+                    <span data-bind="text: $data.Price"></span>
+                </td>
+                <td>
+                    <input type="button" class="btn" value="To Cart"data-bind="click: $root.BatteryViewModel.AddToCart"/>
+                </td>
+            </tr>
+
+    </table>
+</div>

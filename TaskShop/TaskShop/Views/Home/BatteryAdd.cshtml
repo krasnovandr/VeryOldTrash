@@ -1,11 +1,12 @@
 ﻿@model TaskShop.Models.Battery
 
+<div id="Add" data-bind="visible:BatteryViewModel.isEditMode">
 <div class="editor-label">
     @Html.LabelFor(model => model.Producer)
 </div>
 <div class="editor-field">
     @*@Html.EditorFor(model => model.Producer,new { data_bind = "value: $root.Model.Producer" })*@
-    <input type="text"  data-bind="value: BatteryModel.Producer" />
+    <input type="text"  data-bind="value: BatteryViewModel.BatteryModel.Producer" />
 </div>
 
 <div class="editor-label">
@@ -13,7 +14,7 @@
 </div>
 <div class="editor-field">
     @*@Html.EditorFor(model => model.Capacity,new { data_bind = "value: Model.Capacity" })*@
-    <input type="text"  data-bind="value: BatteryModel.Capacity" />
+    <input type="text"  data-bind="value: BatteryViewModel.BatteryModel.Capacity" />
 </div>
 
 <div class="editor-label">
@@ -21,7 +22,7 @@
 </div>
 <div class="editor-field">
     @*@Html.EditorFor(model => model.Voltage,new { data_bind = "value:$Voltage" })*@
-    <input type="text"  data-bind="value: BatteryModel.Voltage" />
+    <input type="text"  data-bind="value: BatteryViewModel.BatteryModel.Voltage" />
 </div>
 
 <div class="editor-label">
@@ -30,11 +31,13 @@
 </div>
 <div class="editor-field">
     @*@Html.EditorFor(model => model.Price,new { data_bind = "value: Model.Price" })*@
-    <input type="text"  data-bind="value: BatteryModel.Price" />
+    <input type="text"  data-bind="value: BatteryViewModel.BatteryModel.Price" />
 </div>
 
 
 <p>
-    <input type="button" value="Add" data-bind="click: $root.Add" />
+    <input type="button" value="Add" data-bind="click: BatteryViewModel.Add" />
+     <input type="button" value="Cancel" data-bind="click: BatteryViewModel.Cancel" />
 </p>
 
+</div>

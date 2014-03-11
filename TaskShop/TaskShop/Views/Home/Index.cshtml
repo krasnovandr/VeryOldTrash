@@ -8,60 +8,83 @@
     <script src="~/Scripts/knockout-2.1.0.js"></script>
     <script src="~/Scripts/jquery-1.7.1.js"></script>
     <script src="~/Scripts/sammy-latest.min.js"></script>
+    <script src="~/Scripts/Models/MonitorModel.js"></script>
+    <script src="~/Scripts/Models/CartModel.js"></script>
+    <script src="~/Scripts/Models/BatteryModel.js"></script>
+    <script src="~/Scripts/Models/MainViewModel.js"></script>
 
-    <script src="~/Scripts/ViewModel.js"></script>
     @Scripts.Render("~/bundles/jqueryval")
 
 }
 
 <div id="Main">
-    <div class="span12" data-bind="foreach:views">
+    <div data-bind="foreach:views">
         @*<li data-bind="css: {active: $root.currentView() == $data}">*@
-        <div class="row">
-            <input type="button" class="btn btn-link" data-bind="value: $data, click: $root.goTopage" />
-        </div>
+
+        <input type="button" class="btn btn-link" data-bind="value: $data, click: $root.goTopage" />
+
         @*<a data-bind="text:$data, attr:{href:'#' + $data}"></a>*@
         @*</li>*@
 
 
     </div>
-
+    <span data-bind="text:CartViewModel.totalItems"></span>
     <div class="container ">
-        <div class="row">
-            <div class="span12">
-                <div id="Home" data-bind="visible: show_Home">
-                    <div>
-                        <h2>Home</h2>
-                    </div>
-                </div>
-
-                <div id="About" data-bind="visible: show_About">
-                    <div>
-                        <h2>About</h2>
-                    </div>
-                </div>
-
-                <div id="Battery" data-bind="visible: show_Battery">
-                    <div>
-                        <h2>Battery</h2>
-                        @*<input type="button" value="Add" data-bind="click: $root.Add" />*@
-                        <input type="button" value="Show" data-bind="click: $root.AllBooks" />
-
-                        @*@Html.Partial("BatteryAdd")*@
-                        @Html.Partial("BatteryShow")
-
-                        @*        <input type="text" value="Add" data-bind="value: Model.Producer" />*@
-                        @*         <input type="button" value="Add" data-bind="click: $root.Add" />*@
-                    </div>
+        @*<div class="row">*@
+        <div class="span12">
+            <div id="Home" data-bind="visible: show_Home">
+                <div>
+                    <h2>Home</h2>
                 </div>
             </div>
+
+            <div id="Monitors" data-bind="visible: show_Monitors">
+                <div>
+                    <h2>Monitors</h2>
+                    <input type="button" value="Add" data-bind="click: MonitorViewModel.Create,visible:MonitorViewModel.isReadMode" />
+                    @Html.Partial("MonitorAdd")
+                    @Html.Partial("MonitorShow")
+                </div>
+            </div>
+
+            <div id="Batteries" data-bind="visible: show_Batteries">
+                <div>
+                    <h2>Battery</h2>
+                    <input type="button" value="Add" data-bind="click: BatteryViewModel.Create,visible:BatteryViewModel.isReadMode" />
+                    @Html.Partial("BatteryAdd")
+                    @Html.Partial("BatteryShow")
+                    @*        <input type="text" value="Add" data-bind="value: Model.Producer" />*@
+                    @*         <input type="button" value="Add" data-bind="click: $root.Add" />*@
+                </div>
+            </div>
+
+            <div id="Earphones" data-bind="visible: show_Earphones">
+                <div>
+                    <h2>Earphones</h2>
+                </div>
+            </div>
+
+            <div id="MemoryCards" data-bind="visible: show_MemoryCards">
+                <div>
+                    <h2>MemoryCards</h2>
+                </div>
+            </div>
+            <div id="Cart" data-bind="visible: show_Cart">
+                <h2>Goods in Cart</h2>
+                @Html.Partial("CartShow")
+
+
+            </div>
+
         </div>
     </div>
+    @*</div>*@
 </div>
 <script>
+    var vm = new MainViewModel();
 
     $(function () {
-        var vm = new ViewModel();
+
 
         ko.applyBindings(vm, document.getElementById("Main"));
 

@@ -20,14 +20,14 @@ namespace TaskShop.Controllers
             this._repository = repository;
         }
 
-        public JsonResult GetResult()
+        public JsonResult Get()
         {
             var monitors = _repository.GetMonitors();
             return Json(monitors, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
-        public JsonResult AddMemoryCard(Monitor monitor)
+        public JsonResult Add(Monitor monitor)
         {
             if (ModelState.IsValid)
             {

@@ -1,0 +1,40 @@
+﻿@model IEnumerable<TaskShop.Models.Cart>
+<table class="simple-little-table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GoodsId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GoodsCategory)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Price)
+        </th>
+        <th></th>
+    </tr>
+
+    <tbody data-bind="foreach: CartViewModel.CartModel.arr">
+        <tr>
+            <td>
+                <span data-bind="text: $data.Id"></span>
+            </td>
+            <td>
+                <span data-bind="text: $data.GoodsId"></span>
+            </td>
+            <td>
+                <span data-bind="text: $data.GoodsCategory"></span>
+            </td>
+
+            <td>
+                <span data-bind="text: $data.Price"></span>
+            </td>
+            <td>
+                <input type="button" class="btn" value="Delete" data-bind="click: $root.CartViewModel.Delete" />
+            </td>
+        </tr>
+    </tbody>
+</table>
+Total Price:     <span data-bind="text: CartViewModel.totalPrice"></span>

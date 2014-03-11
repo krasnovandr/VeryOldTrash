@@ -140,12 +140,31 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MemoryCardsController.cs" />
     <Compile Include="Controllers\MonitorsController.cs" />
+    <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201403101222246_InitialCreate.cs" />
+    <Compile Include="Migrations\201403101222246_InitialCreate.Designer.cs">
+      <DependentUpon>201403101222246_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201403111347512_AddCart.cs" />
+    <Compile Include="Migrations\201403111347512_AddCart.Designer.cs">
+      <DependentUpon>201403111347512_AddCart.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201403111350536_AddCart1.cs" />
+    <Compile Include="Migrations\201403111350536_AddCart1.Designer.cs">
+      <DependentUpon>201403111350536_AddCart1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201403111540058_AddCart2.cs" />
+    <Compile Include="Migrations\201403111540058_AddCart2.Designer.cs">
+      <DependentUpon>201403111540058_AddCart2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ShopModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\BatteriesRepository.cs" />
+    <Compile Include="Repositories\CartRepository.cs" />
     <Compile Include="Repositories\EarphonesRepository.cs" />
     <Compile Include="Repositories\MemoryCardsRepository.cs" />
     <Compile Include="Repositories\MonitorsRepository.cs" />
@@ -155,6 +174,8 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <None Include="Scripts\jquery-1.7.1.intellisense.js" />
+    <Content Include="Scripts\Models\BatteryModel.js" />
+    <Content Include="Scripts\Models\CartModel.js" />
     <Content Include="Scripts\jquery-1.7.1.js" />
     <Content Include="Scripts\jquery-1.7.1.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -169,8 +190,9 @@
     <Content Include="Scripts\knockout-2.1.0.debug.js" />
     <Content Include="Scripts\knockout-2.1.0.js" />
     <Content Include="Scripts\modernizr-2.5.3.js" />
+    <Content Include="Scripts\Models\MonitorModel.js" />
     <Content Include="Scripts\sammy-latest.min.js" />
-    <Content Include="Scripts\ViewModel.js" />
+    <Content Include="Scripts\Models\MainViewModel.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Unity.Mvc3.README.txt" />
     <Content Include="Web.config" />
@@ -193,13 +215,29 @@
     <Content Include="Views\Home\MonitorAdd.cshtml" />
     <Content Include="Views\Home\MemoryCardAdd.cshtml" />
     <Content Include="Views\Home\MemoryCardShow.cshtml" />
+    <Content Include="Views\Home\CartShow.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Services\" />
+    <Folder Include="Views\Cart\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201403101222246_InitialCreate.resx">
+      <DependentUpon>201403101222246_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201403111347512_AddCart.resx">
+      <DependentUpon>201403111347512_AddCart.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201403111350536_AddCart1.resx">
+      <DependentUpon>201403111350536_AddCart1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201403111540058_AddCart2.resx">
+      <DependentUpon>201403111540058_AddCart2.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

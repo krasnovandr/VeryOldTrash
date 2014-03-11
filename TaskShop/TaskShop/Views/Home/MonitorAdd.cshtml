@@ -1,47 +1,51 @@
 ﻿@model TaskShop.Models.Monitor
 
-<div class="editor-label">
-    @Html.LabelFor(model => model.Producer)
-</div>
-<div class="editor-field">
-    @*@Html.EditorFor(model => model.Producer,new { data_bind = "value: $root.Model.Producer" })*@
-    <input type="text" data-bind="value: MonitorModel.Producer" />
-</div>
+<div id="Add" data-bind="visible:MonitorViewModel.isEditMode">
+    <div class="editor-label">
+        @Html.LabelFor(model => model.Producer)
+    </div>
+    <div class="editor-field">
+        @*@Html.EditorFor(model => model.Producer,new { data_bind = "value: $root.Model.Producer" })*@
+        <input type="text" data-bind="value: MonitorViewModel.MonitorModel.Producer" />
+    </div>
 
-<div class="editor-label">
-    @Html.LabelFor(model => model.MatrixType)
+    <div class="editor-label">
+        @Html.LabelFor(model => model.MatrixType)
+    </div>
+    <div class="editor-field">
+
+        <input type="text" data-bind="value: MonitorViewModel.MonitorModel.MatrixType" />
+    </div>
+
+    <div class="editor-label">
+        @Html.LabelFor(model => model.Resolution)
+    </div>
+    <div class="editor-field">
+
+        <input type="text" data-bind="value: MonitorViewModel.MonitorModel.Resolution" />
+    </div>
+
+    <div class="editor-label">
+        @Html.LabelFor(model => model.Frequency)
+    </div>
+    <div class="editor-field">
+        <input type="text" data-bind="value: MonitorViewModel.MonitorModel.Frequency" />
+    </div>
+
+    <div class="editor-label">
+        @Html.LabelFor(model => model.Price)
+
+    </div>
+    <div class="editor-field">
+        @*@Html.EditorFor(model => model.Price,new { data_bind = "value: Model.Price" })*@
+        <input type="text" data-bind="value: MonitorViewModel.MonitorModel.Price" />
+    </div>
+
+
+    <p>
+        <p>
+            <input type="button" value="Add" data-bind="click: MonitorViewModel.Add" />
+            <input type="button" value="Cancel" data-bind="click: MonitorViewModel.Cancel" />
+        </p>
+    </p>
 </div>
-<div class="editor-field">
-
-    <input type="text" data-bind="value: MonitorModel.MatrixType" />
-</div>
-
-<div class="editor-label">
-    @Html.LabelFor(model => model.Resolution)
-</div>
-<div class="editor-field">
-
-    <input type="text" data-bind="value: MonitorModel.Resolution" />
-</div>
-
-<div class="editor-label">
-    @Html.LabelFor(model => model.Frequency)
-</div>
-<div class="editor-field">
-    <input type="text" data-bind="value: MonitorModel.Frequency" />
-</div>
-
-<div class="editor-label">
-    @Html.LabelFor(model => model.Price)
-
-</div>
-<div class="editor-field">
-    @*@Html.EditorFor(model => model.Price,new { data_bind = "value: Model.Price" })*@
-    <input type="text" data-bind="value: MonitorModel.Price" />
-</div>
-
-
-<p>
-    <input type="button" value="Add" data-bind="click: $root.Add" />
-</p>
-
