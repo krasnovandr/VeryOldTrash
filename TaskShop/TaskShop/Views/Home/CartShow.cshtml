@@ -2,13 +2,13 @@
 <table class="simple-little-table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Id)
-        </th>
-        <th>
             @Html.DisplayNameFor(model => model.GoodsId)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.GoodsCategory)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Count)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Price)
@@ -16,11 +16,8 @@
         <th></th>
     </tr>
 
-    <tbody data-bind="foreach: CartViewModel.CartModel.arr">
+    <tbody data-bind="foreach:CartViewModel.CartModel.arr">
         <tr>
-            <td>
-                <span data-bind="text: $data.Id"></span>
-            </td>
             <td>
                 <span data-bind="text: $data.GoodsId"></span>
             </td>
@@ -40,4 +37,9 @@
         </tr>
     </tbody>
 </table>
-Total Price:     <span data-bind="text: CartViewModel.totalPrice"></span>
+<div>
+    Total Price:     <span data-bind="text: CartViewModel.totalPrice"></span>
+    Total Count:     <span data-bind="text: CartViewModel.totalItems"></span>
+    <br />
+    <input type="button" class="btn btn-success" value="Checkout" data-bind="click:wizardOpen" />
+</div>

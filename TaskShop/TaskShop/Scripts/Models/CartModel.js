@@ -6,58 +6,59 @@
     self.GoodsCategory = ko.observable('');
 
     self.Price = ko.observable('');
-    self.counter = ko.observable('');
+    self.Count = ko.observable('');
 
     self.arr = ko.observableArray([]);
 
 
 };
 
-var CartViewModel = function () {
+var CartViewModel = function (options) {
     var self = this;
 
 
 
     self.CartModel = new CartModel();
 
-    //self.totalItems = ko.computed(function () {
-    //    return self.CartModel.arr.length;
-    //}, self);
-    self.totalItems = ko.observable(0);
 
-    self.totalPrice = ko.computed(function () {
-        var sum = 0;
-        for (var i = 0; i < self.CartModel.arr().length; i++)
-            sum += parseInt(self.CartModel.arr()[i].Price);
-        return sum;
-    }, self);
+    self.totalItems = ko.observable(0);
+    self.totalPrice = ko.observable(0);
 
 
 
     self.GetAll = function () {
         $.ajax({
             type: 'GET',
-            url: "/Cart/Get",
+            url: options.cartGet,
             success: onGetSuccess
         });
     };
     function onGetSuccess(data) {
         self.CartModel.arr(data);
-        self.totalItems(self.CartModel.arr().length);
+        var count = 0;
+        var price = 0;
+
+        if (self.CartModel.arr().length != 0)
+            for (var i = 0; i < self.CartModel.arr().length; i++) {
+                count += parseInt(self.CartModel.arr()[i].Count);
+                if (self.CartModel.arr()[i].Count == 1) {
+                    price += parseInt(self.CartModel.arr()[i].Price);
+                }
+                else {
+                    for (var j = 0; j < self.CartModel.arr()[i].Count; j++)
+                    price += parseInt(self.CartModel.arr()[i].Price);
+
+                }
+
+            }
+        self.totalItems(count);
+        self.totalPrice(price);
     }
 
     self.Delete = function (data) {
-        var item = data.Id;
-        $.ajax({
-            type: 'GET',
-            url: "/Cart/Delete" + "/"+item,
-            success: onDeleteSuccses
+        var json = ko.toJS(data);
+        $.post(options.cartDelete, json, function () {
+            self.GetAll();
         });
     };
-    function onDeleteSuccses(data) {
-        if (data)self.GetAll();
-    }
-
-
-
 };

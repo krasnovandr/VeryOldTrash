@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -17,42 +18,89 @@ namespace TaskShop.Controllers
             _repository = repository;
         }
 
+
         [HttpPost]
         public JsonResult AddBattery(Battery battery)
         {
             if (ModelState.IsValid)
             {
-                _repository.AddBattery(battery);
+                var sessionCart = (List<Cart>)Session["CartList"];
+
+                if (sessionCart == null)
+                {
+                    var tmp = new List<Cart>();
+                    _repository.AddBattery(battery, tmp);
+                    Session["CartList"] = tmp;
+                }
+                else
+                {
+                    _repository.AddBattery(battery, sessionCart);
+                    Session["CartList"] = sessionCart;
+                }
                 return Json(new { item = "Added" });
             }
-            var allErrors = ModelState.Values.SelectMany(v => v.Errors);
 
+            var allErrors = ModelState.Values.SelectMany(v => v.Errors);
             return Json(allErrors);
         }
+
+
+        public JsonResult Get()
+        {
+            var cartList = (List<Cart>)Session["CartList"];
+            return Json(cartList, JsonRequestBehavior.AllowGet);
+        }
+
+
+        //[HttpPost]
+        //public JsonResult AddBattery(Battery battery)
+        //{
+        //    Session.Add();
+        //    if (ModelState.IsValid)
+        //    {
+        //        _repository.AddBattery(battery);
+        //        return Json(new { item = "Added" });
+        //    }
+        //    var allErrors = ModelState.Values.SelectMany(v => v.Errors);
+
+        //    return Json(allErrors);
+        //}
 
         [HttpPost]
         public JsonResult AddMonitor(Monitor monitor)
         {
             if (ModelState.IsValid)
             {
-                _repository.AddMonitor(monitor);
+                var sessionCart = (List<Cart>)Session["CartList"];
+
+                if (sessionCart == null)
+                {
+                    var tmp = new List<Cart>();
+                    _repository.AddMonitor(monitor, tmp);
+                    Session["CartList"] = tmp;
+                }
+                else
+                {
+                    _repository.AddMonitor(monitor, sessionCart);
+                    Session["CartList"] = sessionCart;
+                }
                 return Json(new { item = "Added" });
             }
-            var allErrors = ModelState.Values.SelectMany(v => v.Errors);
 
+            var allErrors = ModelState.Values.SelectMany(v => v.Errors);
             return Json(allErrors);
         }
 
-        public JsonResult Get()
-        {
-            var carts = _repository.GetCarts();
-            return Json(carts, JsonRequestBehavior.AllowGet);
-        }
+        //public JsonResult Get()
+        //{
+        //    var carts = _repository.GetCarts();
+        //    return Json(carts, JsonRequestBehavior.AllowGet);
+        //}
 
-        public bool Delete(int id)
+        public void Delete(Cart cart)
         {
-            var result = _repository.Delete(id);
-            return result;
+            var cartList = (List<Cart>)Session["CartList"];
+            _repository.Delete(cart, cartList);
         }
     }
 }

@@ -57,6 +57,9 @@ var MonitorViewModel = function () {
 
         $.post("/Monitors/Add", jsonData, function (returnedData) {
             if (returnedData["item"] == "Added") {
+                var tmp = window.vm.CartViewModel.totalItems();
+                tmp++;
+                window.vm.CartViewModel.totalItems(tmp);
                 self.MonitorModel.errors([]);
             } else {
                 self.MonitorModel.errors(returnedData);
@@ -79,6 +82,9 @@ var MonitorViewModel = function () {
         var json = ko.toJS(data);
         $.post("/Cart/AddMonitor", json, function (returnedData) {
             if (returnedData["item"] == "Added") {
+                var tmp = window.vm.CartViewModel.totalItems();
+                tmp++;
+                window.vm.CartViewModel.totalItems(tmp);
                 self.MonitorModel.errors([]);
             } else {
                 self.MonitorModel.errors(returnedData);

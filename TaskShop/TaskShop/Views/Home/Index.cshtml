@@ -23,7 +23,7 @@
     <div data-bind="foreach:views">
         @*<li data-bind="css: {active: $root.currentView() == $data}">*@
 
-        <input type="button" class="btn btn-link" data-bind="value: $data, click: $root.goTopage" />
+        <input type="button" class="btn btn-default" data-bind="value: $data, click: $root.goTopage" />
 
         @*<a data-bind="text:$data, attr:{href:'#' + $data}"></a>*@
         @*</li>*@
@@ -72,20 +72,28 @@
                     </div>
                 </div>
                 <div id="Cart" data-bind="if: show_Cart">
-                    <h2>Goods in Cart</h2>
+                    <h4>Goods in Cart</h4>
                     @Html.Partial("CartShow")
+                  
+
+                    <div id="Wizrd" data-bind="if: show_Wizard">
+                        @Html.Partial("Wizard")
+                    </div>
                 </div>
-                <div id="Wizrd" data-bind="if: show_Wizard">
-         
-                    @Html.Partial("Wizard")
-                </div>
+
 
             </div>
         </div>
     </div>
 </div>
 <script>
-    var vm = new MainViewModel();
+    var options = {
+        cartAddBattery: '@Url.Action("AddBattery", "Cart")',
+        cartGet: '@Url.Action("Get", "Cart")',
+        cartAddMonitor: '@Url.Action("AddMonitor", "Cart")',
+        cartDelete: '@Url.Action("Delete", "Cart")'
+    };
+    var vm = new MainViewModel(options);
 
     $(function () {
 

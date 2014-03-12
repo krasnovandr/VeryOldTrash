@@ -75,9 +75,12 @@ var BatteryViewModel = function () {
         self.BatteryModel.arr(data);
     }
 
+
+
     self.AddToCart = function (data) {
         var json = ko.toJS(data);
         $.post("/Cart/AddBattery", json, function (returnedData) {
+            var a = returnedData;
             if (returnedData["item"] == "Added") {
                 var tmp = window.vm.CartViewModel.totalItems();
                 tmp++;

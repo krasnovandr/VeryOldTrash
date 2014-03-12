@@ -19,6 +19,7 @@ namespace TaskShop.Models
         public DbSet<MemoryCard> MemoryCards { get; set; }
         public DbSet<Monitor> Monitors { get; set; }
         public DbSet<Cart> Carts { get; set; }
+        public DbSet<Order> Orders { get; set; }
     }
 
     public class Battery
@@ -70,9 +71,26 @@ namespace TaskShop.Models
         public int Id { get; set; }
         public int GoodsId { get; set; }
         public string GoodsCategory { get; set; }
+        public int Count { get; set; }
         public int Price { get; set; }
-        
+        public int OrderId { get; set; }
+    }
 
+    public class Order
+    {
+        [Key]
+        public int Id { get; set; }
+        public int TotalGoodsPrice { get; set; }
+        public int DeliveryPrice { get; set; }
+        public int TotalCount { get; set; }
+        public int Discount { get; set; }
+        public string Email { get; set; }
+
+        public string City { get; set; }
+        public string Street { get; set; }
+        public int House { get; set; }
+
+        public string CardNumber { get; set; }
     }
 
 }

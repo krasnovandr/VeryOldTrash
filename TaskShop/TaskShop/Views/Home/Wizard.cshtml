@@ -1,4 +1,12 @@
-﻿<div data-bind="template: { name: 'currentTmpl', data: WizardModel.currentStep }"></div>
+﻿<div class="row">
+    TotalCount<span data-bind="text: WizardModel.OrderModel.TotalCount"></span>
+    Discount<span data-bind="text: WizardModel.OrderModel.Discount"></span>
+    TotalPrice<span data-bind="text: WizardModel.OrderModel.TotalPrice"></span>
+    DeliveryPrice<span data-bind="text: WizardModel.OrderModel.DeliveryPrice"></span>
+
+</div>
+<div data-bind="template: { name: 'currentTmpl', data: WizardModel.currentStep }"></div>
+
 <hr />
 
 <button data-bind="click: WizardModel.goPrevious, visible: WizardModel.canGoPrevious">Previous</button>
@@ -11,47 +19,41 @@
 </script>
 
 <script id="deliveryMethodsTmpl" type="text/html">
-    deliveryMethodsTmpl
-    @* <fieldset>
-        <legend>Naamgegevens</legend>
-        <p data-bind="css: { error: FirstName.hasError }">
-            <label for"FirstName">First Name</label>
-            <input id="FirstName" type="text" data-bind="value: FirstName, valueUpdate: 'afterkeydown'" />
-            <p data-bind="validationMessage: FirstName"></p>
-        </p>
-        <p data-bind="css: { error: LastName.hasError }">
-            <label for="LastName">Last Name</label>
-            <input id="LastName" type="text" data-bind="value: LastName, valueUpdate: 'afterkeydown'" />
-            <p data-bind="validationMessage: LastName"></p>
-        </p>
-    </fieldset>
-    <div style="display: inline-block;" data-bind="text: FirstName"></div>&nbsp;<div style="display: inline-block;" data-bind="text: LastName"></div>*@
+    <label>
+        <input type="radio" value="Courier" data-bind="checked: chosenMethod" />Courier</label>
+    <br />
+    <label>
+        <input type="radio" value="Ordinary send by mail" data-bind="checked: chosenMethod" />Ordinary send by mail</label>
+    <br />
+    <label>
+        <input type="radio" value="You take yourself" data-bind="checked: chosenMethod" />You take yourself</label>
+    <br />
+    <label>
+        <input type="radio" value="Sending cash on delivery" data-bind="checked: chosenMethod" />Sending cash on delivery</label>
+    <!-- /ko -->
+    @*<input type="radio" value="1" data-bind="DeliveryMethods" />    <br/>*@
+    @*    <input type="radio" value="2" data-bind="DeliveryMethods" />    <br/>
+    <input type="radio" value="3" data-bind="DeliveryMethods" />    <br/>
+    <input type="radio" value="4" data-bind="DeliveryMethods" />*@
 </script>
 <script id="bankCardTmpl" type="text/html">
     bankCardTmpl
 </script>
 
-    <script id="addressTmpl" type="text/html">
-        addressTmpl
-    @*<fieldset>
-        <legend>Adresgegevens</legend>
-            <p data-bind="css: { error: Address.hasError }">
-                <label for="Address">Address</label>
-                <input id="Address" type="text" data-bind="value: Address, valueUpdate: 'afterkeydown'" />
-                <p data-bind="validationMessage: Address"></p>
-            </p>
-            <p data-bind="css: { error: PostalCode.hasError }">
-                <label for="PostalCode">Postal Code</label>
-                <input id="PostalCode" type="text" data-bind="value: PostalCode, valueUpdate: 'afterkeydown'" />
-                <p data-bind="validationMessage: PostalCode"></p>
-            </p>
-            <p data-bind="css: { error: City.hasError }">
-                <label for="City">City</label>
-                <input id="City" type="text" data-bind="value: City, valueUpdate: 'afterkeydown'" />
-                <p data-bind="validationMessage: City"></p>
-            </p>
-    </fieldset>*@
-    </script>
+<script id="addressTmpl" type="text/html">
+    <label for="Email">Email</label>
+    <input id="Email" type="text" data-bind="value: Email" />
+    <br />
+    <label for="City">City</label>
+    <input id="City" type="text" data-bind="value: City" />
+    <br />
+    <label for="Street">Street</label>
+    <input id="Street" type="text" data-bind="value: Street" />
+    <br />
+    <label for="House">House</label>
+    <input id="House" type="text" data-bind="value: House" />
+
+</script>
 
 <script id="confirmTmpl" type="text/html">
     @*<fieldset>

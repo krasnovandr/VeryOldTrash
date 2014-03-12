@@ -160,6 +160,22 @@
     <Compile Include="Migrations\201403111540058_AddCart2.Designer.cs">
       <DependentUpon>201403111540058_AddCart2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201403120818496_AddCart3.cs" />
+    <Compile Include="Migrations\201403120818496_AddCart3.Designer.cs">
+      <DependentUpon>201403120818496_AddCart3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201403121044240_AddCart4.cs" />
+    <Compile Include="Migrations\201403121044240_AddCart4.Designer.cs">
+      <DependentUpon>201403121044240_AddCart4.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201403121046086_Order.cs" />
+    <Compile Include="Migrations\201403121046086_Order.Designer.cs">
+      <DependentUpon>201403121046086_Order.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201403121047370_AddOrder.cs" />
+    <Compile Include="Migrations\201403121047370_AddOrder.Designer.cs">
+      <DependentUpon>201403121047370_AddOrder.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ShopModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -242,6 +258,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201403111540058_AddCart2.resx">
       <DependentUpon>201403111540058_AddCart2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201403120818496_AddCart3.resx">
+      <DependentUpon>201403120818496_AddCart3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201403121044240_AddCart4.resx">
+      <DependentUpon>201403121044240_AddCart4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201403121046086_Order.resx">
+      <DependentUpon>201403121046086_Order.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201403121047370_AddOrder.resx">
+      <DependentUpon>201403121047370_AddOrder.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
