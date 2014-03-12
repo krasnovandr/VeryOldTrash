@@ -170,10 +170,13 @@
     <Compile Include="Repositories\MonitorsRepository.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <None Include="Scripts\jquery-1.7.1.intellisense.js" />
+    <Content Include="Scripts\jquery.dataTables.js" />
     <Content Include="Scripts\Models\BatteryModel.js" />
     <Content Include="Scripts\Models\CartModel.js" />
     <Content Include="Scripts\jquery-1.7.1.js" />
@@ -189,6 +192,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\knockout-2.1.0.debug.js" />
     <Content Include="Scripts\knockout-2.1.0.js" />
+    <Content Include="Scripts\Models\WizardModel.js" />
     <Content Include="Scripts\modernizr-2.5.3.js" />
     <Content Include="Scripts\Models\MonitorModel.js" />
     <Content Include="Scripts\sammy-latest.min.js" />
@@ -216,6 +220,7 @@
     <Content Include="Views\Home\MemoryCardAdd.cshtml" />
     <Content Include="Views\Home\MemoryCardShow.cshtml" />
     <Content Include="Views\Home\CartShow.cshtml" />
+    <Content Include="Views\Home\Wizard.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

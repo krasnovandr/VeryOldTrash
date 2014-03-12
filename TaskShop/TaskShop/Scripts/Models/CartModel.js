@@ -6,6 +6,7 @@
     self.GoodsCategory = ko.observable('');
 
     self.Price = ko.observable('');
+    self.counter = ko.observable('');
 
     self.arr = ko.observableArray([]);
 

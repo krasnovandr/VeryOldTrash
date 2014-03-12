@@ -11,10 +11,29 @@
 
     self.errors = ko.observableArray([]);
 
+    self.maxPrice = ko.computed(function () {
+        var m = 0;
+        for (var i = 1; i < self.arr().length; i++) {
+            if (self.arr()[i].Price > m)
+                m = self.arr()[i].Price;
+        }
+        return m;
+    }, self);
+
+
+    self.minPrice = ko.computed(function () {
+        var m = 9999;
+        for (var i = 0; i < self.arr().length; i++) {
+            if (self.arr()[i].Price < m)
+                m = self.arr()[i].Price;
+        }
+        return m;
+    }, self);
 };
 
 var BatteryViewModel = function () {
     var self = this;
+    self.BatteryModel = new BatteryModel();
 
     self.isReadMode = ko.observable(true);
     self.isEditMode = ko.computed(function () {
@@ -30,7 +49,9 @@ var BatteryViewModel = function () {
     };
 
 
-    self.BatteryModel = new BatteryModel();
+
+
+
     self.Add = function (data) {
         var jsonData = ko.toJS(self.BatteryModel);
 

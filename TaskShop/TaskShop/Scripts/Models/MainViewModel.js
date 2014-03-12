@@ -6,10 +6,11 @@ function MainViewModel() {
     self.BatteryViewModel = new BatteryViewModel();
     self.MonitorViewModel = new MonitorViewModel();
     self.CartViewModel = new CartViewModel();
+    self.WizardModel = new WizardModel();
 
     self.currentView = ko.observable();
 
-    self.views = ko.observableArray(["Home", "Monitors", "Batteries", "MemoryCards", "Earphones","Cart"]);
+    self.views = ko.observableArray(["Home", "Monitors", "Batteries", "MemoryCards", "Earphones", "Cart", "Wizard"]);
 
     self.goTopage = function (page) { location.hash = page; };
 
@@ -37,7 +38,12 @@ function MainViewModel() {
         return self.currentView() === "Cart" ? true : false;
     });
 
-    self.goTopage("Home");
+    self.show_Wizard = ko.computed(function () {
+        self.CartViewModel.GetAll();
+        return self.currentView() === "Wizard" ? true : false;
+    });
+
+    self.goTopage("Wizard");
 
 
 };

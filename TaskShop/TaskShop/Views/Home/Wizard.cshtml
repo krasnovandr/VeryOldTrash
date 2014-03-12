@@ -1,0 +1,72 @@
+﻿<div data-bind="template: { name: 'currentTmpl', data: WizardModel.currentStep }"></div>
+<hr />
+
+<button data-bind="click: WizardModel.goPrevious, visible: WizardModel.canGoPrevious">Previous</button>
+<button data-bind="click: WizardModel.goNext, visible: WizardModel.canGoNext">Next</button>
+
+
+<script id="currentTmpl" type="text/html">
+    <h2 data-bind="text: name"></h2>
+    <div data-bind="template: { name: getTemplate, data: model }"></div>
+</script>
+
+<script id="deliveryMethodsTmpl" type="text/html">
+    deliveryMethodsTmpl
+    @* <fieldset>
+        <legend>Naamgegevens</legend>
+        <p data-bind="css: { error: FirstName.hasError }">
+            <label for"FirstName">First Name</label>
+            <input id="FirstName" type="text" data-bind="value: FirstName, valueUpdate: 'afterkeydown'" />
+            <p data-bind="validationMessage: FirstName"></p>
+        </p>
+        <p data-bind="css: { error: LastName.hasError }">
+            <label for="LastName">Last Name</label>
+            <input id="LastName" type="text" data-bind="value: LastName, valueUpdate: 'afterkeydown'" />
+            <p data-bind="validationMessage: LastName"></p>
+        </p>
+    </fieldset>
+    <div style="display: inline-block;" data-bind="text: FirstName"></div>&nbsp;<div style="display: inline-block;" data-bind="text: LastName"></div>*@
+</script>
+<script id="bankCardTmpl" type="text/html">
+    bankCardTmpl
+</script>
+
+    <script id="addressTmpl" type="text/html">
+        addressTmpl
+    @*<fieldset>
+        <legend>Adresgegevens</legend>
+            <p data-bind="css: { error: Address.hasError }">
+                <label for="Address">Address</label>
+                <input id="Address" type="text" data-bind="value: Address, valueUpdate: 'afterkeydown'" />
+                <p data-bind="validationMessage: Address"></p>
+            </p>
+            <p data-bind="css: { error: PostalCode.hasError }">
+                <label for="PostalCode">Postal Code</label>
+                <input id="PostalCode" type="text" data-bind="value: PostalCode, valueUpdate: 'afterkeydown'" />
+                <p data-bind="validationMessage: PostalCode"></p>
+            </p>
+            <p data-bind="css: { error: City.hasError }">
+                <label for="City">City</label>
+                <input id="City" type="text" data-bind="value: City, valueUpdate: 'afterkeydown'" />
+                <p data-bind="validationMessage: City"></p>
+            </p>
+    </fieldset>*@
+    </script>
+
+<script id="confirmTmpl" type="text/html">
+    @*<fieldset>
+        <legend>Naamgegevens</legend>
+        <b><span data-bind="text:NameModel.FirstName"></span></b>
+        <br/>
+        <b><span data-bind="text:NameModel.LastName"></span></b>
+    </fieldset>
+    <fieldset>
+        <legend>Adresgegevens</legend>
+        <b><span data-bind="text:AddressModel.Address"></span></b>
+        <br/>
+        <b><span data-bind="text:AddressModel.PostalCode"></span></b>
+        <br/>
+        <b><span data-bind="text:AddressModel.City"></span></b>           
+    </fieldset>
+    <button data-bind="click: confirm">Confirm</button>*@
+</script>

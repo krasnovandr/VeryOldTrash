@@ -49,6 +49,9 @@
                     <input type="button" class="btn" value="To Cart" data-bind="click: $root.MonitorViewModel.AddToCart" />
                 </td>
             </tr>
+        </tbody>
 
     </table>
+    <div>Max Price <span data-bind="text: MonitorViewModel.MonitorModel.maxPrice"></span></div>
+    <div>Min Price<span data-bind="text: MonitorViewModel.MonitorModel.minPrice"></span> </div>
 </div>

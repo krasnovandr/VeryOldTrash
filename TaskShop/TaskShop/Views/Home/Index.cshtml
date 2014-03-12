@@ -7,10 +7,12 @@
 @section scripts{
     <script src="~/Scripts/knockout-2.1.0.js"></script>
     <script src="~/Scripts/jquery-1.7.1.js"></script>
+    <script src="~/Scripts/jquery.dataTables.js"></script>
     <script src="~/Scripts/sammy-latest.min.js"></script>
     <script src="~/Scripts/Models/MonitorModel.js"></script>
     <script src="~/Scripts/Models/CartModel.js"></script>
     <script src="~/Scripts/Models/BatteryModel.js"></script>
+    <script src="~/Scripts/Models/WizardModel.js"></script>
     <script src="~/Scripts/Models/MainViewModel.js"></script>
 
     @Scripts.Render("~/bundles/jqueryval")
@@ -28,57 +30,59 @@
 
 
     </div>
-    <span data-bind="text:CartViewModel.totalItems"></span>
+    Total items in cart:<span data-bind="text:CartViewModel.totalItems"></span>
     <div class="container ">
-        @*<div class="row">*@
-        <div class="span12">
-            <div id="Home" data-bind="visible: show_Home">
-                <div>
-                    <h2>Home</h2>
+        <div class="row">
+            <div class="span12">
+                <div id="Home" data-bind="if: show_Home">
+                    <div>
+                        <h2>Home</h2>
+                    </div>
                 </div>
-            </div>
 
-            <div id="Monitors" data-bind="visible: show_Monitors">
-                <div>
-                    <h2>Monitors</h2>
-                    <input type="button" value="Add" data-bind="click: MonitorViewModel.Create,visible:MonitorViewModel.isReadMode" />
-                    @Html.Partial("MonitorAdd")
-                    @Html.Partial("MonitorShow")
+                <div id="Monitors" data-bind="if: show_Monitors">
+                    <div>
+                        <h2>Monitors</h2>
+                        <input type="button" value="Add" data-bind="click: MonitorViewModel.Create,visible:MonitorViewModel.isReadMode" />
+                        @Html.Partial("MonitorAdd")
+                        @Html.Partial("MonitorShow")
+                    </div>
                 </div>
-            </div>
 
-            <div id="Batteries" data-bind="visible: show_Batteries">
-                <div>
-                    <h2>Battery</h2>
-                    <input type="button" value="Add" data-bind="click: BatteryViewModel.Create,visible:BatteryViewModel.isReadMode" />
-                    @Html.Partial("BatteryAdd")
-                    @Html.Partial("BatteryShow")
-                    @*        <input type="text" value="Add" data-bind="value: Model.Producer" />*@
-                    @*         <input type="button" value="Add" data-bind="click: $root.Add" />*@
+                <div id="Batteries" data-bind="if: show_Batteries">
+                    <div>
+                        <h2>Battery</h2>
+                        <input type="button" value="Add" data-bind="click: BatteryViewModel.Create,visible:BatteryViewModel.isReadMode" />
+                        @Html.Partial("BatteryAdd")
+                        @Html.Partial("BatteryShow")
+                        @*        <input type="text" value="Add" data-bind="value: Model.Producer" />*@
+                        @*         <input type="button" value="Add" data-bind="click: $root.Add" />*@
+                    </div>
                 </div>
-            </div>
 
-            <div id="Earphones" data-bind="visible: show_Earphones">
-                <div>
-                    <h2>Earphones</h2>
+                <div id="Earphones" data-bind="if: show_Earphones">
+                    <div>
+                        <h2>Earphones</h2>
+                    </div>
                 </div>
-            </div>
 
-            <div id="MemoryCards" data-bind="visible: show_MemoryCards">
-                <div>
-                    <h2>MemoryCards</h2>
+                <div id="MemoryCards" data-bind="if: show_MemoryCards">
+                    <div>
+                        <h2>MemoryCards</h2>
+                    </div>
                 </div>
+                <div id="Cart" data-bind="if: show_Cart">
+                    <h2>Goods in Cart</h2>
+                    @Html.Partial("CartShow")
+                </div>
+                <div id="Wizrd" data-bind="if: show_Wizard">
+         
+                    @Html.Partial("Wizard")
+                </div>
+
             </div>
-            <div id="Cart" data-bind="visible: show_Cart">
-                <h2>Goods in Cart</h2>
-                @Html.Partial("CartShow")
-
-
-            </div>
-
         </div>
     </div>
-    @*</div>*@
 </div>
 <script>
     var vm = new MainViewModel();
@@ -94,5 +98,7 @@
 
             });
         }).run('#Home');
+
+        //$("#TestTable").dataTable();
     });
 </script>
