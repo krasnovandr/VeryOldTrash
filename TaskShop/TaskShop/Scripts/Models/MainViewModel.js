@@ -3,10 +3,10 @@
 function MainViewModel(options) {
     var self = this;
 
-    self.BatteryViewModel = new BatteryViewModel();
-    self.MonitorViewModel = new MonitorViewModel();
+    self.BatteryViewModel = new BatteryViewModel(options);
+    self.MonitorViewModel = new MonitorViewModel(options);
     self.CartViewModel = new CartViewModel(options);
-    self.WizardModel = new WizardModel();
+    self.WizardModel = new WizardModel(options);
 
     self.currentView = ko.observable();
 

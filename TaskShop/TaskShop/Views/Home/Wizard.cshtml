@@ -1,7 +1,7 @@
 ﻿<div class="row">
-    TotalCount<span data-bind="text: WizardModel.OrderModel.TotalCount"></span>
+    @*TotalCount<span data-bind="text: WizardModel.OrderModel.TotalCount"></span>*@
     Discount<span data-bind="text: WizardModel.OrderModel.Discount"></span>
-    TotalPrice<span data-bind="text: WizardModel.OrderModel.TotalPrice"></span>
+    @*TotalPrice<span data-bind="text: WizardModel.OrderModel.TotalPrice"></span>*@
     DeliveryPrice<span data-bind="text: WizardModel.OrderModel.DeliveryPrice"></span>
 
 </div>
@@ -14,61 +14,76 @@
 
 
 <script id="currentTmpl" type="text/html">
-    <h2 data-bind="text: name"></h2>
+    <h4 data-bind="text: name"></h4>
     <div data-bind="template: { name: getTemplate, data: model }"></div>
 </script>
 
 <script id="deliveryMethodsTmpl" type="text/html">
-    <label>
-        <input type="radio" value="Courier" data-bind="checked: chosenMethod" />Courier</label>
-    <br />
-    <label>
-        <input type="radio" value="Ordinary send by mail" data-bind="checked: chosenMethod" />Ordinary send by mail</label>
-    <br />
-    <label>
-        <input type="radio" value="You take yourself" data-bind="checked: chosenMethod" />You take yourself</label>
-    <br />
-    <label>
-        <input type="radio" value="Sending cash on delivery" data-bind="checked: chosenMethod" />Sending cash on delivery</label>
-    <!-- /ko -->
-    @*<input type="radio" value="1" data-bind="DeliveryMethods" />    <br/>*@
-    @*    <input type="radio" value="2" data-bind="DeliveryMethods" />    <br/>
-    <input type="radio" value="3" data-bind="DeliveryMethods" />    <br/>
-    <input type="radio" value="4" data-bind="DeliveryMethods" />*@
+    <div class="container">
+
+        <input type="radio" name="deliveryMethods" value="Courier" data-bind="checked: choosenMethod" />
+        Courier
+        <br />
+        <input type="radio" name="deliveryMethods" value="Ordinary send by mail" data-bind="checked: choosenMethod" />
+        Ordinary send by mail
+        <br />
+        <input type="radio" name="deliveryMethods" value="You take yourself" data-bind="checked: choosenMethod" />
+        You take yourself
+        <br />
+        <input type="radio" name="deliveryMethods" value="Sending cash on delivery" data-bind="checked: choosenMethod" />
+        Sending cash on delivery
+        
+    </div>
+
 </script>
 <script id="bankCardTmpl" type="text/html">
-    bankCardTmpl
+    <label for="CardNumber">CardNumber</label>
+    <input id="CardNumber" type="text" data-bind="value: CardNumber" />
+    <br />
 </script>
 
 <script id="addressTmpl" type="text/html">
-    <label for="Email">Email</label>
-    <input id="Email" type="text" data-bind="value: Email" />
-    <br />
-    <label for="City">City</label>
-    <input id="City" type="text" data-bind="value: City" />
-    <br />
-    <label for="Street">Street</label>
-    <input id="Street" type="text" data-bind="value: Street" />
-    <br />
-    <label for="House">House</label>
-    <input id="House" type="text" data-bind="value: House" />
-
+    <div class="container">
+        <div class="row">
+            <label for="Email">Email</label>
+            <input id="Email" type="text" data-bind="value: Email" />
+        </div>
+        <div>
+            <label for="City">City</label>
+            <input id="City" type="text" data-bind="value: City" />
+        </div>
+        <div class="row">
+            <label for="Street">Street</label>
+            <input id="Street" type="text" data-bind="value: Street" />
+        </div>
+        <div class="row">
+            <label for="House">House</label>
+            <input id="House" type="text" data-bind="value: House" />
+        </div>
+    </div>
 </script>
 
 <script id="confirmTmpl" type="text/html">
-    @*<fieldset>
-        <legend>Naamgegevens</legend>
-        <b><span data-bind="text:NameModel.FirstName"></span></b>
-        <br/>
-        <b><span data-bind="text:NameModel.LastName"></span></b>
-    </fieldset>
-    <fieldset>
-        <legend>Adresgegevens</legend>
-        <b><span data-bind="text:AddressModel.Address"></span></b>
-        <br/>
-        <b><span data-bind="text:AddressModel.PostalCode"></span></b>
-        <br/>
-        <b><span data-bind="text:AddressModel.City"></span></b>           
-    </fieldset>
-    <button data-bind="click: confirm">Confirm</button>*@
+
+    <div class="container">
+        <div class="row">
+            <fieldset>
+                <legend>Your Order</legend>
+                Discount:<span data-bind="text:Discount"></span><br/>
+                Total Count:<span data-bind="text:TotalCount"></span><br/>
+                Total Goods Price:<span data-bind="text:TotalGoodsPrice"></span><br/>
+                Total  Price:<span data-bind="text:TotalPrice"></span><br/>
+                DeliveryPrice:<span data-bind="text:DeliveryPrice"></span><br/>
+                Email:<span data-bind="text:Email"></span><br/>
+                City:<span data-bind="text:City"></span><br/>
+                Street:<span data-bind="text:Street"></span><br/>
+                House:<span data-bind="text:House"></span><br/>
+                CardNumber<span data-bind="text:CardNumber"></span><br/>
+            </fieldset>
+        </div>
+    </div>
+
+
+
+    <input type="button" value="Submit" data-bind="click:SubmitOrder" />
 </script>

@@ -85,6 +85,7 @@ var BatteryViewModel = function () {
                 var tmp = window.vm.CartViewModel.totalItems();
                 tmp++;
                 window.vm.CartViewModel.totalItems(tmp);
+            
                 self.BatteryModel.errors([]);
             } else {
                 self.BatteryModel.errors(returnedData);

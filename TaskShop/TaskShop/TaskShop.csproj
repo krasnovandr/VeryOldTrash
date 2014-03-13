@@ -141,6 +141,7 @@
     <Compile Include="Controllers\MemoryCardsController.cs" />
     <Compile Include="Controllers\MonitorsController.cs" />
     <Compile Include="Controllers\CartController.cs" />
+    <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -184,6 +185,7 @@
     <Compile Include="Repositories\EarphonesRepository.cs" />
     <Compile Include="Repositories\MemoryCardsRepository.cs" />
     <Compile Include="Repositories\MonitorsRepository.cs" />
+    <Compile Include="Repositories\OrdersRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />

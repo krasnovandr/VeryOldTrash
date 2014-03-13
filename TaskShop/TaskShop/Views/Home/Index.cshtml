@@ -91,13 +91,14 @@
         cartAddBattery: '@Url.Action("AddBattery", "Cart")',
         cartGet: '@Url.Action("Get", "Cart")',
         cartAddMonitor: '@Url.Action("AddMonitor", "Cart")',
-        cartDelete: '@Url.Action("Delete", "Cart")'
+        cartDelete: '@Url.Action("Delete", "Cart")',
+        orderAdd: '@Url.Action("AddOrder", "Order")'
     };
     var vm = new MainViewModel(options);
 
     $(function () {
 
-
+       
         ko.applyBindings(vm, document.getElementById("Main"));
 
         Sammy(function () {

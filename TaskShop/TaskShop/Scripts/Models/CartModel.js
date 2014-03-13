@@ -38,7 +38,7 @@ var CartViewModel = function (options) {
         var count = 0;
         var price = 0;
 
-        if (self.CartModel.arr().length != 0)
+        if (data)
             for (var i = 0; i < self.CartModel.arr().length; i++) {
                 count += parseInt(self.CartModel.arr()[i].Count);
                 if (self.CartModel.arr()[i].Count == 1) {
@@ -51,8 +51,11 @@ var CartViewModel = function (options) {
                 }
 
             }
+
         self.totalItems(count);
         self.totalPrice(price);
+        window.vm.WizardModel.OrderModel.TotalCount(count);
+        window.vm.WizardModel.OrderModel.TotalGoodsPrice(price);
     }
 
     self.Delete = function (data) {
