@@ -1,14 +1,17 @@
 ﻿var BatteryModel = function () {
 
     var self = this;
-
+    self.Id = ko.observable('');
     self.Producer = ko.observable('');
     self.Capacity = ko.observable('');
     self.Voltage = ko.observable('');
     self.Price = ko.observable('');
+};
+
+var BatteryViewModel = function (options) {
+    var self = this;
 
     self.arr = ko.observableArray([]);
-
     self.errors = ko.observableArray([]);
 
     self.maxPrice = ko.computed(function () {
@@ -19,8 +22,6 @@
         }
         return m;
     }, self);
-
-
     self.minPrice = ko.computed(function () {
         var m = 9999;
         for (var i = 0; i < self.arr().length; i++) {
@@ -29,10 +30,8 @@
         }
         return m;
     }, self);
-};
 
-var BatteryViewModel = function () {
-    var self = this;
+
     self.BatteryModel = new BatteryModel();
 
     self.isReadMode = ko.observable(true);
@@ -55,11 +54,11 @@ var BatteryViewModel = function () {
     self.Add = function (data) {
         var jsonData = ko.toJS(self.BatteryModel);
 
-        $.post("/Batteries/Add", jsonData, function (returnedData) {
+        $.post(options.batteryAdd, jsonData, function (returnedData) {
             if (returnedData["item"] == "Added") {
-                self.BatteryModel.errors([]);
+                self.errors([]);
             } else {
-                self.BatteryModel.errors(returnedData);
+                self.errors(returnedData);
             }
         });
     };
@@ -67,28 +66,28 @@ var BatteryViewModel = function () {
     self.GetAll = function (data) {
         $.ajax({
             type: 'GET',
-            url: "/Batteries/Get",
+            url: options.batteryGetAll,
             success: onAjaxSuccess
         });
     };
     function onAjaxSuccess(data) {
-        self.BatteryModel.arr(data);
+        self.arr(data);
     }
 
 
 
     self.AddToCart = function (data) {
         var json = ko.toJS(data);
-        $.post("/Cart/AddBattery", json, function (returnedData) {
+        $.post(options.cartAddBattery, json, function (returnedData) {
             var a = returnedData;
             if (returnedData["item"] == "Added") {
                 var tmp = window.vm.CartViewModel.totalItems();
                 tmp++;
                 window.vm.CartViewModel.totalItems(tmp);
-            
-                self.BatteryModel.errors([]);
+
+                self.errors([]);
             } else {
-                self.BatteryModel.errors(returnedData);
+                self.errors(returnedData);
             }
         });
     };

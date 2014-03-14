@@ -54,7 +54,7 @@
                         <h2>Battery</h2>
                         <input type="button" value="Add" data-bind="click: BatteryViewModel.Create,visible:BatteryViewModel.isReadMode" />
                         @Html.Partial("BatteryAdd")
-                        @Html.Partial("BatteryShow")
+                        @Html.Partial("BatteryList")
                         @*        <input type="text" value="Add" data-bind="value: Model.Producer" />*@
                         @*         <input type="button" value="Add" data-bind="click: $root.Add" />*@
                     </div>
@@ -74,10 +74,22 @@
                 <div id="Cart" data-bind="if: show_Cart">
                     <h4>Goods in Cart</h4>
                     @Html.Partial("CartShow")
-                  
+
 
                     <div id="Wizrd" data-bind="if: show_Wizard">
                         @Html.Partial("Wizard")
+                    </div>
+                </div>
+                <div id="Orders" data-bind="if: show_Orders">
+                    <div>
+                        <h2>Orders</h2>
+                        @Html.Partial("OrderShow")
+                    </div>
+                </div>
+                <div data-bind="if: show_Battery">
+                    <div>
+                        <h2>Battery</h2>
+                        @Html.Partial("BatteryShow")
                     </div>
                 </div>
 
@@ -92,21 +104,55 @@
         cartGet: '@Url.Action("Get", "Cart")',
         cartAddMonitor: '@Url.Action("AddMonitor", "Cart")',
         cartDelete: '@Url.Action("Delete", "Cart")',
-        orderAdd: '@Url.Action("AddOrder", "Order")'
+        orderAdd: '@Url.Action("AddOrder", "Order")',
+        orderGet: '@Url.Action("Get", "Order")',
+        batteryAdd: '@Url.Action("Add", "Batteries")',
+        batteryGetAll: '@Url.Action("GetAll", "Batteries")',
+        batteryGetById: '@Url.Action("GetById", "Batteries")'
     };
     var vm = new MainViewModel(options);
 
     $(function () {
 
-       
+
         ko.applyBindings(vm, document.getElementById("Main"));
 
         Sammy(function () {
+
             this.get('#:view', function () {
                 vm.currentView(this.params.view);
+            });
+            this.get('#:view/:Id', function () {
+                //self.chosenFolderId(this.params.folder);
+                //self.chosenFolderData(null);
+               
+                //$.get(options.batteryGetById, { id: this.params.Id }, model);
+                var jsonData = {id:this.params.Id};
+                var currentCategory = this.params.view;
+                $.post(options.batteryGetById, jsonData, function (returnedData) {
+                    if (returnedData)
+                        vm.goToPageItem(currentCategory, returnedData);
+                });
+                
+               
+                //$.ajax({
+                //    type: 'GET',
+                //    url: options.batteryGetById,
+                //    success: onAjaxSuccess,
+                //    data: id,
+                //});
+
+                //function onAjaxSuccess(data) {
+                //    if (data)
+                //        
+                //}
+
+
 
             });
-        }).run('#Home');
+
+            //this.get('', function () { this.app.runRoute('get', '#Home'); });
+        }).run("#Home");
 
         //$("#TestTable").dataTable();
     });

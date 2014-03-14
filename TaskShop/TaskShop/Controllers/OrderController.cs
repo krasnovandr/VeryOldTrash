@@ -32,5 +32,12 @@ namespace TaskShop.Controllers
             return Json(allErrors);
         }
 
+        public JsonResult Get()
+        {
+            var orders = _repository.GetOrders();
+            return Json(orders, JsonRequestBehavior.AllowGet);
+        }
+
+
     }
 }

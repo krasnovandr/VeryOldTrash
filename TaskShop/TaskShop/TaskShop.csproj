@@ -145,6 +145,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="MailSender.cs" />
     <Compile Include="Migrations\201403101222246_InitialCreate.cs" />
     <Compile Include="Migrations\201403101222246_InitialCreate.Designer.cs">
       <DependentUpon>201403101222246_InitialCreate.cs</DependentUpon>
@@ -230,7 +231,7 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\BatteryAdd.cshtml" />
-    <Content Include="Views\Home\BatteryShow.cshtml" />
+    <Content Include="Views\Home\BatteryList.cshtml" />
     <Content Include="Views\Home\EarphoneAdd.cshtml" />
     <Content Include="Views\Home\EarphoneShow.cshtml" />
     <Content Include="Views\Home\MonitorShow.cshtml" />
@@ -239,11 +240,14 @@
     <Content Include="Views\Home\MemoryCardShow.cshtml" />
     <Content Include="Views\Home\CartShow.cshtml" />
     <Content Include="Views\Home\Wizard.cshtml" />
+    <Content Include="Views\Home\OrderShow.cshtml" />
+    <Content Include="Views\Home\BatteryShow.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Services\" />
     <Folder Include="Views\Cart\" />
+    <Folder Include="Views\PartialViews\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

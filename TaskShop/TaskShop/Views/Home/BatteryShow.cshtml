@@ -1,51 +1,31 @@
-﻿@model IEnumerable<TaskShop.Models.Battery>
-<div id="Show" data-bind="visible:BatteryViewModel.isReadMode">
+﻿@model TaskShop.Models.Battery
 
 
-    <table class="simple-little-table" id="TestTable">
-        <thead>
-            <tr>
-                <th class="col-md-3">
-                    @Html.DisplayNameFor(model => model.Id)
-                </th>
-                <th class="col-md-3">
-                    @Html.DisplayNameFor(model => model.Producer)
-                </th>
-                <th class="col-md-3">
-                    @Html.DisplayNameFor(model => model.Capacity)
-                </th>
-                <th class="col-md-3">
-                    @Html.DisplayNameFor(model => model.Voltage)
-                </th>
-                <th class="col-md-3">
-                    @Html.DisplayNameFor(model => model.Price)
-                </th>
-                <th></th>
-            </tr>
-        </thead>
+<div >
+    <div class="editor-label">
+        @Html.LabelFor(model => model.Producer)
+    </div>
+    <div class="editor-field">
+        <span data-bind="text:BatteryViewModel.BatteryModel.Producer"></span>
+    </div>
+    <div class="editor-label">
+        @Html.LabelFor(model => model.Capacity)
+    </div>
+    <div class="editor-field">
+        <span data-bind="text: BatteryViewModel.BatteryModel.Capacity" ></span>
+    </div>
+    <div class="editor-label">
+        @Html.LabelFor(model => model.Voltage)
+    </div>
+    <div class="editor-field">
+        <span data-bind="text: BatteryViewModel.BatteryModel.Voltage" ></span>
+    </div>
+    <div class="editor-label">
+        @Html.LabelFor(model => model.Price)
+    </div>
+    <div class="editor-field">
+        <span data-bind="text: BatteryViewModel.BatteryModel.Price" ></span>
+    </div>
+    <input type="button" class="btn" value="To Cart" data-bind="click: $root.BatteryViewModel.AddToCart" />
 
-        <tbody data-bind="foreach: BatteryViewModel.BatteryModel.arr">
-            <tr>
-                <td class="col-md-3">
-                    <span data-bind="text: $data.Id"></span>
-                </td>
-                <td class="col-md-3">
-                    <span data-bind="text: $data.Producer"></span>
-                </td>
-                <td class="col-md-3">
-                    <span data-bind="text: $data.Capacity"></span>
-                </td>
-                <td class="col-md-3">
-                    <span data-bind="text: $data.Voltage"></span>
-                </td>
-                <td class="col-md-3">
-                    <span data-bind="text: $data.Price"></span>
-                </td>
-                <td class="col-md-3">
-                    <input type="button" class="btn" value="To Cart" data-bind="click: $root.BatteryViewModel.AddToCart" />
-                </td>
-            </tr>
-    </table>
-    <div>Max Price </div><span data-bind="text: BatteryViewModel.BatteryModel.maxPrice"></span>
-    <div>Min Price </div><span data-bind="text: BatteryViewModel.BatteryModel.minPrice"></span>
 </div>

@@ -16,12 +16,12 @@ namespace TaskShop.Controllers
 
         //
         // GET: /Batteries/
-   
+
         public BatteriesController(IBatteriesRepository repository)
         {
             this._repository = repository;
         }
-        public JsonResult Get()
+        public JsonResult GetAll()
         {
             var batteries = _repository.GetBatteries();
             return Json(batteries, JsonRequestBehavior.AllowGet);
@@ -38,6 +38,14 @@ namespace TaskShop.Controllers
             var allErrors = ModelState.Values.SelectMany(v => v.Errors);
 
             return Json(allErrors);
+        }
+
+        [HttpPost]
+        public JsonResult GetById(int id)
+        {
+            var battery = _repository.GetBattery(id);
+
+            return Json(battery);
         }
 
     }

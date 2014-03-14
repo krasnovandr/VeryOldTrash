@@ -12,6 +12,7 @@ namespace TaskShop.Repositories
     {
         void AddBattery(Battery battery);
         List<Battery> GetBatteries();
+        Battery GetBattery(int id);
     }
 
 
@@ -34,6 +35,17 @@ namespace TaskShop.Repositories
                 var batteries = (from entity in db.Batteries
                                  select entity).ToList();
                 return batteries;
+            }
+        }
+
+        public Battery GetBattery(int id)
+        {
+            using (var db = new ShopContext())
+            {
+                var battery = (from entity in db.Batteries
+                                 where entity.Id == id
+                                 select entity).FirstOrDefault();
+                return battery;
             }
         }
     }

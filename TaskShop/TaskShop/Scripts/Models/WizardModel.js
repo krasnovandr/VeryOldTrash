@@ -107,6 +107,21 @@ OrderModel = function (options) {
 
     self.CardNumber = ko.observable();
 
+    self.arr = ko.observableArray([]);
+
+    self.GetAll = function () {
+        $.ajax({
+            type: 'GET',
+            url: options.orderGet,
+            success: onAjaxSuccess
+        });
+    };
+    function onAjaxSuccess(data) {
+        self.arr(data);
+    }
+
+
+
     self.SubmitOrder = function () {
         var obj = {
             TotalGoodsPrice: self.TotalGoodsPrice,
@@ -119,12 +134,9 @@ OrderModel = function (options) {
             House: self.House,
             CardNumber: self.CardNumber
         };
-
         var json = ko.toJS(obj);
         $.post(options.orderAdd, json, function (returnedData) {
         });
-
-
     };
 
 }
