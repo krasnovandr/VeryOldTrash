@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using TaskShop.Models;
+using TaskShop.Repositories;
 using TaskShop.Repositories;
 
 namespace TaskShop.Controllers
@@ -13,31 +13,31 @@ namespace TaskShop.Controllers
         //
         // GET: /MemoryCards/
 
-        private readonly IMemoryCardsRepository _repository;
+        //private readonly IMemoryCardsRepository _repository;
 
-        public MemoryCardsController(IMemoryCardsRepository repository)
-        {
-            this._repository = repository;
-        }
+        //public MemoryCardsController(IMemoryCardsRepository repository)
+        //{
+        //    this._repository = repository;
+        //}
 
-        public JsonResult GetResult()
-        {
-            var memoryCards = _repository.GetMemoryCards();
-            return Json(memoryCards, JsonRequestBehavior.AllowGet);
-        }
+        //public JsonResult GetResult()
+        //{
+        //    var memoryCards = _repository.GetMemoryCards();
+        //    return Json(memoryCards, JsonRequestBehavior.AllowGet);
+        //}
 
-        [HttpPost]
-        public JsonResult AddMemoryCard(MemoryCard memoryCard)
-        {
-            if (ModelState.IsValid)
-            {
-                _repository.AddMemoryCard(memoryCard);
-                return Json(new { item = "Added" }, JsonRequestBehavior.AllowGet);
-            }
-            var allErrors = ModelState.Values.SelectMany(v => v.Errors);
+        //[HttpPost]
+        //public JsonResult AddMemoryCard(MemoryCard memoryCard)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        _repository.AddMemoryCard(memoryCard);
+        //        return Json(new { item = "Added" }, JsonRequestBehavior.AllowGet);
+        //    }
+        //    var allErrors = ModelState.Values.SelectMany(v => v.Errors);
 
-            return Json(allErrors);
-        }
+        //    return Json(allErrors);
+        //}
 
     }
 }

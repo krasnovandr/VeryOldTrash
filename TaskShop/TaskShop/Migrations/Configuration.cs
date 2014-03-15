@@ -1,3 +1,5 @@
+using TaskShop.Models;
+
 namespace TaskShop.Migrations
 {
     using System;
@@ -14,6 +16,7 @@ namespace TaskShop.Migrations
 
         protected override void Seed(TaskShop.Models.ShopContext context)
         {
+           
             //  This method will be called after migrating to the latest version.
 
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 

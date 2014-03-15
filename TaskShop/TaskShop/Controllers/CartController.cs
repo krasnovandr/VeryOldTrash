@@ -6,6 +6,8 @@ using System.Web;
 using System.Web.Mvc;
 using TaskShop.Models;
 using TaskShop.Repositories;
+using TaskShop.Repositories;
+using TaskShop.Shared;
 
 namespace TaskShop.Controllers
 {

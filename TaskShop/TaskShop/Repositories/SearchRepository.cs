@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using TaskShop.Models;
+using TaskShop.Repositories;
 using TaskShop.Shared;
 
 namespace TaskShop.Repositories
@@ -22,24 +23,24 @@ namespace TaskShop.Repositories
         {
             using (var db = new ShopContext())
             {
-                var batteries = (from entity in db.Batteries
-                                 where entity.Model.Contains(modelName)
-                                 select entity).ToList();
-                var monitors = (from entity in db.Monitors
-                                where entity.Model.Contains(modelName)
-                                select entity).ToList();
+                //var batteries = (from entity in db.Batteries
+                //                 where entity.Model.Contains(modelName)
+                //                 select entity).ToList();
+                //var monitors = (from entity in db.Monitors
+                //                where entity.Model.Contains(modelName)
+                //                select entity).ToList();
 
-                var list = batteries.Select(item => new SearchModel
-                {
-                    GoodsCategory = "Batteries", GoodsId = item.Id, Price = item.Price, Model = item.Model, Producer = item.Producer
-                }).ToList();
-                list.AddRange(monitors.Select(item => new SearchModel
-                {
-                    GoodsCategory = "Monitors", GoodsId = item.Id, Price = item.Price, Model = item.Model, Producer = item.Producer
-                }));
+                //var list = batteries.Select(item => new SearchModel
+                //{
+                //    GoodsCategory = "Batteries", GoodsId = item.Id, Price = item.Price, Model = item.Model, Producer = item.Producer
+                //}).ToList();
+                //list.AddRange(monitors.Select(item => new SearchModel
+                //{
+                //    GoodsCategory = "Monitors", GoodsId = item.Id, Price = item.Price, Model = item.Model, Producer = item.Producer
+                //}));
 
 
-                return list;
+                return null;
             }
         }
     }

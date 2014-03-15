@@ -1,4 +1,4 @@
-﻿@model TaskShop.Models.Battery
+﻿@model TaskShop.Shared.Battery
 
 
 <div id="Add" data-bind="visible:BatteryViewModel.isEditMode">
@@ -17,7 +17,13 @@
     @*@Html.EditorFor(model => model.Capacity,new { data_bind = "value: Model.Capacity" })*@
     <input type="text"  data-bind="value: BatteryViewModel.BatteryModel.Capacity" />
 </div>
-
+<div class="editor-label">
+    @Html.LabelFor(model => model.Model)
+</div>
+<div class="editor-field">
+    @*@Html.EditorFor(model => model.Capacity,new { data_bind = "value: Model.Capacity" })*@
+    <input type="text"  data-bind="value: BatteryViewModel.BatteryModel.Model" />
+</div>
 <div class="editor-label">
     @Html.LabelFor(model => model.Voltage)
 </div>

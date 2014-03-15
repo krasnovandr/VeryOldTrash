@@ -1,6 +1,7 @@
 using System.Web.Mvc;
 using Microsoft.Practices.Unity;
 using TaskShop.Repositories;
+using TaskShop.Services;
 using Unity.Mvc3;
 
 namespace TaskShop
@@ -24,10 +25,12 @@ namespace TaskShop
             // e.g. container.RegisterType<ITestService, TestService>();            
 
 
-            container.RegisterType<IBatteriesRepository, BatteriesRepository>();
-            container.RegisterType<IMonitorsRepository, MonitorsRepository>();
-            container.RegisterType<IMemoryCardsRepository, MemoryCardsRepository>();
-            container.RegisterType<IEarphonesRepository, EarphonesRepository>();
+            //container.RegisterType<IBatteriesRepository, BatteriesRepository>();
+            //container.RegisterType<IMonitorsRepository, MonitorsRepository>();
+            //container.RegisterType<IMemoryCardsRepository, MemoryCardsRepository>();
+            //container.RegisterType<IEarphonesRepository, EarphonesRepository>();
+            container.RegisterType<IBatteriesService, BatteriesService>();
+            container.RegisterType<IGoodsRepository, GoodsRepository>();
             container.RegisterType<ICartRepository, CartRepository>();
             container.RegisterType<IOrdersRepository, OrdersRepository>();
             container.RegisterType<ISearchRepository, SearchRepository>();

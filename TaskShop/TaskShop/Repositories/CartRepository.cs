@@ -6,6 +6,9 @@ using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Web;
 using TaskShop.Models;
+using TaskShop.Repositories;
+using TaskShop.Shared;
+
 
 namespace TaskShop.Repositories
 {

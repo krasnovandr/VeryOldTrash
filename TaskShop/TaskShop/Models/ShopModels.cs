@@ -10,60 +10,32 @@ namespace TaskShop.Models
 {
     public class ShopContext : DbContext
     {
-        public DbSet<Battery> Batteries { get; set; }
-        public DbSet<Earphone> Earphones { get; set; }
-        public DbSet<MemoryCard> MemoryCards { get; set; }
-        public DbSet<Monitor> Monitors { get; set; }
+        //public DbSet<Battery> Batteries { get; set; }
+        //public DbSet<Earphone> Earphones { get; set; }
+        //public DbSet<MemoryCard> MemoryCards { get; set; }
+        //public DbSet<Monitor> Monitors { get; set; }
         public DbSet<Cart> Carts { get; set; }
         public DbSet<Order> Orders { get; set; }
+        public DbSet<Commodity> DbGoods { get; set; }
+        public DbSet<Property> DbProperties { get; set; }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Property>().
+                HasMany(c => c.Goods).
+                WithMany(p => p.Properties).
+                Map(
+                    m =>
+                    {
+                        m.MapLeftKey("GoodsId");
+                        m.MapRightKey("PropertyId");
+                        m.ToTable("GoodsProperties");
+                    });
+
+        }
     }
 
-    public class Battery
-    {
-        [Key]
-        public int Id { get; set; }
-        public string Model { get; set; }
-        public string Producer { get; set; }
-        public int Capacity { get; set; }
-        public int Voltage { get; set; }
-        public int Price { get; set; }
-    }
 
-    public class Earphone
-    {
-        [Key]
-        public int Id { get; set; }
-        public string Model { get; set; }
-        public string Producer { get; set; }
-        public double CableLength { get; set; }
-        public int Resistance { get; set; }
-        public int MaxFrequency { get; set; }
-        public int Price { get; set; }
-    }
-
-    public class MemoryCard
-    {
-        [Key]
-        public int Id { get; set; }
-        public string Model { get; set; }
-        public string Producer { get; set; }
-        public int Size { get; set; }
-        public int WriteSpeed { get; set; }
-        public int ReadSpeed { get; set; }
-        public int Price { get; set; }
-    }
-
-    public class Monitor
-    {
-        [Key]
-        public int Id { get; set; }
-        public string Model { get; set; }
-        public string Producer { get; set; }
-        public string Resolution { get; set; }
-        public int Frequency { get; set; }
-        public string MatrixType { get; set; }
-        public int Price { get; set; }
-    }
 
     public class Cart
     {
@@ -94,5 +66,33 @@ namespace TaskShop.Models
 
         public string CardNumber { get; set; }
     }
+
+    public class Commodity
+    {
+        public int Id { get; set; }
+        public string Model { get; set; }
+        public string Producer { get; set; }
+        public int Price { get; set; }
+        public string Category { get; set; }
+        public virtual ICollection<Property> Properties { get; set; }
+        public Commodity()
+        {
+            Properties = new List<Property>();
+        }
+    }
+    public class Property
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public string ValueChar { get; set; }
+        public int ValueInt { get; set; }
+        public virtual ICollection<Commodity> Goods { get; set; }
+        public Property()
+        {
+            Goods = new List<Commodity>();
+        }
+    }
+
+
 
 }

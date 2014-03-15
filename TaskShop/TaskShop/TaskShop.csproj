@@ -149,8 +149,16 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201403151920482_AddTables.cs" />
+    <Compile Include="Migrations\201403151920482_AddTables.Designer.cs">
+      <DependentUpon>201403151920482_AddTables.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201403151948347_AddTables1.cs" />
+    <Compile Include="Migrations\201403151948347_AddTables1.Designer.cs">
+      <DependentUpon>201403151948347_AddTables1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Repositories\GoodsRepository.cs" />
     <Compile Include="Repositories\SearchRepository.cs" />
-    <Compile Include="Shared\MailSender.cs" />
     <Compile Include="Migrations\201403101222246_InitialCreate.cs" />
     <Compile Include="Migrations\201403101222246_InitialCreate.Designer.cs">
       <DependentUpon>201403101222246_InitialCreate.cs</DependentUpon>
@@ -212,7 +220,7 @@
     <Compile Include="Repositories\MemoryCardsRepository.cs" />
     <Compile Include="Repositories\MonitorsRepository.cs" />
     <Compile Include="Repositories\OrdersRepository.cs" />
-    <Compile Include="Shared\SearchModel.cs" />
+    <Compile Include="Services\BatteriesService.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -278,7 +286,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Services\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -323,6 +330,18 @@
     <EmbeddedResource Include="Migrations\201403142029106_Price1.resx">
       <DependentUpon>201403142029106_Price1.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201403151920482_AddTables.resx">
+      <DependentUpon>201403151920482_AddTables.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201403151948347_AddTables1.resx">
+      <DependentUpon>201403151948347_AddTables1.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Shared\Shared.csproj">
+      <Project>{49962587-af7a-4413-9de8-a72462116f3f}</Project>
+      <Name>Shared</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

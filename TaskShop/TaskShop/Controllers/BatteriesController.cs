@@ -5,45 +5,47 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using TaskShop.Models;
 using TaskShop.Repositories;
+using TaskShop.Repositories;
+using TaskShop.Services;
+using TaskShop.Shared;
 
 namespace TaskShop.Controllers
 {
     public class BatteriesController : Controller
     {
-        private readonly IBatteriesRepository _repository;
+        private readonly IBatteriesService _service;
 
-        //
-        // GET: /Batteries/
+        ////
+        //// GET: /Batteries/
 
-        public BatteriesController(IBatteriesRepository repository)
+        public BatteriesController(IBatteriesService service)
         {
-            this._repository = repository;
+            this._service = service;
         }
         public JsonResult GetAll()
         {
-            var batteries = _repository.GetBatteries();
+            var batteries = _service.GetBatteries();
             return Json(batteries, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
         public JsonResult Add(Battery battery)
         {
-            if (ModelState.IsValid)
-            {
-                _repository.AddBattery(battery);
+            //if (ModelState.IsValid)
+            //{
+                _service.AddBattery(battery);
                 return Json(new { item = "Added" }, JsonRequestBehavior.AllowGet);
-            }
-            var allErrors = ModelState.Values.SelectMany(v => v.Errors);
+            //}
+            //var allErrors = ModelState.Values.SelectMany(v => v.Errors);
 
-            return Json(allErrors);
+            //return Json(allErrors);
         }
 
         [HttpGet]
         public JsonResult GetById(int id)
         {
-            var battery = _repository.GetBattery(id);
+            var battery = _service.GetBattery(id);
 
             return Json(battery, JsonRequestBehavior.AllowGet);
         }

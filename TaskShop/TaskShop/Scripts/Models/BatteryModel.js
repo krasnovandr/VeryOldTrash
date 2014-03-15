@@ -54,6 +54,7 @@ var BatteryViewModel = function (options) {
 
     self.Add = function (data) {
         var jsonData = ko.toJS(self.BatteryModel);
+        
 
         $.post(options.batteryAdd, jsonData, function (returnedData) {
             if (returnedData["item"] == "Added") {
