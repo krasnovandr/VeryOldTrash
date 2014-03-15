@@ -39,6 +39,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.6.0.2\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.0.2\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Practices.ServiceLocation">
       <HintPath>..\packages\CommonServiceLocator.1.0\lib\NET35\Microsoft.Practices.ServiceLocation.dll</HintPath>
@@ -51,7 +58,6 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Data.Entity" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -68,9 +74,6 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
-    <Reference Include="EntityFramework">
-      <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
@@ -142,10 +145,12 @@
     <Compile Include="Controllers\MonitorsController.cs" />
     <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\OrderController.cs" />
+    <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="MailSender.cs" />
+    <Compile Include="Repositories\SearchRepository.cs" />
+    <Compile Include="Shared\MailSender.cs" />
     <Compile Include="Migrations\201403101222246_InitialCreate.cs" />
     <Compile Include="Migrations\201403101222246_InitialCreate.Designer.cs">
       <DependentUpon>201403101222246_InitialCreate.cs</DependentUpon>
@@ -178,6 +183,26 @@
     <Compile Include="Migrations\201403121047370_AddOrder.Designer.cs">
       <DependentUpon>201403121047370_AddOrder.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201403141936303_AddBattery.cs" />
+    <Compile Include="Migrations\201403141936303_AddBattery.Designer.cs">
+      <DependentUpon>201403141936303_AddBattery.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201403141957186_AddPrice.cs" />
+    <Compile Include="Migrations\201403141957186_AddPrice.Designer.cs">
+      <DependentUpon>201403141957186_AddPrice.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201403142006590_DeleteModel.cs" />
+    <Compile Include="Migrations\201403142006590_DeleteModel.Designer.cs">
+      <DependentUpon>201403142006590_DeleteModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201403142011224_Price.cs" />
+    <Compile Include="Migrations\201403142011224_Price.Designer.cs">
+      <DependentUpon>201403142011224_Price.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201403142029106_Price1.cs" />
+    <Compile Include="Migrations\201403142029106_Price1.Designer.cs">
+      <DependentUpon>201403142029106_Price1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ShopModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -187,6 +212,7 @@
     <Compile Include="Repositories\MemoryCardsRepository.cs" />
     <Compile Include="Repositories\MonitorsRepository.cs" />
     <Compile Include="Repositories\OrdersRepository.cs" />
+    <Compile Include="Shared\SearchModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -196,6 +222,8 @@
     <Content Include="Content\Site.css" />
     <None Include="Scripts\jquery-1.7.1.intellisense.js" />
     <Content Include="Scripts\jquery.dataTables.js" />
+    <Content Include="Scripts\knockout.validation.debug.js" />
+    <Content Include="Scripts\knockout.validation.js" />
     <Content Include="Scripts\Models\BatteryModel.js" />
     <Content Include="Scripts\Models\CartModel.js" />
     <Content Include="Scripts\jquery-1.7.1.js" />
@@ -211,6 +239,8 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\knockout-2.1.0.debug.js" />
     <Content Include="Scripts\knockout-2.1.0.js" />
+    <Content Include="Scripts\Models\OrderModel.js" />
+    <Content Include="Scripts\Models\SearchModel.js" />
     <Content Include="Scripts\Models\WizardModel.js" />
     <Content Include="Scripts\modernizr-2.5.3.js" />
     <Content Include="Scripts\Models\MonitorModel.js" />
@@ -230,24 +260,25 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Home\BatteryAdd.cshtml" />
-    <Content Include="Views\Home\BatteryList.cshtml" />
-    <Content Include="Views\Home\EarphoneAdd.cshtml" />
-    <Content Include="Views\Home\EarphoneShow.cshtml" />
-    <Content Include="Views\Home\MonitorShow.cshtml" />
-    <Content Include="Views\Home\MonitorAdd.cshtml" />
-    <Content Include="Views\Home\MemoryCardAdd.cshtml" />
-    <Content Include="Views\Home\MemoryCardShow.cshtml" />
-    <Content Include="Views\Home\CartShow.cshtml" />
-    <Content Include="Views\Home\Wizard.cshtml" />
-    <Content Include="Views\Home\OrderShow.cshtml" />
-    <Content Include="Views\Home\BatteryShow.cshtml" />
+    <Content Include="Views\PartialViews\BatteryAdd.cshtml" />
+    <Content Include="Views\PartialViews\BatteryList.cshtml" />
+    <Content Include="Views\PartialViews\EarphoneAdd.cshtml" />
+    <Content Include="Views\PartialViews\EarphoneList.cshtml" />
+    <Content Include="Views\PartialViews\MonitorList.cshtml" />
+    <Content Include="Views\PartialViews\MonitorAdd.cshtml" />
+    <Content Include="Views\PartialViews\MemoryCardAdd.cshtml" />
+    <Content Include="Views\PartialViews\MemoryCardList.cshtml" />
+    <Content Include="Views\PartialViews\CartList.cshtml" />
+    <Content Include="Views\PartialViews\Wizard.cshtml" />
+    <Content Include="Views\PartialViews\OrderList.cshtml" />
+    <Content Include="Views\PartialViews\BatteryShow.cshtml" />
+    <Content Include="Views\PartialViews\MonitorShow.cshtml" />
+    <Content Include="Views\PartialViews\OrderShow.cshtml" />
+    <Content Include="Views\PartialViews\Search.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Services\" />
-    <Folder Include="Views\Cart\" />
-    <Folder Include="Views\PartialViews\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -276,6 +307,21 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201403121047370_AddOrder.resx">
       <DependentUpon>201403121047370_AddOrder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201403141936303_AddBattery.resx">
+      <DependentUpon>201403141936303_AddBattery.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201403141957186_AddPrice.resx">
+      <DependentUpon>201403141957186_AddPrice.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201403142006590_DeleteModel.resx">
+      <DependentUpon>201403142006590_DeleteModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201403142011224_Price.resx">
+      <DependentUpon>201403142011224_Price.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201403142029106_Price1.resx">
+      <DependentUpon>201403142029106_Price1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

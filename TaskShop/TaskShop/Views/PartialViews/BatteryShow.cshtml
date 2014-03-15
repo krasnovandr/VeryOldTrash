@@ -1,0 +1,37 @@
+﻿@model TaskShop.Models.Battery
+
+
+<div data-bind="with:currentData">
+    <div class="editor-label">
+        @Html.LabelFor(model => model.Producer)
+    </div>
+    <div class="editor-field">
+        <span data-bind="text:Producer"></span>
+    </div>
+    <div class="editor-label">
+        @Html.LabelFor(model => model.Model)
+    </div>
+    <div class="editor-field">
+        <span data-bind="text: Model"></span>
+    </div>
+    <div class="editor-label">
+        @Html.LabelFor(model => model.Capacity)
+    </div>
+    <div class="editor-field">
+        <span data-bind="text: Capacity"></span>
+    </div>
+    <div class="editor-label">
+        @Html.LabelFor(model => model.Voltage)
+    </div>
+    <div class="editor-field">
+        <span data-bind="text: Voltage"></span>
+    </div>
+    <div class="editor-label">
+        @Html.LabelFor(model => model.Price)
+    </div>
+    <div class="editor-field">
+        <span data-bind="text:Price"></span>
+    </div>
+    <input type="button" class="btn" value="To Cart" data-bind="click: $root.BatteryViewModel.AddToCart" />
+
+</div>

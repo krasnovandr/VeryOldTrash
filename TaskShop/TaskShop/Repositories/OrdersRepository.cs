@@ -8,10 +8,17 @@ using TaskShop.Models;
 
 namespace TaskShop.Repositories
 {
+    public class OrderAndGoods
+    {
+        public Order Order { get; set; }
+        public List<Cart> GoodsList { get; set; }
+    }
+
     public interface IOrdersRepository
     {
         void AddOrder(Order order, List<Cart> listGoods);
         List<Order> GetOrders();
+        OrderAndGoods GetOrder(int id);
     }
 
     public class OrdersRepository : IOrdersRepository
@@ -47,6 +54,24 @@ namespace TaskShop.Repositories
                 var orders = (from entity in db.Orders
                               select entity).ToList();
                 return orders;
+            }
+        }
+
+        public OrderAndGoods GetOrder(int id)
+        {
+            using (var db = new ShopContext())
+            {
+                var orderAndGoods = new OrderAndGoods();
+                var order = (from entity in db.Orders
+                             where entity.Id == id
+                             select entity).FirstOrDefault();
+                orderAndGoods.Order = order;
+                var goods = (from entity in db.Carts
+                             where entity.OrderId == id
+                             select entity).ToList();
+
+                orderAndGoods.GoodsList = goods;
+                return orderAndGoods;
             }
         }
 

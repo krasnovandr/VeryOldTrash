@@ -27,14 +27,14 @@ namespace TaskShop.Repositories
             var cart = new Cart
             {
                 GoodsId = battery.Id,
-                GoodsCategory = "battery",
+                GoodsCategory = "Batteries",
                 Price = battery.Price,
                 Count = 1
             };
             var flg = 1;
             foreach (Cart item in list)
             {
-                if (item.GoodsId == battery.Id && item.GoodsCategory == "battery")
+                if (item.GoodsId == battery.Id && item.GoodsCategory == "Batteries")
                 {
                     item.Count++;
                     flg = 0;
@@ -86,14 +86,14 @@ namespace TaskShop.Repositories
             var cart = new Cart
             {
                 GoodsId = monitor.Id,
-                GoodsCategory = "monitor",
+                GoodsCategory = "Monitors",
                 Price = monitor.Price,
                 Count = 1
             };
             var flg = 1;
             foreach (Cart item in list)
             {
-                if (item.GoodsId == monitor.Id && item.GoodsCategory == "monitor")
+                if (item.GoodsId == monitor.Id && item.GoodsCategory == "Monitors")
                 {
                     item.Count++;
                     flg = 0;

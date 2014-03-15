@@ -2,6 +2,7 @@
 
     var self = this;
     self.Id = ko.observable('');
+    self.Model = ko.observable('');
     self.Producer = ko.observable('');
     self.Capacity = ko.observable('');
     self.Voltage = ko.observable('');

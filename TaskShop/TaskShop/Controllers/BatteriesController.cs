@@ -40,12 +40,12 @@ namespace TaskShop.Controllers
             return Json(allErrors);
         }
 
-        [HttpPost]
+        [HttpGet]
         public JsonResult GetById(int id)
         {
             var battery = _repository.GetBattery(id);
 
-            return Json(battery);
+            return Json(battery, JsonRequestBehavior.AllowGet);
         }
 
     }

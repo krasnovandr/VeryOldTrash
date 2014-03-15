@@ -19,7 +19,7 @@ namespace TaskShop.Controllers
             this._repository = repository;
         }
         [HttpPost]
-        public JsonResult AddOrder(Order order)
+        public JsonResult Add(Order order)
         {
             if (ModelState.IsValid)
             {
@@ -32,12 +32,18 @@ namespace TaskShop.Controllers
             return Json(allErrors);
         }
 
-        public JsonResult Get()
+        public JsonResult GetAll()
         {
             var orders = _repository.GetOrders();
             return Json(orders, JsonRequestBehavior.AllowGet);
         }
 
+        [HttpGet]
+        public JsonResult GetById(int id)
+        {
+            var order = _repository.GetOrder(id);
 
+            return Json(order, JsonRequestBehavior.AllowGet);
+        }
     }
 }

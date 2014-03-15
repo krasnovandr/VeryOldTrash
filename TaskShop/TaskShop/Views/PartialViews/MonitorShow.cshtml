@@ -1,0 +1,45 @@
+﻿@model TaskShop.Models.Monitor
+
+
+<div data-bind="with:currentData">
+    <div class="editor-label">
+        @Html.LabelFor(model => model.Producer)
+    </div>
+    <div class="editor-field">
+        <span data-bind="text: Producer"></span>
+    </div>
+    <div class="editor-label">
+        @Html.LabelFor(model => model.Model)
+    </div>
+    <div class="editor-field">
+        <span data-bind="text: Model"></span>
+    </div>
+    <div class="editor-label">
+        @Html.LabelFor(model => model.MatrixType)
+    </div>
+    <div class="editor-field">
+        <span data-bind="text:MatrixType"></span>
+    </div>
+
+    <div class="editor-label">
+        @Html.LabelFor(model => model.Resolution)
+    </div>
+    <div class="editor-field">
+        <span data-bind="text: Resolution"></span>
+    </div>
+    <div class="editor-label">
+        @Html.LabelFor(model => model.Frequency)
+    </div>
+    <div class="editor-field">
+        <span data-bind="text: Frequency"></span>
+    </div>
+    <div class="editor-label">
+        @Html.LabelFor(model => model.Price)
+    </div>
+    <div class="editor-field">
+        <span data-bind="text:Price"></span>
+    </div>
+
+    <input type="button" class="btn" value="To Cart" data-bind="click: $root.MonitorViewModel.AddToCart" />
+
+</div>

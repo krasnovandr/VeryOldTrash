@@ -258,3 +258,5 @@ p {
 		border: 1px solid #ccc; 
 		text-align: left; 
 	}
+
+    .validationMessage { color: Red; }

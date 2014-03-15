@@ -10,10 +10,6 @@ namespace TaskShop.Models
 {
     public class ShopContext : DbContext
     {
-        //public ShopContext()
-        //    : base("TaskShopConnection")
-        //{
-        //}
         public DbSet<Battery> Batteries { get; set; }
         public DbSet<Earphone> Earphones { get; set; }
         public DbSet<MemoryCard> MemoryCards { get; set; }
@@ -26,6 +22,7 @@ namespace TaskShop.Models
     {
         [Key]
         public int Id { get; set; }
+        public string Model { get; set; }
         public string Producer { get; set; }
         public int Capacity { get; set; }
         public int Voltage { get; set; }
@@ -36,6 +33,7 @@ namespace TaskShop.Models
     {
         [Key]
         public int Id { get; set; }
+        public string Model { get; set; }
         public string Producer { get; set; }
         public double CableLength { get; set; }
         public int Resistance { get; set; }
@@ -47,6 +45,7 @@ namespace TaskShop.Models
     {
         [Key]
         public int Id { get; set; }
+        public string Model { get; set; }
         public string Producer { get; set; }
         public int Size { get; set; }
         public int WriteSpeed { get; set; }
@@ -58,6 +57,7 @@ namespace TaskShop.Models
     {
         [Key]
         public int Id { get; set; }
+        public string Model { get; set; }
         public string Producer { get; set; }
         public string Resolution { get; set; }
         public int Frequency { get; set; }
@@ -82,6 +82,8 @@ namespace TaskShop.Models
         public int Id { get; set; }
         public int TotalGoodsPrice { get; set; }
         public int DeliveryPrice { get; set; }
+        public int TotalPrice { get; set; }
+
         public int TotalCount { get; set; }
         public int Discount { get; set; }
         public string Email { get; set; }

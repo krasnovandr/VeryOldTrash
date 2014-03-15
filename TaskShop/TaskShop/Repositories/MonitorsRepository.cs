@@ -10,6 +10,7 @@ namespace TaskShop.Repositories
     {
         void AddMonitor(Monitor battery);
         List<Monitor> GetMonitors();
+        Monitor GetMonitor(int id);
     }
 
 
@@ -32,6 +33,17 @@ namespace TaskShop.Repositories
                 var monitors = (from entity in db.Monitors
                                  select entity).ToList();
                 return monitors;
+            }
+        }
+
+        public Monitor GetMonitor(int id)
+        {
+            using (var db = new ShopContext())
+            {
+                var monitor = (from entity in db.Monitors
+                               where entity.Id == id
+                               select entity).FirstOrDefault();
+                return monitor;
             }
         }
     }

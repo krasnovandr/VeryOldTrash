@@ -20,7 +20,7 @@ namespace TaskShop.Controllers
             this._repository = repository;
         }
 
-        public JsonResult Get()
+        public JsonResult GetAll()
         {
             var monitors = _repository.GetMonitors();
             return Json(monitors, JsonRequestBehavior.AllowGet);
@@ -37,6 +37,13 @@ namespace TaskShop.Controllers
             var allErrors = ModelState.Values.SelectMany(v => v.Errors);
 
             return Json(allErrors);
+        }
+
+        [HttpGet]
+        public JsonResult GetById(int id)
+        {
+            var monitor = _repository.GetMonitor(id);
+            return Json(monitor, JsonRequestBehavior.AllowGet);
         }
 
     }

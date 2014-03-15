@@ -30,7 +30,8 @@ namespace TaskShop
             container.RegisterType<IEarphonesRepository, EarphonesRepository>();
             container.RegisterType<ICartRepository, CartRepository>();
             container.RegisterType<IOrdersRepository, OrdersRepository>();
-    
+            container.RegisterType<ISearchRepository, SearchRepository>();
+
             //container.RegisterType<IController, StoreController>("Store");
             return container;
         }

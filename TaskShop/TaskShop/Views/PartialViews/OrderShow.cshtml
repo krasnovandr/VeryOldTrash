@@ -1,0 +1,70 @@
+﻿@model TaskShop.Models.Order
+
+<div data-bind="with:currentData">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="editor-label">
+                    @Html.DisplayNameFor(model => model.Id)
+                    <span data-bind="text: Order.Id"></span>
+                </div>
+                <div class="editor-label">
+
+                    @Html.DisplayNameFor(model => model.TotalCount)
+                    <span data-bind="text: Order.TotalCount"></span>
+                </div>
+                <div class="editor-label">
+
+                    @Html.DisplayNameFor(model => model.Discount)
+                    <span data-bind="text: Order.Discount"></span>
+                </div>
+                <div class="editor-label">
+                    @Html.DisplayNameFor(model => model.Email)
+                    <span data-bind="text: Order.Email"></span>
+                </div>
+                <div class="editor-label">
+                    @Html.DisplayNameFor(model => model.City)
+                    <span data-bind="text: Order.City"></span>
+                </div>
+                <div class="editor-label">
+                    @Html.DisplayNameFor(model => model.Street)
+                    <span data-bind="text: Order.Street"></span>
+                </div>
+                <div class="editor-label">
+                    @Html.DisplayNameFor(model => model.House)
+
+                    <span data-bind="text: Order.House"></span>
+                </div>
+                <div class="editor-label">
+                    @Html.DisplayNameFor(model => model.CardNumber)
+                    <span data-bind="text: Order.CardNumber"></span>
+                </div>
+                <div class="editor-label">
+                    @Html.DisplayNameFor(model => model.TotalGoodsPrice)
+                    <span data-bind="text: Order.TotalGoodsPrice"></span>
+                </div>
+                <div class="editor-label">
+                    @Html.DisplayNameFor(model => model.DeliveryPrice)
+
+                    <span data-bind="text: Order.DeliveryPrice"></span>
+                </div>
+                <div class="editor-label">
+                    @Html.DisplayNameFor(model => model.TotalPrice)
+                    <span data-bind="text: Order.TotalPrice"></span>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div data-bind="foreach:GoodsList">
+                    <div class="row">
+                      
+                        GoodsId:      <span data-bind="text: $data.GoodsId"></span>
+                        GoodsCategory:<span data-bind="text: $data.GoodsCategory"></span>
+                        Count:        <span data-bind="text: $data.Count"></span>
+                        Price:        <span data-bind="text: $data.Price"></span>
+                        <input type="button" class="btn btn-info" value="Details" data-bind="click: $root.goToPageCategoryItem" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

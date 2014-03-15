@@ -1,0 +1,19 @@
+﻿<div data-bind="with:SearchViewModel">
+    <label>
+        Search:
+        <input data-bind="value: searchString" /></label>
+    <input type="button" class="btn btn-info" value="Search" data-bind="click: GetAll" />
+    <div data-bind="foreach:arr">
+        <div class="row">
+            GoodsId:      <span data-bind="text: $data.GoodsId"></span>
+            GoodsCategory:<span data-bind="text: $data.GoodsCategory"></span>
+            Producer:        <span data-bind="text: $data.Count"></span>
+            Price:        <span data-bind="text: $data.Price"></span>
+            Model:        <span data-bind="text: $data.Model"></span>
+            <input type="button" class="btn btn-info" value="Details" data-bind="click: $root.goToPageCategoryItem" />
+        </div>
+    </div>
+
+</div>
+
+

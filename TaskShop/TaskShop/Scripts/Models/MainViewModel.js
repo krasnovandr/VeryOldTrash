@@ -7,85 +7,106 @@ function MainViewModel(options) {
     self.MonitorViewModel = new MonitorViewModel(options);
     self.CartViewModel = new CartViewModel(options);
     self.WizardModel = new WizardModel(options);
+    self.SearchViewModel = new SearchViewModel(options);
 
-    self.currentView = ko.observable();
-    self.currentDeep = ko.observable();
 
-    self.views = ko.observableArray(["Home", "Monitors", "Batteries", "MemoryCards", "Earphones", "Cart", "Orders"]);
+    self.currentMainView = ko.observable();
 
-    self.chosenData = ko.observable();
+    self.currentDeepView = ko.observable();
+    self.currentData = ko.observable();
+
+    self.views = ko.observableArray(["Home", "Monitors", "Batteries", "MemoryCards", "Earphones", "Cart", "Orders", "Search"]);
+
+
 
     self.show_Battery = ko.computed(function () {
-        return self.currentDeep() === "Batteries" ? true : false;
+        return self.currentDeepView() === "Batteries" ? true : false;
     });
     self.show_Monitor = ko.computed(function () {
-        return self.currentDeep() === "Monitors" ? true : false;
+        return self.currentDeepView() === "Monitors" ? true : false;
+    });
+    self.show_Order = ko.computed(function () {
+        return self.currentDeepView() === "Orders" ? true : false;
     });
 
     self.goTopage = function (page) { location.hash = page; };
-    self.goToItem = function (item) {
-        location.hash = self.currentView() + '/' + item.Id;
+
+    self.goToPageItem = function (item) {
+        location.hash = self.currentMainView() + '/' + item.Id;
     };
 
- 
+    self.goToPageCategoryItem = function (item) {
+        var a = item.GoodsCategory + '/' + item.GoodsId;
+        location.hash = a;
+    };
 
-    self.goToPageItem = function (category, item) {
-        self.currentView(false);
 
-        if (category == "Monitors")
-            self.currentDeep("Monitors");
-        if (category == "Batteries") {
-            self.BatteryViewModel.BatteryModel.Id(item.Id);
-            self.BatteryViewModel.BatteryModel.Producer(item.Producer);
-            self.BatteryViewModel.BatteryModel.Capacity(item.Capacity);
-            self.BatteryViewModel.BatteryModel.Voltage(item.Voltage);
-            self.BatteryViewModel.BatteryModel.Price(item.Price);
-            self.currentDeep("Batteries");
-       
+    self.currentView = function (category, item) {
+        self.currentMainView(false);
+
+        if (category == "Monitors") {
+            self.currentDeepView(false);
+            self.currentData(item);
+            self.currentDeepView(category);
         }
-
+        if (category == "Batteries") {
+            self.currentDeepView(false);
+            self.currentData(item);
+            self.currentDeepView(category);
+        }
+        if (category == "Orders") {
+            self.currentDeepView(false);
+            self.currentData(item);
+            self.currentDeepView(category);
+        }
     };
+
+
 
     self.show_Batteries = ko.computed(function () {
-        self.currentDeep(false);
+        self.currentDeepView(false);
         self.BatteryViewModel.GetAll();
-        return self.currentView() === "Batteries" ? true : false;
+        return self.currentMainView() === "Batteries" ? true : false;
+    });
+    self.show_Search = ko.computed(function () {
+        self.currentDeepView(false);
+        return self.currentMainView() === "Search" ? true : false;
     });
     self.show_Monitors = ko.computed(function () {
-        self.currentDeep(false);
+        self.currentDeepView(false);
         self.MonitorViewModel.GetAll();
 
 
-        return self.currentView() === "Monitors" ? true : false;
+        return self.currentMainView() === "Monitors" ? true : false;
     });
     self.show_MemoryCards = ko.computed(function () {
-        self.currentDeep(false);
-        return self.currentView() === "MemoryCards" ? true : false;
+        self.currentDeepView(false);
+        return self.currentMainView() === "MemoryCards" ? true : false;
     });
     self.show_Earphones = ko.computed(function () {
-        self.currentDeep(false);
-        return self.currentView() === "Earphones" ? true : false;
+        self.currentDeepView(false);
+        return self.currentMainView() === "Earphones" ? true : false;
     });
 
     self.show_Home = ko.computed(function () {
-        self.currentDeep(false);
-        return self.currentView() === "Home" ? true : false;
+        self.currentDeepView(false);
+        return self.currentMainView() === "Home" ? true : false;
     });
     self.show_Cart = ko.computed(function () {
-        self.currentDeep(false);
+        self.currentDeepView(false);
         self.CartViewModel.GetAll();
-        return self.currentView() === "Cart" ? true : false;
+        return self.currentMainView() === "Cart" ? true : false;
     });
     self.show_Orders = ko.computed(function () {
-        self.currentDeep(false);
+        self.currentDeepView(false);
         self.WizardModel.OrderModel.GetAll();
-        return self.currentView() === "Orders" ? true : false;
+        return self.currentMainView() === "Orders" ? true : false;
     });
 
 
     self.show_Wizard = ko.observable(false);
 
-    self.wizardOpen = function (data) {
+    self.wizardOpen = function () {
         self.show_Wizard(true);
     };
 
