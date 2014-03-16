@@ -3,39 +3,41 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Shared;
 using TaskShop.Repositories;
 using TaskShop.Repositories;
+using TaskShop.Services;
 
 namespace TaskShop.Controllers
 {
     public class EarphonesController : Controller
     {
-        //
-        //private readonly IEarphonesRepository _repository;
+        private readonly IEarponesService _service;
 
-        //public EarphonesController(IEarphonesRepository repository)
-        //{
-        //    this._repository = repository;
-        //}
 
-        //public JsonResult GetResult()
-        //{
-        //    var earphones = _repository.GetEarphones();
-        //    return Json(earphones, JsonRequestBehavior.AllowGet);
-        //}
+        public EarphonesController(IEarponesService service)
+        {
+            this._service = service;
+        }
+        public JsonResult GetAll()
+        {
+            var earphones = _service.GetEarphones();
+            return Json(earphones, JsonRequestBehavior.AllowGet);
+        }
 
-        //[HttpPost]
-        //public JsonResult AddEarphone(Earphone earphone)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        _repository.AddEarphone(earphone);
-        //        return Json(new { item = "Added" }, JsonRequestBehavior.AllowGet);
-        //    }
-        //    var allErrors = ModelState.Values.SelectMany(v => v.Errors);
+        [HttpPost]
+        public JsonResult Add(Earphone earphone)
+        {
+            _service.AddEarphone(earphone);
+            return Json(new { item = "Added" }, JsonRequestBehavior.AllowGet);
+        }
 
-        //    return Json(allErrors);
-        //}
+        [HttpGet]
+        public JsonResult GetById(int id)
+        {
+            var earphone = _service.GetEarphone(id);
+            return Json(earphone, JsonRequestBehavior.AllowGet);
+        }
 
     }
 }

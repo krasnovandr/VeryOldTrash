@@ -37,15 +37,35 @@ WizardModel = function (options) {
         return self.currentStep().template();
     };
 
-  
+    self.modelIsValid = ko.computed(function () {
+        if (self.currentStep().id == 1) {
+            if (self.OrderModel.ValidateFieldsStep1.errors().length == 0) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+        if (self.currentStep().id == 2) {
+            return true;
+        }
+        if (self.currentStep().id == 3) {
+            if (self.OrderModel.ValidateFieldsStep3.errors().length == 0) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+        return false;
+
+    });
     self.canGoNext = ko.computed(function () {
-        return (self.currentIndex() < (self.stepModels().length - 1) &&  ($('.validationMessage:visible').length <= 0));
+        return (self.currentIndex() < (self.stepModels().length - 1) );
     });
 
-    
+
 
     self.goNext = function () {
-        if ((self.currentIndex() < self.stepModels().length - 1) && ($('.validationMessage:visible').length <= 0)) {
+        if ((self.currentIndex() < self.stepModels().length - 1) ) {
             self.currentStep(self.stepModels()[self.currentIndex() + 1]);
         }
     };
@@ -53,7 +73,7 @@ WizardModel = function (options) {
 
 
     self.canGoPrevious = ko.computed(function () {
-        return (self.currentIndex() > 0 );
+        return (self.currentIndex() > 0);
     });
 
     self.goPrevious = function () {

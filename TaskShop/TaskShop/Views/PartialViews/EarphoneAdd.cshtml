@@ -1,48 +1,50 @@
-﻿@model TaskShop.Shared.Earphone
+﻿@model Shared.Earphone
 
-<div class="editor-label">
-    @Html.LabelFor(model => model.Producer)
+<div id="Add" data-bind="visible:EarphoneViewModel.isEditMode">
+    <div class="editor-label">
+        @Html.LabelFor(model => model.Producer)
+    </div>
+    <div class="editor-field">
+        <input type="text" data-bind="value: EarphoneViewModel.EarphoneModel.Producer" />
+    </div>
+
+    <div class="editor-label">
+        @Html.LabelFor(model => model.Model)
+    </div>
+    <div class="editor-field">
+        <input type="text" data-bind="value: EarphoneViewModel.EarphoneModel.Model" />
+    </div>
+
+    <div class="editor-field">
+        @Html.LabelFor(model => model.CableLength)
+    </div>
+    <div class="editor-field">
+        <input type="text" data-bind="value: EarphoneViewModel.EarphoneModel.CableLength" />
+    </div>
+    <div class="editor-label">
+        @Html.LabelFor(model => model.MaxFrequency)
+    </div>
+    <div class="editor-field">
+        <input type="text" data-bind="value: EarphoneViewModel.EarphoneModel.MaxFrequency" />
+    </div>
+    <div class="editor-label">
+        @Html.LabelFor(model => model.Resistance)
+    </div>
+    <div class="editor-field">
+        <input type="text" data-bind="value: EarphoneViewModel.EarphoneModel.Resistance" />
+    </div>
+
+    <div class="editor-label">
+        @Html.LabelFor(model => model.Price)
+
+    </div>
+    <div class="editor-field">
+        <input type="text" data-bind="value: EarphoneViewModel.EarphoneModel.Price" />
+    </div>
+
+
+    <p>
+        <input type="button" value="Add" data-bind="click: EarphoneViewModel.Add" />
+        <input type="button" value="Cancel" data-bind="click: EarphoneViewModel.Cancel" />
+    </p>
 </div>
-<div class="editor-field">
-    @*@Html.EditorFor(model => model.Producer,new { data_bind = "value: $root.Model.Producer" })*@
-    <input type="text" data-bind="value: EarphoneModel.Producer" />
-</div>
-
-<div class="editor-label">
-    @Html.LabelFor(model => model.MaxFrequency)
-</div>
-<div class="editor-field">
-
-    <input type="text" data-bind="value: EarphoneModel.MaxFrequency" />
-</div>
-
-<div class="editor-label">
-    @Html.LabelFor(model => model.Resistance)
-</div>
-<div class="editor-field">
-
-    <input type="text" data-bind="value: EarphoneModel.Resistance" />
-</div>
-
-<div class="editor-label">
-    @Html.LabelFor(model => model.CableLength)
-</div>
-<div class="editor-field">
-
-    <input type="text" data-bind="value: EarphoneModel.CableLength" />
-</div>
-
-<div class="editor-label">
-    @Html.LabelFor(model => model.Price)
-
-</div>
-<div class="editor-field">
-    @*@Html.EditorFor(model => model.Price,new { data_bind = "value: Model.Price" })*@
-    <input type="text" data-bind="value: EarphoneModel.Price" />
-</div>
-
-
-<p>
-    <input type="button" value="Add" data-bind="click: $root.Add" />
-</p>
-

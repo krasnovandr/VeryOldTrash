@@ -7,7 +7,7 @@ using System.Security.Cryptography.X509Certificates;
 using System.Web;
 using TaskShop.Models;
 using TaskShop.Repositories;
-using TaskShop.Shared;
+using Shared;
 
 
 namespace TaskShop.Repositories
@@ -17,7 +17,8 @@ namespace TaskShop.Repositories
     {
         void AddBattery(Battery battery, List<Cart> list);
         void AddMonitor(Monitor monitor, List<Cart> list);
-        //List<Cart> GetCarts();
+        void AddEarphone(Earphone earphone, List<Cart> list);
+        void AddMemoryCard(MemoryCard memoryCard, List<Cart> list);
         void Delete(Cart cart, List<Cart> list);
     }
 
@@ -50,40 +51,6 @@ namespace TaskShop.Repositories
                 list.Add(cart);
             }
         }
-
-
-        //public void AddBattery(Battery battery)
-        //{
-
-        //    using (var db = new ShopContext())
-        //    {
-        //        var tmp = (from entity in db.Carts
-        //                   where entity.GoodsId == battery.Id
-        //                   where entity.GoodsCategory == "battery"
-        //                   select entity).FirstOrDefault();
-
-        //        if (tmp == null)
-        //        {
-        //            var cart = new Cart
-        //            {
-        //                GoodsId = battery.Id,
-        //                GoodsCategory = "battery",
-        //                Price = battery.Price,
-        //                Count = 1
-        //            };
-        //            db.Carts.Add(cart);
-
-        //        }
-        //        else
-        //        {
-        //            tmp.Count++;
-        //            db.Entry(tmp).State = EntityState.Modified;
-
-        //        }
-        //        db.SaveChanges();
-        //    }
-        //}
-
         public void AddMonitor(Monitor monitor, List<Cart> list)
         {
             var cart = new Cart
@@ -111,15 +78,59 @@ namespace TaskShop.Repositories
 
         }
 
-        //public List<Cart> GetCarts()
-        //{
-        //    using (var db = new ShopContext())
-        //    {
-        //        var carts = (from entity in db.Carts
-        //                     select entity).ToList();
-        //        return carts;
-        //    }
-        //}
+        public void AddEarphone(Earphone earphone, List<Cart> list)
+        {
+            var cart = new Cart
+            {
+                GoodsId = earphone.Id,
+                GoodsCategory = "Earphones",
+                Price = earphone.Price,
+                Count = 1
+            };
+            var flg = 1;
+            foreach (Cart item in list)
+            {
+                if (item.GoodsId == earphone.Id && item.GoodsCategory == "Earphones")
+                {
+                    item.Count++;
+                    flg = 0;
+                    break;
+
+                }
+            }
+            if (flg == 1)
+            {
+                list.Add(cart);
+            }
+
+        }
+
+        public void AddMemoryCard(MemoryCard memoryCard, List<Cart> list)
+        {
+            var cart = new Cart
+            {
+                GoodsId = memoryCard.Id,
+                GoodsCategory = "MemoryCards",
+                Price = memoryCard.Price,
+                Count = 1
+            };
+            var flg = 1;
+            foreach (Cart item in list)
+            {
+                if (item.GoodsId == memoryCard.Id && item.GoodsCategory == "MemoryCards")
+                {
+                    item.Count++;
+                    flg = 0;
+                    break;
+
+                }
+            }
+            if (flg == 1)
+            {
+                list.Add(cart);
+            }
+
+        }
 
         public void Delete(Cart cart, List<Cart> list)
         {
@@ -138,24 +149,7 @@ namespace TaskShop.Repositories
                     }
                 }
             }
-            //using (var db = new ShopContext())
-            //{
-            //    var tmp = (from entity in db.Carts
-            //               where entity.Id == id
-            //               select entity).FirstOrDefault();
-            //    if (tmp.Count == 1)
-            //    {
-            //        db.Carts.Remove(tmp);
-            //    }
-            //    else
-            //    {
-            //        tmp.Count--;
-            //        db.Entry(tmp).State = EntityState.Modified;
-            //    }
 
-            //    db.SaveChanges();
-
-            //}
         }
     }
 }

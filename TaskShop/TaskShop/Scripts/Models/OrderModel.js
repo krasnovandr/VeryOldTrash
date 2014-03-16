@@ -63,59 +63,66 @@ OrderModel = function (options) {
         return value;
     });
 
-    self.Street = ko.observable('').extend({ required: true }).extend({ minLength: 2, maxLength: 10 });
-    self.City = ko.observable('').extend({ minLength: 2, maxLength: 10 }).extend({ required: true });
-    self.House = ko.observable('').extend({ min: 1, max: 1000 }).extend({ required: true });
-    self.Email = ko.observable('').extend({ email: true }).extend({ required: true });
-    self.CardNumber = ko.observable().extend({ required: true }).extend({ pattern: {
-                message: 'Hey this doesnt match my pattern',
-                params: '^[0-9]{12}$'
-    }});
-    //self.ValidateFieldsStep1 = {
-
-
-    //};
-
-    //self.ValidateFieldsStep3 = {
-    //    CardNumber: ko.observable().extend({ minLength: 13, maxLength: 16 }).extend({ required: true })
-    //};
-
-    //self.ValidateFieldsStep1.errors = ko.validation.group(self.ValidateFieldsStep1);
-    //self.ValidateFieldsStep3.errors = ko.validation.group(self.ValidateFieldsStep3);
-
-
-
-
-    //self.modelIsValid = ko.computed(function () {
-    //    return self.ValidateFields.isValid();
-    //});
-    self.arr = ko.observableArray([]);
-    //ko.validation.group(self);
-
-    self.GetAll = function () {
-        $.get(options.orderGetAll, function (returnedData) {
-            if (returnedData)
-                self.arr(returnedData);
-        });
+    //self.Street = ko.observable('').extend({ required: true }).extend({ minLength: 2, maxLength: 10 });
+    //self.City = ko.observable('').extend({ minLength: 2, maxLength: 10 }).extend({ required: true });
+    //self.House = ko.observable('').extend({ min: 1, max: 1000 }).extend({ required: true });
+    //self.Email = ko.observable('').extend({ email: true }).extend({ required: true });
+    //self.CardNumber = ko.observable().extend({ required: true }).extend({ pattern: {
+    //    message: 'Hey this doesnt match my pattern',
+    //    params: '^[0-9]{12}$'
+    //}});
+    self.ValidateFieldsStep1 = {
+        Street : ko.observable('').extend({ required: true }).extend({ minLength: 2, maxLength: 10 }),
+        City : ko.observable('').extend({ minLength: 2, maxLength: 10 }).extend({ required: true }),
+        House : ko.observable('').extend({ min: 1, max: 1000 }).extend({ required: true }),
+        Email : ko.observable('').extend({ email: true }).extend({ required: true })
+  
     };
-    self.SubmitOrder = function () {
-        window.vm.show_Wizard(false);
 
-        var obj = {
-            TotalGoodsPrice: self.TotalGoodsPrice,
-            DeliveryPrice: self.DeliveryPrice,
-            TotalCount: self.TotalCount,
-            Discount: self.Discount,
-            Email: self.Email,
-            City: self.City,
-            Street: self.Street,
-            House: self.House,
-            CardNumber: self.CardNumber,
-            TotalPrice: self.TotalPrice
-        };
-        var json = ko.toJS(obj);
-        $.post(options.orderAdd, json, function (returnedData) {
-        });
+    self.ValidateFieldsStep3 = {
+        CardNumber : ko.observable().extend({ required: true }).extend({ pattern: {
+            message: 'Hey this doesnt match my pattern',
+            params: '^[0-9]{2}$'
+        }})
+};
+
+self.ValidateFieldsStep1.errors = ko.validation.group(self.ValidateFieldsStep1);
+self.ValidateFieldsStep3.errors = ko.validation.group(self.ValidateFieldsStep3);
+
+
+
+
+//self.modelIsValid = ko.computed(function () {
+//    return self.ValidateFields.isValid();
+//});
+self.arr = ko.observableArray([]);
+//ko.validation.group(self);
+
+self.GetAll = function () {
+    $.get(options.orderGetAll, function (returnedData) {
+        if (returnedData)
+            self.arr(returnedData);
+    });
+};
+self.SubmitOrder = function () {
+    window.vm.show_Wizard(false);
+
+    var obj = {
+        TotalGoodsPrice: self.TotalGoodsPrice,
+        DeliveryPrice: self.DeliveryPrice,
+        TotalCount: self.TotalCount,
+        Discount: self.Discount,
+        Email: self.ValidateFieldsStep1.Email,
+        City: self.ValidateFieldsStep1.City,
+        Street: self.ValidateFieldsStep1.Street,
+        House: self.ValidateFieldsStep1.House,
+        CardNumber: self.ValidateFieldsStep3.CardNumber,
+        TotalPrice: self.TotalPrice
     };
+    var json = ko.toJS(obj);
+    $.post(options.orderAdd, json, function (returnedData) {
+        window.vm.CartViewModel.GetAll();
+    });
+};
 
 }

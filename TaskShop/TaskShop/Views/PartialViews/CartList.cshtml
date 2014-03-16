@@ -1,5 +1,5 @@
 ﻿@model IEnumerable<TaskShop.Models.Cart>
-<table >
+<table>
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.GoodsId)
@@ -33,6 +33,7 @@
             </td>
             <td>
                 <input type="button" class="btn" value="Delete" data-bind="click: $root.CartViewModel.Delete" />
+                        <input type="button" class="btn btn-info" value="Details" data-bind="click: $root.goToPageCategoryItem" />
             </td>
         </tr>
     </tbody>

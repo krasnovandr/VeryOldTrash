@@ -1,50 +1,65 @@
-﻿@model IEnumerable<TaskShop.Shared.MemoryCard>
+﻿@model IEnumerable<Shared.MemoryCard>
 
-<table class="simple-little-table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Id)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Producer)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Size)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ReadSpeed)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.WriteSpeed)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Price)
-        </th>
-
-    </tr>
-
-
-    <tbody data-bind="foreach: MemoryCardModel.arr">
+<div id="Show" data-bind="visible:MemoryCardViewModel.isReadMode">
+    <table>
         <tr>
-            <td>
-                <span data-bind="text: $data.Id"></span>
-            </td>
-            <td>
-                <span data-bind="text: $data.Producer"></span>
-            </td>
-            <td>
-                <span data-bind="text: $data.Size"></span>
-            </td>
-            <td>
-                <span data-bind="text: $data.ReadSpeed"></span>
-            </td>
-            <td>
-                <span data-bind="text: $data.WriteSpeed"></span>
-            </td>
-            <td>
-                <span data-bind="text: $data.Price"></span>
-            </td>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Producer)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Model)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Size)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ReadSpeed)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.WriteSpeed)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th></th>
 
         </tr>
 
-</table>
+
+        <tbody data-bind="foreach: MemoryCardViewModel.arr">
+            <tr>
+                <td>
+                    <span data-bind="text: $data.Id"></span>
+                </td>
+                <td>
+                    <span data-bind="text: $data.Producer"></span>
+                </td>
+                <td>
+                    <span data-bind="text: $data.Model"></span>
+                </td>
+                <td>
+                    <span data-bind="text: $data.Size"></span>
+                </td>
+                <td>
+                    <span data-bind="text: $data.WriteSpeed"></span>
+                </td>
+                <td>
+                    <span data-bind="text: $data.ReadSpeed"></span>
+                </td>
+                <td>
+                    <span data-bind="text: $data.Price"></span>
+                </td>
+                <td>
+                    <input type="button" class="btn btn-default" value="To Cart" data-bind="click: $root.MemoryCardViewModel.AddToCart" />
+                    <input type="button" class="btn btn-info" value="Details" data-bind="click: $root.goToPageItem" />
+                </td>
+            </tr>
+        </tbody>
+
+    </table>
+    <div>Max Price <span data-bind="text: MemoryCardViewModel.maxPrice"></span></div>
+    <div>Min Price<span data-bind="text: MemoryCardViewModel.minPrice"></span> </div>
+</div>

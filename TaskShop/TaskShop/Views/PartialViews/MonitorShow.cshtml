@@ -1,7 +1,13 @@
-﻿@model TaskShop.Shared.Monitor
+﻿@model Shared.Monitor
 
 
 <div data-bind="with:currentData">
+    <div class="editor-label">
+        @Html.DisplayNameFor(model => model.Id)
+    </div>
+    <div class="editor-field">
+        <span data-bind="text:Id"></span>
+    </div>
     <div class="editor-label">
         @Html.LabelFor(model => model.Producer)
     </div>

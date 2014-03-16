@@ -5,6 +5,8 @@ using System.Web;
 using System.Web.Mvc;
 using TaskShop.Repositories;
 using TaskShop.Repositories;
+using TaskShop.Services;
+using Shared;
 
 namespace TaskShop.Controllers
 {
@@ -13,39 +15,41 @@ namespace TaskShop.Controllers
         //
         // GET: /Monitors/
 
-        //private readonly IMonitorsRepository _repository;
+       private readonly IMonitorsService _service;
 
-        //public MonitorsController(IMonitorsRepository repository)
-        //{
-        //    this._repository = repository;
-        //}
+        ////
+        //// GET: /Batteries/
 
-        public JsonResult GetAll()
+       public MonitorsController(IMonitorsService service)
         {
-            //var monitors = _repository.GetMonitors();
-            //return Json(monitors, JsonRequestBehavior.AllowGet);
-            return Json(null, JsonRequestBehavior.AllowGet);
+            this._service = service;
         }
+       public JsonResult GetAll()
+       {
+           var monitors = _service.GetMonitors();
+           return Json(monitors, JsonRequestBehavior.AllowGet);
+       }
 
-        //[HttpPost]
-        //public JsonResult Add(Monitor monitor)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        _repository.AddMonitor(monitor);
-        //        return Json(new { item = "Added" }, JsonRequestBehavior.AllowGet);
-        //    }
-        //    var allErrors = ModelState.Values.SelectMany(v => v.Errors);
+       [HttpPost]
+       public JsonResult Add(Monitor monitor)
+       {
+           //if (ModelState.IsValid)
+           //{
+           _service.AddMonitor(monitor);
+           return Json(new { item = "Added" }, JsonRequestBehavior.AllowGet);
+           //}
+           //var allErrors = ModelState.Values.SelectMany(v => v.Errors);
 
-        //    return Json(allErrors);
-        //}
+           //return Json(allErrors);
+       }
 
-        //[HttpGet]
-        //public JsonResult GetById(int id)
-        //{
-        //    var monitor = _repository.GetMonitor(id);
-        //    return Json(monitor, JsonRequestBehavior.AllowGet);
-        //}
+       [HttpGet]
+       public JsonResult GetById(int id)
+       {
+           var monitor = _service.GetMonitor(id);
+
+           return Json(monitor, JsonRequestBehavior.AllowGet);
+       }
 
     }
 }

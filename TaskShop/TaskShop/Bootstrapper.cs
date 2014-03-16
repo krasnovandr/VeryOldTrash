@@ -19,23 +19,16 @@ namespace TaskShop
         {
             var container = new UnityContainer();
 
-            // register all your components with the container here
-            // it is NOT necessary to register your controllers
-
-            // e.g. container.RegisterType<ITestService, TestService>();            
-
-
-            //container.RegisterType<IBatteriesRepository, BatteriesRepository>();
-            //container.RegisterType<IMonitorsRepository, MonitorsRepository>();
-            //container.RegisterType<IMemoryCardsRepository, MemoryCardsRepository>();
-            //container.RegisterType<IEarphonesRepository, EarphonesRepository>();
             container.RegisterType<IBatteriesService, BatteriesService>();
+            container.RegisterType<IMonitorsService, MonitorsService>();
+            container.RegisterType<ISearchService, SearchService>();
+            container.RegisterType<IEarponesService, EarponesService>();
+            container.RegisterType<IMemoryCardsService, MemoryCardsService>();
+
             container.RegisterType<IGoodsRepository, GoodsRepository>();
             container.RegisterType<ICartRepository, CartRepository>();
             container.RegisterType<IOrdersRepository, OrdersRepository>();
-            container.RegisterType<ISearchRepository, SearchRepository>();
-
-            //container.RegisterType<IController, StoreController>("Store");
+    
             return container;
         }
     }

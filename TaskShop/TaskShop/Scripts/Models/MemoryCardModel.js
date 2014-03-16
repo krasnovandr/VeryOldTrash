@@ -1,38 +1,22 @@
-﻿var MonitorModel = function () {
+﻿var MemoryCardModel = function () {
 
     var self = this;
     self.Id = ko.observable('');
-    self.Producer = ko.observable('');
     self.Model = ko.observable('');
-    self.Resolution = ko.observable('');
-    self.Frequency = ko.observable('');
-    self.MatrixType = ko.observable('');
+    self.Producer = ko.observable('');
+    self.Size = ko.observable('');
+    self.WriteSpeed = ko.observable('');
+    self.ReadSpeed = ko.observable('');
     self.Price = ko.observable('');
-
-
-
 };
 
-var MonitorViewModel = function (options) {
+var MemoryCardViewModel = function (options) {
+
     var self = this;
 
-    self.isReadMode = ko.observable(true);
-    self.isEditMode = ko.computed(function () {
-        return !(self.isReadMode());
-    }, self);
-
-
-    self.Create = function (data) {
-        self.isReadMode(false);
-    };
-    self.Cancel = function (data) {
-        self.isReadMode(true);
-    };
-
-
-    self.MonitorModel = new MonitorModel();
-
     self.arr = ko.observableArray([]);
+    self.errors = ko.observableArray([]);
+
     self.maxPrice = ko.computed(function () {
         var m = 0;
         for (var i = 1; i < self.arr().length; i++) {
@@ -49,12 +33,26 @@ var MonitorViewModel = function (options) {
         }
         return m;
     }, self);
-    self.errors = ko.observableArray([]);
+
+
+    self.MemoryCardModel = new MemoryCardModel();
+
+    self.isReadMode = ko.observable(true);
+    self.isEditMode = ko.computed(function () {
+        return !(self.isReadMode());
+    }, self);
+
+
+    self.Create = function (data) {
+        self.isReadMode(false);
+    };
+    self.Cancel = function (data) {
+        self.isReadMode(true);
+    };
 
     self.Add = function (data) {
-        var jsonData = ko.toJS(self.MonitorModel);
-
-        $.post(options.monitorAdd, jsonData, function (returnedData) {
+        var jsonData = ko.toJS(self.MemoryCardModel);
+        $.post(options.memoryCardAdd, jsonData, function (returnedData) {
             if (returnedData["item"] == "Added") {
                 self.errors([]);
             } else {
@@ -63,24 +61,32 @@ var MonitorViewModel = function (options) {
         });
     };
 
-    self.GetAll = function() {
-        $.get(options.monitorGetAll, function(returnedData) {
-            if (returnedData)
-                self.arr(returnedData);
+    self.GetAll = function (data) {
+        $.ajax({
+            type: 'GET',
+            url: options.memoryCardGetAll,
+            success: onAjaxSuccess
         });
     };
 
+    function onAjaxSuccess(data) {
+        self.arr(data);
+    }
+
+
     self.AddToCart = function (data) {
         var json = ko.toJS(data);
-        $.post(options.cartAddMonitor, json, function (returnedData) {
+        $.post(options.cartAddMemoryCard, json, function (returnedData) {
+            var a = returnedData;
             if (returnedData["item"] == "Added") {
                 var tmp = window.vm.CartViewModel.totalItems();
                 tmp++;
                 window.vm.CartViewModel.totalItems(tmp);
+
                 self.errors([]);
             } else {
                 self.errors(returnedData);
             }
         });
     };
-};
+}

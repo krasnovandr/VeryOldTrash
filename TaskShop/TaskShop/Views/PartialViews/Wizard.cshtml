@@ -1,16 +1,13 @@
 ﻿<div class="row">
-    @*TotalCount<span data-bind="text: WizardModel.OrderModel.TotalCount"></span>*@
     Discount<span data-bind="text: WizardModel.OrderModel.Discount"></span>
-    @*TotalPrice<span data-bind="text: WizardModel.OrderModel.TotalPrice"></span>*@
     DeliveryPrice<span data-bind="text: WizardModel.OrderModel.DeliveryPrice"></span>
-
 </div>
 <div data-bind="template: { name: 'currentTmpl', data: WizardModel.currentStep }"></div>
 
 <hr />
 
 <button  class="btn btn-primary"data-bind="click: WizardModel.goPrevious, visible: WizardModel.canGoPrevious">Previous</button>
-<button   class="btn btn-primary" data-bind="click: WizardModel.goNext, visible: WizardModel.canGoNext ">Next</button>
+<button   class="btn btn-primary" data-bind="click: WizardModel.goNext, visible: WizardModel.canGoNext, enable: WizardModel.modelIsValid">Next</button>
 
 
 <script id="currentTmpl" type="text/html">
@@ -38,7 +35,7 @@
 </script>
 <script id="bankCardTmpl" type="text/html">
     <label for="CardNumber">CardNumber</label>
-    <input id="CardNumber" type="text" data-bind="value: CardNumber" />
+    <input id="CardNumber" type="text" data-bind="value: ValidateFieldsStep3.CardNumber,valueUpdate: 'afterkeydown'" />
     <br />
 </script>
 
@@ -47,19 +44,19 @@
         <div class="row">
    @*         <label for="Email">Email</label>
             <input id="Email" type="text" data-bind="value: Email" />*@
-              <label>Email: <input data-bind="value: Email" required/></label>
+              <label>Email: <input data-bind="value: ValidateFieldsStep1.Email,valueUpdate: 'afterkeydown'" /></label>
         </div>
         <div>
             <label for="City">City</label>
-            <input id="City" type="text" data-bind="value: City"  required/>
+            <input id="City" type="text" data-bind="value: ValidateFieldsStep1.City,valueUpdate: 'afterkeydown'"  />
         </div>
         <div class="row">
             <label for="Street">Street</label>
-            <input id="Street" type="text" data-bind="value: Street" required />
+            <input id="Street" type="text" data-bind="value: ValidateFieldsStep1.Street,valueUpdate: 'afterkeydown'"  />
         </div>
         <div class="row">
             <label for="House">House</label>
-            <input id="House" type="text" data-bind="value: House" required/>
+            <input id="House" type="text" data-bind="value: ValidateFieldsStep1.House,valueUpdate: 'afterkeydown'" />
         </div>
     </div>
 </script>
@@ -75,11 +72,11 @@
                 Total Goods Price:<span data-bind="text:TotalGoodsPrice"></span><br/>
                 Total  Price:<span data-bind="text:TotalPrice"></span><br/>
                 DeliveryPrice:<span data-bind="text:DeliveryPrice"></span><br/>
-                Email:<span data-bind="text:Email"></span><br/>
-                City:<span data-bind="text:City"></span><br/>
-                Street:<span data-bind="text:Street"></span><br/>
-                House:<span data-bind="text:House"></span><br/>
-                CardNumber<span data-bind="text:CardNumber"></span><br/>
+                Email:<span data-bind="text:ValidateFieldsStep1.Email"></span><br/>
+                City:<span data-bind="text:ValidateFieldsStep1.City"></span><br/>
+                Street:<span data-bind="text:ValidateFieldsStep1.Street"></span><br/>
+                House:<span data-bind="text:ValidateFieldsStep1.House"></span><br/>
+                CardNumber<span data-bind="text:ValidateFieldsStep3.CardNumber"></span><br/>
             </fieldset>
         </div>
     </div>

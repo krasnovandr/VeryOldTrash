@@ -3,26 +3,27 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Shared;
+using TaskShop.Models;
 using TaskShop.Repositories;
+using TaskShop.Services;
 
 namespace TaskShop.Controllers
 {
     public class SearchController : Controller
     {
-        //
-        // GET: /Search/
 
-        private readonly ISearchRepository _repository;
+        private readonly ISearchService _service;
 
-        public SearchController(ISearchRepository repository)
+        public SearchController(ISearchService service)
         {
-            this._repository = repository;
+            this._service = service;
         }
 
-        public JsonResult GetAll(string modelName)
+        [HttpPost]
+        public JsonResult GetAll(SearchModel searchModel)
         {
-            var items = _repository.GetAll(modelName);
-            return Json(items, JsonRequestBehavior.AllowGet);
+            return Json(_service.GetAll(searchModel));
         }
     }
 }

@@ -5,6 +5,8 @@ function MainViewModel(options) {
 
     self.BatteryViewModel = new BatteryViewModel(options);
     self.MonitorViewModel = new MonitorViewModel(options);
+    self.MemoryCardViewModel = new MemoryCardViewModel(options);
+    self.EarphoneViewModel = new EarphoneViewModel(options);
     self.CartViewModel = new CartViewModel(options);
     self.WizardModel = new WizardModel(options);
     self.SearchViewModel = new SearchViewModel(options);
@@ -25,9 +27,16 @@ function MainViewModel(options) {
     self.show_Monitor = ko.computed(function () {
         return self.currentDeepView() === "Monitors" ? true : false;
     });
+    self.show_Earphone = ko.computed(function () {
+        return self.currentDeepView() === "Earphones" ? true : false;
+    });
+    self.show_MemoryCard = ko.computed(function () {
+        return self.currentDeepView() === "MemoryCards" ? true : false;
+    });
     self.show_Order = ko.computed(function () {
         return self.currentDeepView() === "Orders" ? true : false;
     });
+
 
     self.goTopage = function (page) { location.hash = page; };
 
@@ -43,22 +52,24 @@ function MainViewModel(options) {
 
     self.currentView = function (category, item) {
         self.currentMainView(false);
-
-        if (category == "Monitors") {
-            self.currentDeepView(false);
-            self.currentData(item);
-            self.currentDeepView(category);
-        }
-        if (category == "Batteries") {
-            self.currentDeepView(false);
-            self.currentData(item);
-            self.currentDeepView(category);
-        }
-        if (category == "Orders") {
-            self.currentDeepView(false);
-            self.currentData(item);
-            self.currentDeepView(category);
-        }
+        self.currentDeepView(false);
+        self.currentData(item);
+        self.currentDeepView(category);
+        //if (category == "Monitors") {
+        //    self.currentDeepView(false);
+        //    self.currentData(item);
+        //    self.currentDeepView(category);
+        //}
+        //if (category == "Batteries") {
+        //    self.currentDeepView(false);
+        //    self.currentData(item);
+        //    self.currentDeepView(category);
+        //}
+        //if (category == "Orders") {
+        //    self.currentDeepView(false);
+        //    self.currentData(item);
+        //    self.currentDeepView(category);
+        //}
     };
 
 
@@ -81,10 +92,12 @@ function MainViewModel(options) {
     });
     self.show_MemoryCards = ko.computed(function () {
         self.currentDeepView(false);
+        self.MemoryCardViewModel.GetAll();
         return self.currentMainView() === "MemoryCards" ? true : false;
     });
     self.show_Earphones = ko.computed(function () {
         self.currentDeepView(false);
+        self.EarphoneViewModel.GetAll();
         return self.currentMainView() === "Earphones" ? true : false;
     });
 

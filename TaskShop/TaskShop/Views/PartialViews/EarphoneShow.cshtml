@@ -1,18 +1,18 @@
-﻿@model Shared.Battery
+﻿@model Shared.Earphone
 
 
 <div data-bind="with:currentData">
     <div class="editor-label">
         @Html.DisplayNameFor(model => model.Id)
     </div>
-     <div class="editor-field">
+    <div class="editor-field">
         <span data-bind="text:Id"></span>
     </div>
     <div class="editor-label">
         @Html.LabelFor(model => model.Producer)
     </div>
     <div class="editor-field">
-        <span data-bind="text:Producer"></span>
+        <span data-bind="text: Producer"></span>
     </div>
     <div class="editor-label">
         @Html.LabelFor(model => model.Model)
@@ -21,16 +21,23 @@
         <span data-bind="text: Model"></span>
     </div>
     <div class="editor-label">
-        @Html.LabelFor(model => model.Capacity)
+        @Html.LabelFor(model => model.MaxFrequency)
     </div>
     <div class="editor-field">
-        <span data-bind="text: Capacity"></span>
+        <span data-bind="text:MaxFrequency"></span>
+    </div>
+
+    <div class="editor-label">
+        @Html.LabelFor(model => model.CableLength)
+    </div>
+    <div class="editor-field">
+        <span data-bind="text: CableLength"></span>
     </div>
     <div class="editor-label">
-        @Html.LabelFor(model => model.Voltage)
+        @Html.LabelFor(model => model.Resistance)
     </div>
     <div class="editor-field">
-        <span data-bind="text: Voltage"></span>
+        <span data-bind="text: Resistance"></span>
     </div>
     <div class="editor-label">
         @Html.LabelFor(model => model.Price)
@@ -38,6 +45,7 @@
     <div class="editor-field">
         <span data-bind="text:Price"></span>
     </div>
-    <input type="button" class="btn" value="To Cart" data-bind="click: $root.BatteryViewModel.AddToCart" />
+
+    <input type="button" class="btn" value="To Cart" data-bind="click: $root.EarphoneViewModel.AddToCart" />
 
 </div>

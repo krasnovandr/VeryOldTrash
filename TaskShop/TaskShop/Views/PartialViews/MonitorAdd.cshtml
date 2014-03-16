@@ -1,30 +1,32 @@
-﻿@model TaskShop.Shared.Monitor
+﻿@model Shared.Monitor
 
 <div id="Add" data-bind="visible:MonitorViewModel.isEditMode">
     <div class="editor-label">
         @Html.LabelFor(model => model.Producer)
     </div>
     <div class="editor-field">
-        @*@Html.EditorFor(model => model.Producer,new { data_bind = "value: $root.Model.Producer" })*@
         <input type="text" data-bind="value: MonitorViewModel.MonitorModel.Producer" />
     </div>
 
     <div class="editor-label">
+        @Html.LabelFor(model => model.Model)
+    </div>
+    <div class="editor-field">
+        <input type="text" data-bind="value: MonitorViewModel.MonitorModel.Model" />
+    </div>
+
+    <div class="editor-field">
         @Html.LabelFor(model => model.MatrixType)
     </div>
     <div class="editor-field">
-
         <input type="text" data-bind="value: MonitorViewModel.MonitorModel.MatrixType" />
     </div>
-
     <div class="editor-label">
         @Html.LabelFor(model => model.Resolution)
     </div>
     <div class="editor-field">
-
         <input type="text" data-bind="value: MonitorViewModel.MonitorModel.Resolution" />
     </div>
-
     <div class="editor-label">
         @Html.LabelFor(model => model.Frequency)
     </div>
@@ -37,15 +39,12 @@
 
     </div>
     <div class="editor-field">
-        @*@Html.EditorFor(model => model.Price,new { data_bind = "value: Model.Price" })*@
         <input type="text" data-bind="value: MonitorViewModel.MonitorModel.Price" />
     </div>
 
 
     <p>
-        <p>
-            <input type="button" value="Add" data-bind="click: MonitorViewModel.Add" />
-            <input type="button" value="Cancel" data-bind="click: MonitorViewModel.Cancel" />
-        </p>
+        <input type="button" value="Add" data-bind="click: MonitorViewModel.Add" />
+        <input type="button" value="Cancel" data-bind="click: MonitorViewModel.Cancel" />
     </p>
 </div>

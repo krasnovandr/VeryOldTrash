@@ -5,7 +5,7 @@ using System.Web;
 using Microsoft.Ajax.Utilities;
 using TaskShop.Models;
 using TaskShop.Repositories;
-using TaskShop.Shared;
+using Shared;
 
 namespace TaskShop.Services
 {
@@ -22,6 +22,7 @@ namespace TaskShop.Services
     {
 
         private readonly IGoodsRepository _repository;
+       
         public BatteriesService(IGoodsRepository repository)
         {
             this._repository = repository;
@@ -29,7 +30,7 @@ namespace TaskShop.Services
 
         public void AddBattery(Battery battery)
         {
-                _repository.AddBattery(battery);
+            _repository.AddBattery(battery);
         }
 
         public List<Battery> GetBatteries()
@@ -37,9 +38,9 @@ namespace TaskShop.Services
             var goods = _repository.GetGoods();
 
             var batteries = from entity in goods
-                where entity.Category == "Batteries"
-                select entity;
-           var listReturn = new List<Battery>();
+                            where entity.Category == "Batteries"
+                            select entity;
+            var listReturn = new List<Battery>();
 
             foreach (var item in batteries)
             {
@@ -68,41 +69,31 @@ namespace TaskShop.Services
             return listReturn;
         }
 
-        //using (var db = new ShopContext())
-            //{
-            //    var batteries = (from entity in db.Batteries
-            //                     select entity).ToList();
-            //    return batteries;
-            //}
-        
 
         public Battery GetBattery(int id)
         {
-            using (var db = new ShopContext())
+            var goods = _repository.GetGoods();
+
+            var item = (from entity in goods
+                        where entity.Id == id
+                        select entity).FirstOrDefault();
+            var battery = new Battery()
             {
-                var goods = _repository.GetGoods();
-
-                var item = (from entity in goods
-                               where entity.Id == id
-                               select entity).FirstOrDefault();
-                var battery = new Battery()
-                {
-                    Model = item.Model,
-                    Producer = item.Producer,
-                    Price = item.Price,
-
-
-                    //Capacity = (int)from entity in item.Properties
-                    //                where entity.Name == "Capacity"
-                    //                select entity.ValueInt,
-                    //Voltage = (int)from entity in item.Properties
-                    //               where entity.Name == "Voltage"
-                    //               select entity.ValueInt,
-                    //Capacity = item.Properties.Select()
-
-                };
-                return battery;
+                Id = item.Id,
+                Model = item.Model,
+                Producer = item.Producer,
+                Price = item.Price,
+            };
+            foreach (var prop in item.Properties.Where(prop => prop.Name == "Capacity"))
+            {
+                battery.Capacity = prop.ValueInt;
             }
+            foreach (var prop in item.Properties.Where(prop => prop.Name == "Voltage"))
+            {
+                battery.Voltage = prop.ValueInt;
+            }
+            return battery;
+
         }
     }
 }

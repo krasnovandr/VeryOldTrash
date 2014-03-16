@@ -9,10 +9,13 @@
     <script src="~/Scripts/jquery.dataTables.js"></script>
     <script src="~/Scripts/sammy-latest.min.js"></script>
     <script src="~/Scripts/Models/MonitorModel.js"></script>
+      <script src="~/Scripts/Models/EarphoneModel.js"></script>
+    <script src="~/Scripts/Models/MemoryCardModel.js"></script>
     <script src="~/Scripts/Models/CartModel.js"></script>
     <script src="~/Scripts/Models/BatteryModel.js"></script>
     <script src="~/Scripts/Models/OrderModel.js"></script>
     <script src="~/Scripts/Models/WizardModel.js"></script>
+  
     <script src="~/Scripts/Models/SearchModel.js"></script>
     <script src="~/Scripts/Models/MainViewModel.js"></script>
     @Scripts.Render("~/bundles/jqueryval")
@@ -21,7 +24,7 @@
 
 <div id="Main">
     <div data-bind="foreach:views">
-        <input type="button" class="btn btn-default" data-bind="value: $data, click: $root.goTopage" />
+        <input type="button" class="btn btn-primary" data-bind="value: $data, click: $root.goTopage" />
     </div>
     Total items in cart:<span data-bind="text:CartViewModel.totalItems"></span>
     <div class="container ">
@@ -44,24 +47,27 @@
 
             <div id="Batteries" data-bind="if: show_Batteries">
                 <div>
-                    <h2>Battery</h2>
+                    <h2>Batteries</h2>
                     <input type="button" value="Add" data-bind="click: BatteryViewModel.Create,visible:BatteryViewModel.isReadMode" />
                     @Html.Partial(Url.Content("~/Views/PartialViews/BatteryAdd.cshtml"))
                     @Html.Partial(Url.Content("~/Views/PartialViews/BatteryList.cshtml"))
-                    @*        <input type="text" value="Add" data-bind="value: Model.Producer" />*@
-                    @*         <input type="button" value="Add" data-bind="click: $root.Add" />*@
                 </div>
             </div>
 
             <div id="Earphones" data-bind="if: show_Earphones">
                 <div>
                     <h2>Earphones</h2>
+                    <input type="button" value="Add" data-bind="click: EarphoneViewModel.Create,visible:EarphoneViewModel.isReadMode" />
+                    @Html.Partial(Url.Content("~/Views/PartialViews/EarphoneAdd.cshtml"))
+                    @Html.Partial(Url.Content("~/Views/PartialViews/EarphoneList.cshtml"))
                 </div>
             </div>
 
             <div id="MemoryCards" data-bind="if: show_MemoryCards">
                 <div>
-                    <h2>MemoryCards</h2>
+                    <input type="button" value="Add" data-bind="click: MemoryCardViewModel.Create,visible:MemoryCardViewModel.isReadMode" />
+                    @Html.Partial(Url.Content("~/Views/PartialViews/MemoryCardAdd.cshtml"))
+                    @Html.Partial(Url.Content("~/Views/PartialViews/MemoryCardList.cshtml"))
                 </div>
             </div>
             <div id="Cart" data-bind="if: show_Cart">
@@ -80,25 +86,37 @@
                 </div>
             </div>
 
-            <div data-bind="if: show_Battery">
+            <div id="Battery" data-bind="if: show_Battery">
                 <div>
                     <h2>Battery</h2>
                     @Html.Partial(Url.Content("~/Views/PartialViews/BatteryShow.cshtml"))
                 </div>
             </div>
-            <div data-bind="if: show_Monitor">
+            <div id="Earphone" data-bind="if: show_Earphone">
+                <div>
+                    <h2>Earphone</h2>
+                    @Html.Partial(Url.Content("~/Views/PartialViews/EarphoneShow.cshtml"))
+                </div>
+            </div>
+               <div id="MemoryCard" data-bind="if: show_MemoryCard">
+                <div>
+                    <h2>MemoryCard</h2>
+                    @Html.Partial(Url.Content("~/Views/PartialViews/MemoryCardShow.cshtml"))
+                </div>
+            </div>
+            <div id="Monitor" data-bind="if: show_Monitor">
                 <div>
                     <h2>Monitor</h2>
                     @Html.Partial(Url.Content("~/Views/PartialViews/MonitorShow.cshtml"))
                 </div>
             </div>
-            <div data-bind="if: show_Order">
+            <div id="Order" data-bind="if: show_Order">
                 <div>
                     <h2>Order</h2>
                     @Html.Partial(Url.Content("~/Views/PartialViews/OrderShow.cshtml"))
                 </div>
             </div>
-            <div data-bind="if: show_Search">
+            <div id="Search" data-bind="if: show_Search">
                 <div>
                     <h2>Search</h2>
                     @Html.Partial(Url.Content("~/Views/PartialViews/Search.cshtml"))
@@ -117,6 +135,8 @@
         cartAddBattery: '@Url.Action("AddBattery", "Cart")',
         cartGet: '@Url.Action("Get", "Cart")',
         cartAddMonitor: '@Url.Action("AddMonitor", "Cart")',
+        cartAddEarphone: '@Url.Action("AddEarphone", "Cart")',
+        cartAddMemoryCard: '@Url.Action("AddMemoryCard", "Cart")',
         cartDelete: '@Url.Action("Delete", "Cart")',
         orderAdd: '@Url.Action("Add", "Order")',
         orderGetAll: '@Url.Action("GetAll", "Order")',
@@ -127,6 +147,13 @@
         monitorAdd: '@Url.Action("Add", "Monitors")',
         monitorGetAll: '@Url.Action("GetAll", "Monitors")',
         monitorGetById: '@Url.Action("GetById", "Monitors")',
+        earphoneAdd: '@Url.Action("Add", "Earphones")',
+        earphoneGetAll: '@Url.Action("GetAll", "Earphones")',
+        earphoneGetById: '@Url.Action("GetById", "Earphones")',
+        memoryCardAdd: '@Url.Action("Add", "MemoryCards")',
+        memoryCardGetAll: '@Url.Action("GetAll", "MemoryCards")',
+        memoryCardGetById: '@Url.Action("GetById", "MemoryCards")',
+
         searchGetAll: '@Url.Action("GetAll", "Search")'
     };
     var vm = new MainViewModel(options);
@@ -152,6 +179,16 @@
                         if (returnedData)
                             vm.currentView(currentCategory, returnedData);
                     });
+                if (currentCategory == "Earphones")
+                    $.get(options.earphoneGetById, jsonData, function (returnedData) {
+                        if (returnedData)
+                            vm.currentView(currentCategory, returnedData);
+                    });
+                if (currentCategory == "MemoryCards")
+                    $.get(options.memoryCardGetById, jsonData, function (returnedData) {
+                        if (returnedData)
+                            vm.currentView(currentCategory, returnedData);
+                    });
                 if (currentCategory == "Orders")
                     $.get(options.orderGetById, jsonData, function (returnedData) {
                         if (returnedData)
@@ -159,6 +196,5 @@
                     });
             });
         }).run("#Home");
-        //$("#TestTable").dataTable();
     });
 </script>

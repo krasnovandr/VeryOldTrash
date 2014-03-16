@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace TaskShop.Shared
+namespace Shared
 {
    
         public class Battery
@@ -21,7 +21,7 @@ namespace TaskShop.Shared
             public int Id { get; set; }
             public string Model { get; set; }
             public string Producer { get; set; }
-            public double CableLength { get; set; }
+            public int CableLength { get; set; }
             public int Resistance { get; set; }
             public int MaxFrequency { get; set; }
             public int Price { get; set; }

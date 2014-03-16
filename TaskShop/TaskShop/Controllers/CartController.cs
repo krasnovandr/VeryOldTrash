@@ -7,7 +7,7 @@ using System.Web.Mvc;
 using TaskShop.Models;
 using TaskShop.Repositories;
 using TaskShop.Repositories;
-using TaskShop.Shared;
+using Shared;
 
 namespace TaskShop.Controllers
 {
@@ -20,6 +20,12 @@ namespace TaskShop.Controllers
             _repository = repository;
         }
 
+
+        public JsonResult Get()
+        {
+            var cartList = (List<Cart>)Session["CartList"];
+            return Json(cartList, JsonRequestBehavior.AllowGet);
+        }
 
         [HttpPost]
         public JsonResult AddBattery(Battery battery)
@@ -46,28 +52,6 @@ namespace TaskShop.Controllers
             return Json(allErrors);
         }
 
-
-        public JsonResult Get()
-        {
-            var cartList = (List<Cart>)Session["CartList"];
-            return Json(cartList, JsonRequestBehavior.AllowGet);
-        }
-
-
-        //[HttpPost]
-        //public JsonResult AddBattery(Battery battery)
-        //{
-        //    Session.Add();
-        //    if (ModelState.IsValid)
-        //    {
-        //        _repository.AddBattery(battery);
-        //        return Json(new { item = "Added" });
-        //    }
-        //    var allErrors = ModelState.Values.SelectMany(v => v.Errors);
-
-        //    return Json(allErrors);
-        //}
-
         [HttpPost]
         public JsonResult AddMonitor(Monitor monitor)
         {
@@ -93,11 +77,55 @@ namespace TaskShop.Controllers
             return Json(allErrors);
         }
 
-        //public JsonResult Get()
-        //{
-        //    var carts = _repository.GetCarts();
-        //    return Json(carts, JsonRequestBehavior.AllowGet);
-        //}
+        [HttpPost]
+        public JsonResult AddEarphone(Earphone earphone)
+        {
+            if (ModelState.IsValid)
+            {
+                var sessionCart = (List<Cart>)Session["CartList"];
+
+                if (sessionCart == null)
+                {
+                    var tmp = new List<Cart>();
+                    _repository.AddEarphone(earphone, tmp);
+                    Session["CartList"] = tmp;
+                }
+                else
+                {
+                    _repository.AddEarphone(earphone, sessionCart);
+                    Session["CartList"] = sessionCart;
+                }
+                return Json(new { item = "Added" });
+            }
+
+            var allErrors = ModelState.Values.SelectMany(v => v.Errors);
+            return Json(allErrors);
+        }
+      
+        [HttpPost]
+        public JsonResult AddMemoryCard(MemoryCard memoryCard)
+        {
+            if (ModelState.IsValid)
+            {
+                var sessionCart = (List<Cart>)Session["CartList"];
+
+                if (sessionCart == null)
+                {
+                    var tmp = new List<Cart>();
+                    _repository.AddMemoryCard(memoryCard, tmp);
+                    Session["CartList"] = tmp;
+                }
+                else
+                {
+                    _repository.AddMemoryCard(memoryCard, sessionCart);
+                    Session["CartList"] = sessionCart;
+                }
+                return Json(new { item = "Added" });
+            }
+
+            var allErrors = ModelState.Values.SelectMany(v => v.Errors);
+            return Json(allErrors);
+        }
 
         public void Delete(Cart cart)
         {
