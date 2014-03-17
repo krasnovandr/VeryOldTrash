@@ -1,86 +1,32 @@
-﻿@model IEnumerable<TaskShop.Models.Order>
+﻿@model IEnumerable<DataLayer.Models.Order>
 
+<div data-bind="with:WizardModel.OrderModel" class="row">
+    <label>
+        Enter Your Order Id:
+        <input data-bind="value: Id ,valueUpdate: 'afterkeydown'" /></label>
+    <input type="button" class="btn btn-info" value="Search"
+        data-bind="click: $root.searchOrder" />
+</div>
+<br />
+<br />
 
-<table>
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Id)
-            </th>
-
-            <th>
-                @Html.DisplayNameFor(model => model.TotalCount)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Discount)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Email)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.City)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Street)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.House)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CardNumber)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TotalGoodsPrice)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DeliveryPrice)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TotalPrice)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-
-    <tbody data-bind="foreach: WizardModel.OrderModel.arr">
-        <tr>
-            <td >
-                <span data-bind="text: $data.Id"></span>
-            </td>
-            <td >
-                <span data-bind="text: $data.TotalCount"></span>
-            </td>
-            <td >
-                <span data-bind="text: $data.Discount"></span>
-            </td>
-            <td >
-                <span data-bind="text: $data.Email"></span>
-            </td>
-            <td >
-                <span data-bind="text: $data.City"></span>
-            </td>
-            <td class="col-md-3">
-                <span data-bind="text: $data.Street"></span>
-            </td>
-            <td class="col-md-3">
-                <span data-bind="text: $data.House"></span>
-            </td>
-            <td class="col-md-3">
-                <span data-bind="text: $data.CardNumber"></span>
-            </td>
-            <td class="col-md-3">
-                <span data-bind="text: $data.TotalGoodsPrice"></span>
-            </td>
-            <td class="col-md-3">
-                <span data-bind="text: $data.DeliveryPrice"></span>
-            </td>
-            <td class="col-md-3">
-                <span data-bind="text: $data.TotalPrice"></span>
-            </td>
-            <td>
-                <input type="button" class="btn btn-info" value="Details" data-bind="click: $root.goToPageItem" />
-            </td>
-        </tr>
-
-
-</table>
+<div data-bind="foreach: WizardModel.OrderModel.arr" class="row">
+    <div class="col-md-4 ">
+        @Html.DisplayNameFor(model => model.Id)
+        <span data-bind="text: $data.Id"></span>
+        <br />
+        @Html.DisplayNameFor(model => model.CardNumber)
+        <span data-bind="text: $data.CardNumber"></span>
+        <br />
+        @Html.DisplayNameFor(model => model.Email)
+        <span data-bind="text: $data.Email"></span>
+        <br />
+        @Html.DisplayNameFor(model => model.TotalCount)
+        <span data-bind="text: $data.TotalCount"></span>
+        <br />
+        @Html.DisplayNameFor(model => model.TotalPrice)
+        <span data-bind="text: $data.TotalPrice"></span>
+        <br />
+        <input type="button" class="btn btn-info" value="Details" data-bind="click: $root.goToPageItem" />
+    </div>
+</div>

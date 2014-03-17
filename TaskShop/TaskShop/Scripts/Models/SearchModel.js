@@ -18,6 +18,18 @@ var SearchViewModel = function (options) {
 
     self.arr = ko.observableArray([]);
 
+    self.standartMode = ko.observable(true);
+    self.fullMode = ko.computed(function () {
+        return !(self.standartMode());
+    }, self);
+
+
+    self.Full = function (data) {
+        self.standartMode(false);
+    };
+    self.Cancel = function (data) {
+        self.standartMode(true);
+    };
 
 
     self.GetAll = function (data) {

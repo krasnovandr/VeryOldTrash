@@ -1,9 +1,9 @@
-﻿@model TaskShop.Models.Order
+﻿@model DataLayer.Models.Order
 
 <div data-bind="with:currentData">
     <div class="container">
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-4">
                 <div class="editor-label">
                     @Html.DisplayNameFor(model => model.Id)
                     <span data-bind="text: Order.Id"></span>
@@ -53,15 +53,17 @@
                     <span data-bind="text: Order.TotalPrice"></span>
                 </div>
             </div>
-            <div class="col-md-6">
-                <div data-bind="foreach:GoodsList">
-                    <div class="row">
-                      
+            <div class="col-md-8">
+                <div data-bind="foreach:GoodsList" class="row">
+                    <div class="col-md-4">
                         GoodsId:      <span data-bind="text: $data.GoodsId"></span>
-                        GoodsCategory:<span data-bind="text: $data.GoodsCategory"></span>
+                        <br />
+                        GoodsCategory:<span data-bind="text: $data.GoodsCategory"></span><br />
                         Count:        <span data-bind="text: $data.Count"></span>
+                        <br />
                         Price:        <span data-bind="text: $data.Price"></span>
-                        <input type="button" class="btn btn-info" value="Details" data-bind="click: $root.goToPageCategoryItem" />
+                        <br />
+                        <input type="button" class="btn btn-info" value="Details" data-bind="click: $root.goToPageCategoryItem" /><br />
                     </div>
                 </div>
             </div>

@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using TaskShop.Models;
-using TaskShop.Repositories;
-using TaskShop.Repositories;
+using DataLayer.Models;
+using DataLayer.Repositories;
+
 
 namespace TaskShop.Controllers
 {
@@ -18,19 +18,19 @@ namespace TaskShop.Controllers
         {
             this._repository = repository;
         }
-       
+
         [HttpPost]
         public JsonResult Add(Order order)
         {
             if (ModelState.IsValid)
             {
                 var cartList = (List<Cart>)Session["CartList"];
-                _repository.AddOrder(order, cartList); 
+                _repository.AddOrder(order, cartList);
                 Session["CartList"] = null;
                 return Json(new { item = "Added" }, JsonRequestBehavior.AllowGet);
             }
             var allErrors = ModelState.Values.SelectMany(v => v.Errors);
-           
+
 
             return Json(allErrors);
         }
@@ -45,7 +45,11 @@ namespace TaskShop.Controllers
         public JsonResult GetById(int id)
         {
             var order = _repository.GetOrder(id);
-            return Json(order, JsonRequestBehavior.AllowGet);
+            if (order != null)
+                return Json(order, JsonRequestBehavior.AllowGet);
+
+            return Json(new { item = "Error" }, JsonRequestBehavior.AllowGet);
+
         }
     }
 }

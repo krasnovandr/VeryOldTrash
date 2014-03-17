@@ -9,13 +9,13 @@
     <script src="~/Scripts/jquery.dataTables.js"></script>
     <script src="~/Scripts/sammy-latest.min.js"></script>
     <script src="~/Scripts/Models/MonitorModel.js"></script>
-      <script src="~/Scripts/Models/EarphoneModel.js"></script>
+    <script src="~/Scripts/Models/EarphoneModel.js"></script>
     <script src="~/Scripts/Models/MemoryCardModel.js"></script>
     <script src="~/Scripts/Models/CartModel.js"></script>
     <script src="~/Scripts/Models/BatteryModel.js"></script>
     <script src="~/Scripts/Models/OrderModel.js"></script>
     <script src="~/Scripts/Models/WizardModel.js"></script>
-  
+
     <script src="~/Scripts/Models/SearchModel.js"></script>
     <script src="~/Scripts/Models/MainViewModel.js"></script>
     @Scripts.Render("~/bundles/jqueryval")
@@ -23,107 +23,145 @@
 }
 
 <div id="Main">
-    <div data-bind="foreach:views">
-        <input type="button" class="btn btn-primary" data-bind="value: $data, click: $root.goTopage" />
-    </div>
-    Total items in cart:<span data-bind="text:CartViewModel.totalItems"></span>
-    <div class="container ">
+    @*<div data-bind="foreach:views">*@
+    @*       <input type="button" class="btn btn-primary" data-bind="value: 'Home', click: $root.goTopage" />
+        <input type="button" class="btn btn-primary" data-bind="value: 'Cart', click: $root.goTopage" />
+        <input type="button" class="btn btn-primary" data-bind="value: 'Orders', click: $root.goTopage" />
+    <input type="button" class="btn btn-primary" data-bind="value: 'Search', click: $root.goTopage" />*@
+    <div class="container-fluid">
+        <div class="row">
+            <ul class="nav nav-tabs ">
+                <li><a data-bind="text:'Home', attr:{href:'#' + 'Home'}"></a></li>
+
+                <li><a data-bind="text:'Orders', attr:{href:'#' + 'Orders'}"></a></li>
+                <li><a data-bind="text:'Search', attr:{href:'#' + 'Search'}"></a></li>
+
+                <li><a data-bind="text:'Cart', attr:{href:'#' + 'Cart'}"></a></li>
+                <li>(<span data-bind="text:CartViewModel.totalItems"></span>)
+                </li>
+
+            </ul>
+        </div>
+
+        @*Total items in cart:*@
+
         <div class="row">
 
-            <div id="Home" data-bind="if: show_Home">
-                <div>
-                    <h2>Home</h2>
-                </div>
-            </div>
+            <div class="col-md-2">
+                Categories:<br />
+                <a data-bind="text:'Monitors', attr:{href:'#' + 'Monitors'}"></a>(<span data-bind="text:MonitorViewModel.totalCount"></span>)
+                <br />
+                <a data-bind="text:'Batteries', attr:{href:'#' + 'Batteries'}"></a>(<span data-bind="text:BatteryViewModel.totalCount"></span>)
+                <br />
+                <a data-bind="text:'MemoryCards', attr:{href:'#' + 'MemoryCards'}"></a>(<span data-bind="text:MemoryCardViewModel.totalCount"></span>)
+                <br />
+                <a data-bind="text:'Earphones', attr:{href:'#' + 'Earphones'}"></a>(<span data-bind="text:EarphoneViewModel.totalCount"></span>)
+                <br />
 
-            <div id="Monitors" data-bind="if: show_Monitors">
-                <div>
-                    <h2>Monitors</h2>
-                    <input type="button" value="Add" data-bind="click: MonitorViewModel.Create,visible:MonitorViewModel.isReadMode" />
-                    @Html.Partial(Url.Content("~/Views/PartialViews/MonitorAdd.cshtml"))
-                    @Html.Partial(Url.Content("~/Views/PartialViews/MonitorList.cshtml"))
-                </div>
             </div>
+            <div class="col-md-10">
+                <div id="Home" data-bind="if: show_Home">
+                    <div class="row">
+                        @Html.Partial(Url.Content("~/Views/PartialViews/MainList.cshtml"))
 
-            <div id="Batteries" data-bind="if: show_Batteries">
-                <div>
-                    <h2>Batteries</h2>
-                    <input type="button" value="Add" data-bind="click: BatteryViewModel.Create,visible:BatteryViewModel.isReadMode" />
-                    @Html.Partial(Url.Content("~/Views/PartialViews/BatteryAdd.cshtml"))
-                    @Html.Partial(Url.Content("~/Views/PartialViews/BatteryList.cshtml"))
+                    </div>
                 </div>
-            </div>
 
-            <div id="Earphones" data-bind="if: show_Earphones">
-                <div>
-                    <h2>Earphones</h2>
-                    <input type="button" value="Add" data-bind="click: EarphoneViewModel.Create,visible:EarphoneViewModel.isReadMode" />
-                    @Html.Partial(Url.Content("~/Views/PartialViews/EarphoneAdd.cshtml"))
-                    @Html.Partial(Url.Content("~/Views/PartialViews/EarphoneList.cshtml"))
+                <div id="Monitors" data-bind="if: show_Monitors">
+                    <div>
+                        @*<h2>Monitors</h2>*@
+                        <input type="button" value="Add" data-bind="click: MonitorViewModel.Create,visible:MonitorViewModel.isReadMode" />
+                        @Html.Partial(Url.Content("~/Views/PartialViews/MonitorAdd.cshtml"))
+                        @Html.Partial(Url.Content("~/Views/PartialViews/MonitorList.cshtml"))
+                    </div>
                 </div>
-            </div>
 
-            <div id="MemoryCards" data-bind="if: show_MemoryCards">
-                <div>
-                    <input type="button" value="Add" data-bind="click: MemoryCardViewModel.Create,visible:MemoryCardViewModel.isReadMode" />
-                    @Html.Partial(Url.Content("~/Views/PartialViews/MemoryCardAdd.cshtml"))
-                    @Html.Partial(Url.Content("~/Views/PartialViews/MemoryCardList.cshtml"))
+                <div id="Batteries" data-bind="if: show_Batteries">
+                    <div>
+                        @*<h2>Batteries</h2>*@
+                        <input type="button" value="Add" data-bind="click: BatteryViewModel.Create,visible:BatteryViewModel.isReadMode" />
+                        @Html.Partial(Url.Content("~/Views/PartialViews/BatteryAdd.cshtml"))
+                        @Html.Partial(Url.Content("~/Views/PartialViews/BatteryList.cshtml"))
+                    </div>
                 </div>
-            </div>
-            <div id="Cart" data-bind="if: show_Cart">
-                <h4>Goods in Cart</h4>
-                @Html.Partial(Url.Content("~/Views/PartialViews/CartList.cshtml"))
 
+                <div id="Earphones" data-bind="if: show_Earphones">
+                    <div>
+                        @*<h2>Earphones</h2>*@
+                        <input type="button" value="Add" data-bind="click: EarphoneViewModel.Create,visible:EarphoneViewModel.isReadMode" />
+                        @Html.Partial(Url.Content("~/Views/PartialViews/EarphoneAdd.cshtml"))
+                        @Html.Partial(Url.Content("~/Views/PartialViews/EarphoneList.cshtml"))
+                    </div>
+                </div>
 
-                <div id="Wizrd" data-bind="if: show_Wizard">
-                    @Html.Partial(Url.Content("~/Views/PartialViews/Wizard.cshtml"))
+                <div id="MemoryCards" data-bind="if: show_MemoryCards">
+                    <div>
+                        <input type="button" value="Add" data-bind="click: MemoryCardViewModel.Create,visible:MemoryCardViewModel.isReadMode" />
+                        @Html.Partial(Url.Content("~/Views/PartialViews/MemoryCardAdd.cshtml"))
+                        @Html.Partial(Url.Content("~/Views/PartialViews/MemoryCardList.cshtml"))
+                    </div>
                 </div>
-            </div>
-            <div id="Orders" data-bind="if: show_Orders">
-                <div>
-                    <h2>Orders</h2>
-                    @Html.Partial(Url.Content("~/Views/PartialViews/OrderList.cshtml"))
-                </div>
-            </div>
-
-            <div id="Battery" data-bind="if: show_Battery">
-                <div>
-                    <h2>Battery</h2>
-                    @Html.Partial(Url.Content("~/Views/PartialViews/BatteryShow.cshtml"))
-                </div>
-            </div>
-            <div id="Earphone" data-bind="if: show_Earphone">
-                <div>
-                    <h2>Earphone</h2>
-                    @Html.Partial(Url.Content("~/Views/PartialViews/EarphoneShow.cshtml"))
-                </div>
-            </div>
-               <div id="MemoryCard" data-bind="if: show_MemoryCard">
-                <div>
-                    <h2>MemoryCard</h2>
-                    @Html.Partial(Url.Content("~/Views/PartialViews/MemoryCardShow.cshtml"))
-                </div>
-            </div>
-            <div id="Monitor" data-bind="if: show_Monitor">
-                <div>
-                    <h2>Monitor</h2>
-                    @Html.Partial(Url.Content("~/Views/PartialViews/MonitorShow.cshtml"))
-                </div>
-            </div>
-            <div id="Order" data-bind="if: show_Order">
-                <div>
-                    <h2>Order</h2>
-                    @Html.Partial(Url.Content("~/Views/PartialViews/OrderShow.cshtml"))
-                </div>
-            </div>
-            <div id="Search" data-bind="if: show_Search">
-                <div>
-                    <h2>Search</h2>
-                    @Html.Partial(Url.Content("~/Views/PartialViews/Search.cshtml"))
-                </div>
-            </div>
+                <div id="Cart" data-bind="if: show_Cart">
+                    <h4>Goods in Cart</h4>
+                    @Html.Partial(Url.Content("~/Views/PartialViews/CartList.cshtml"))
 
 
+                    <div id="Wizrd" data-bind="if: show_Wizard">
+                        @Html.Partial(Url.Content("~/Views/PartialViews/Wizard.cshtml"))
+                    </div>
+                </div>
+                <div id="Orders" data-bind="if: show_Orders">
+                    <div>
+                        @*<h2>Orders</h2>*@
+                        @Html.Partial(Url.Content("~/Views/PartialViews/OrderList.cshtml"))
+                    </div>
+                </div>
+
+                <div id="Battery" data-bind="if: show_Battery">
+                    <div>
+                        <h2>Battery</h2>
+                        @Html.Partial(Url.Content("~/Views/PartialViews/BatteryShow.cshtml"))
+                    </div>
+                </div>
+                <div id="Earphone" data-bind="if: show_Earphone">
+                    <div>
+                        <h2>Earphone</h2>
+                        @Html.Partial(Url.Content("~/Views/PartialViews/EarphoneShow.cshtml"))
+                    </div>
+                </div>
+                <div id="MemoryCard" data-bind="if: show_MemoryCard">
+                    <div>
+                        <h2>MemoryCard</h2>
+                        @Html.Partial(Url.Content("~/Views/PartialViews/MemoryCardShow.cshtml"))
+                    </div>
+                </div>
+                <div id="Monitor" data-bind="if: show_Monitor">
+                    <div>
+                        @*<h2>Monitor</h2>*@
+                        @Html.Partial(Url.Content("~/Views/PartialViews/MonitorShow.cshtml"))
+                    </div>
+                </div>
+                <div id="Order" data-bind="if: show_Order">
+                    <div>
+                        <h2>Order</h2>
+                        @Html.Partial(Url.Content("~/Views/PartialViews/OrderShow.cshtml"))
+                    </div>
+                </div>
+                <div id="Search" data-bind="if: show_Search">
+                    <div>
+                        <div class="row">
+                            @Html.Partial(Url.Content("~/Views/PartialViews/Search.cshtml"))
+                        </div>
+                    </div>
+                </div>
+                <div id="Error" data-bind="if: show_Error">
+                    <div>
+                        <h2>Error</h2>
+                        @Html.Partial(Url.Content("~/Views/PartialViews/Error.cshtml"))
+                    </div>
+                </div>
+
+            </div>
         </div>
     </div>
 </div>
@@ -153,6 +191,7 @@
         memoryCardAdd: '@Url.Action("Add", "MemoryCards")',
         memoryCardGetAll: '@Url.Action("GetAll", "MemoryCards")',
         memoryCardGetById: '@Url.Action("GetById", "MemoryCards")',
+        homeGetAll: '@Url.Action("GetAll", "Home")',
 
         searchGetAll: '@Url.Action("GetAll", "Search")'
     };
@@ -164,35 +203,80 @@
         Sammy(function () {
 
             this.get('#:view', function () {
-                vm.currentMainView(this.params.view);
+                var currentView = this.params.view;
+                vm.currentMainViewFunc(this.params.view);
+                if (currentView == "Monitors") {
+                    vm.MonitorViewModel.GetAll();
+                }
+                if (currentView == "Batteries") {
+                    vm.BatteryViewModel.GetAll();
+                }
+                if (currentView == "MemoryCards") {
+                    vm.MemoryCardViewModel.GetAll();
+                }
+                if (currentView == "Earphones") {
+                    vm.EarphoneViewModel.GetAll();
+                }
+                if (currentView == "Orders") {
+                    vm.WizardModel.OrderModel.GetAll();
+                }
+                if (currentView == "Cart") {
+                    vm.CartViewModel.GetAll();
+                }
+                if (currentView == "Home") {
+                    $.get(options.homeGetAll, function (returnedData) {
+                        vm.arrData(returnedData);
+                    });
+                    vm.CartViewModel.GetAll();
+                    vm.MonitorViewModel.GetAll();
+                    vm.MemoryCardViewModel.GetAll();
+                    vm.BatteryViewModel.GetAll();
+                    vm.EarphoneViewModel.GetAll();
+
+                }
             });
             this.get('#:view/:Id', function () {
                 var jsonData = { id: this.params.Id };
                 var currentCategory = this.params.view;
                 if (currentCategory == "Batteries")
                     $.get(options.batteryGetById, jsonData, function (returnedData) {
-                        if (returnedData)
+                        if (returnedData["item"] == "Error")
+                            vm.currentMainView("Error");
+                        else {
                             vm.currentView(currentCategory, returnedData);
+                        }
                     });
                 if (currentCategory == "Monitors")
                     $.get(options.monitorGetById, jsonData, function (returnedData) {
-                        if (returnedData)
+                        if (returnedData["item"] == "Error")
+                            vm.currentMainView("Error");
+                        else {
                             vm.currentView(currentCategory, returnedData);
+                        }
                     });
                 if (currentCategory == "Earphones")
                     $.get(options.earphoneGetById, jsonData, function (returnedData) {
-                        if (returnedData)
+                        if (returnedData["item"] == "Error")
+                            vm.currentMainView("Error");
+                        else {
                             vm.currentView(currentCategory, returnedData);
+                        }
                     });
                 if (currentCategory == "MemoryCards")
                     $.get(options.memoryCardGetById, jsonData, function (returnedData) {
-                        if (returnedData)
+                        if (returnedData["item"] == "Error")
+                            vm.currentMainView("Error");
+                        else {
                             vm.currentView(currentCategory, returnedData);
+                        }
                     });
                 if (currentCategory == "Orders")
                     $.get(options.orderGetById, jsonData, function (returnedData) {
-                        if (returnedData)
+                        if (returnedData["item"] == "Error")
+                            vm.currentMainViewFunc("Error");
+                        else {
                             vm.currentView(currentCategory, returnedData);
+                        }
                     });
             });
         }).run("#Home");

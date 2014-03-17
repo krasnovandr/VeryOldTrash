@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using DataLayer.Models;
+using ServiceLayer;
 using Shared;
-using TaskShop.Models;
-using TaskShop.Repositories;
-using TaskShop.Services;
 
 namespace TaskShop.Controllers
 {

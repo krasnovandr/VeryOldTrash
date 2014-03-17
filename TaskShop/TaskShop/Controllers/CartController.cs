@@ -4,20 +4,19 @@ using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using TaskShop.Models;
-using TaskShop.Repositories;
-using TaskShop.Repositories;
-using Shared;
+using DataLayer.Models;
+using ServiceLayer;
+
 
 namespace TaskShop.Controllers
 {
     public class CartController : Controller
     {
-        private readonly ICartRepository _repository;
+        private readonly ICartService _service;
 
-        public CartController(ICartRepository repository)
+        public CartController(ICartService repository)
         {
-            _repository = repository;
+            _service = repository;
         }
 
 
@@ -37,12 +36,12 @@ namespace TaskShop.Controllers
                 if (sessionCart == null)
                 {
                     var tmp = new List<Cart>();
-                    _repository.AddBattery(battery, tmp);
+                    _service.AddBattery(battery, tmp);
                     Session["CartList"] = tmp;
                 }
                 else
                 {
-                    _repository.AddBattery(battery, sessionCart);
+                    _service.AddBattery(battery, sessionCart);
                     Session["CartList"] = sessionCart;
                 }
                 return Json(new { item = "Added" });
@@ -62,12 +61,12 @@ namespace TaskShop.Controllers
                 if (sessionCart == null)
                 {
                     var tmp = new List<Cart>();
-                    _repository.AddMonitor(monitor, tmp);
+                    _service.AddMonitor(monitor, tmp);
                     Session["CartList"] = tmp;
                 }
                 else
                 {
-                    _repository.AddMonitor(monitor, sessionCart);
+                    _service.AddMonitor(monitor, sessionCart);
                     Session["CartList"] = sessionCart;
                 }
                 return Json(new { item = "Added" });
@@ -87,12 +86,12 @@ namespace TaskShop.Controllers
                 if (sessionCart == null)
                 {
                     var tmp = new List<Cart>();
-                    _repository.AddEarphone(earphone, tmp);
+                    _service.AddEarphone(earphone, tmp);
                     Session["CartList"] = tmp;
                 }
                 else
                 {
-                    _repository.AddEarphone(earphone, sessionCart);
+                    _service.AddEarphone(earphone, sessionCart);
                     Session["CartList"] = sessionCart;
                 }
                 return Json(new { item = "Added" });
@@ -112,12 +111,12 @@ namespace TaskShop.Controllers
                 if (sessionCart == null)
                 {
                     var tmp = new List<Cart>();
-                    _repository.AddMemoryCard(memoryCard, tmp);
+                    _service.AddMemoryCard(memoryCard, tmp);
                     Session["CartList"] = tmp;
                 }
                 else
                 {
-                    _repository.AddMemoryCard(memoryCard, sessionCart);
+                    _service.AddMemoryCard(memoryCard, sessionCart);
                     Session["CartList"] = sessionCart;
                 }
                 return Json(new { item = "Added" });
@@ -130,7 +129,7 @@ namespace TaskShop.Controllers
         public void Delete(Cart cart)
         {
             var cartList = (List<Cart>)Session["CartList"];
-            _repository.Delete(cart, cartList);
+            _service.Delete(cart, cartList);
         }
     }
 }

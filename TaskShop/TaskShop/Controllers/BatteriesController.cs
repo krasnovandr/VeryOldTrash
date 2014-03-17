@@ -5,10 +5,9 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using TaskShop.Repositories;
-using TaskShop.Repositories;
-using TaskShop.Services;
-using Shared;
+using DataLayer.Models;
+using ServiceLayer;
+
 
 namespace TaskShop.Controllers
 {
@@ -37,8 +36,12 @@ namespace TaskShop.Controllers
         [HttpGet]
         public JsonResult GetById(int id)
         {
+        
             var battery = _service.GetBattery(id);
+            if(battery != null)
             return Json(battery, JsonRequestBehavior.AllowGet);
+
+            return Json(new { item = "Error" }, JsonRequestBehavior.AllowGet);
         }
 
     }

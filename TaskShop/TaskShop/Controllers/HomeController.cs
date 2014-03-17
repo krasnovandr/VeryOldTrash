@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using TaskShop.Models;
-using TaskShop.Repositories;
+using ServiceLayer;
+
 
 namespace TaskShop.Controllers
 {
@@ -12,10 +12,22 @@ namespace TaskShop.Controllers
     {
         //
         // GET: /Home/
+        private readonly IHomeService _service;
+
+        public HomeController(IHomeService service)
+        {
+            this._service = service;
+        }
+
         public ActionResult Index()
         {
             return View();
         }
 
+
+        public JsonResult GetAll()
+        {
+            return Json(_service.GetAll(), JsonRequestBehavior.AllowGet);
+        }
     }
 }

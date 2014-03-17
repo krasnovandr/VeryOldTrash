@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using DataLayer.Models;
+using ServiceLayer;
 using Shared;
-using TaskShop.Repositories;
-using TaskShop.Repositories;
-using TaskShop.Services;
 
 namespace TaskShop.Controllers
 {
@@ -36,7 +35,11 @@ namespace TaskShop.Controllers
         public JsonResult GetById(int id)
         {
             var earphone = _service.GetEarphone(id);
-            return Json(earphone, JsonRequestBehavior.AllowGet);
+            if (earphone != null)
+                return Json(earphone, JsonRequestBehavior.AllowGet);
+
+            return Json(new { item = "Error" }, JsonRequestBehavior.AllowGet);
+
         }
 
     }

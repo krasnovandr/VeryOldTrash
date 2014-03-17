@@ -1,0 +1,23 @@
+﻿
+
+    <div data-bind="foreach:arrData" class="row">
+        <div class="col-md-3 ">
+            <h4><span data-bind="text: $data.Model"></span></h4>
+         
+            <span data-bind="text: $data.Producer"></span>
+            <br />
+            <span data-bind="text: $data.GoodsCategory"></span>
+            <br />
+
+            <input type="button" class="btn btn-info btn-sm" value="Details" data-bind="click: $root.goToPageCategoryItem" />
+        </div>
+        @* GoodsId:      <span data-bind="text: $data.GoodsId"></span>
+            GoodsCategory:<span data-bind="text: $data.GoodsCategory"></span>
+            Model:        <span data-bind="text: $data.Model"></span>
+            Price:        <span data-bind="text: $data.Price"></span>
+            Producer:        <span data-bind="text: $data.Producer"></span>*@
+
+    </div>
+
+
+

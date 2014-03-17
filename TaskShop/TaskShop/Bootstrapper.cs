@@ -1,7 +1,7 @@
 using System.Web.Mvc;
+using DataLayer.Repositories;
 using Microsoft.Practices.Unity;
-using TaskShop.Repositories;
-using TaskShop.Services;
+using ServiceLayer;
 using Unity.Mvc3;
 
 namespace TaskShop
@@ -24,11 +24,12 @@ namespace TaskShop
             container.RegisterType<ISearchService, SearchService>();
             container.RegisterType<IEarponesService, EarponesService>();
             container.RegisterType<IMemoryCardsService, MemoryCardsService>();
+            container.RegisterType<ICartService, CartService>();
+            container.RegisterType<IHomeService, HomeService>();
 
             container.RegisterType<IGoodsRepository, GoodsRepository>();
-            container.RegisterType<ICartRepository, CartRepository>();
             container.RegisterType<IOrdersRepository, OrdersRepository>();
-    
+
             return container;
         }
     }

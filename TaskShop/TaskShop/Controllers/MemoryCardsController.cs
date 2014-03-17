@@ -3,19 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using Shared;
-using TaskShop.Repositories;
-using TaskShop.Repositories;
-using TaskShop.Services;
+using DataLayer.Models;
+using ServiceLayer;
+
 
 namespace TaskShop.Controllers
 {
     public class MemoryCardsController : Controller
     {
-      private readonly IMemoryCardsService _service;
+        private readonly IMemoryCardsService _service;
 
 
-      public MemoryCardsController(IMemoryCardsService service)
+        public MemoryCardsController(IMemoryCardsService service)
         {
             this._service = service;
         }
@@ -36,7 +35,11 @@ namespace TaskShop.Controllers
         public JsonResult GetById(int id)
         {
             var memoryCard = _service.GetMemoryCard(id);
-            return Json(memoryCard, JsonRequestBehavior.AllowGet);
+            if (memoryCard != null)
+                return Json(memoryCard, JsonRequestBehavior.AllowGet);
+
+            return Json(new { item = "Error" }, JsonRequestBehavior.AllowGet);
+
         }
 
     }

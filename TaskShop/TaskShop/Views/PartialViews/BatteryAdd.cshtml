@@ -1,4 +1,4 @@
-﻿@model Shared.Battery
+﻿@model DataLayer.Models.Battery
 
 
 <div id="Add" data-bind="visible:BatteryViewModel.isEditMode">
@@ -15,7 +15,7 @@
         <input type="text" data-bind="value: BatteryViewModel.BatteryModel.Capacity" />
     </div>
     <div class="editor-label">
-        @Html.LabelFor(model => model.Model)
+        @Html.LabelFor(model => model.Model)  
     </div>
     <div class="editor-field">
         <input type="text" data-bind="value: BatteryViewModel.BatteryModel.Model" />
@@ -29,7 +29,7 @@
     </div>
 
     <div class="editor-label">
-        @Html.LabelFor(model => model.Price)
+        @Html.LabelFor(model => model.Price)   
     </div>
     <div class="editor-field">
 

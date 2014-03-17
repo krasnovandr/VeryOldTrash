@@ -1,46 +1,32 @@
-﻿@model IEnumerable<TaskShop.Models.Cart>
-<table>
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.GoodsId)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.GoodsCategory)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Count)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Price)
-        </th>
-        <th></th>
-    </tr>
-
-    <tbody data-bind="foreach:CartViewModel.CartModel.arr">
-        <tr>
-            <td>
-                <span data-bind="text: $data.GoodsId"></span>
-            </td>
-            <td>
-                <span data-bind="text: $data.GoodsCategory"></span>
-            </td>
-
-            <td>
-                <span data-bind="text: $data.Count"></span>
-            </td>
-            <td>
-                <span data-bind="text: $data.Price"></span>
-            </td>
-            <td>
-                <input type="button" class="btn" value="Delete" data-bind="click: $root.CartViewModel.Delete" />
-                        <input type="button" class="btn btn-info" value="Details" data-bind="click: $root.goToPageCategoryItem" />
-            </td>
-        </tr>
-    </tbody>
-</table>
+﻿@model DataLayer.Models.Cart
 <div>
-    Total Price:     <span data-bind="text: CartViewModel.totalPrice"></span>
-    Total Count:     <span data-bind="text: CartViewModel.totalItems"></span>
+    Total Price:<span data-bind="text: CartViewModel.totalPrice"></span>
+    Total Count:<span data-bind="text: CartViewModel.totalItems"></span>
+</div>
+
+<div data-bind="foreach:CartViewModel.CartModel.arr" class="row">
+    <div class="col-md-4 ">
+        <br />
+        @Html.LabelFor(model => model.GoodsId):
+        <span data-bind="text: $data.GoodsId"></span>
+        <br />
+        @Html.LabelFor(model => model.GoodsCategory):
+        <span data-bind="text: $data.GoodsCategory"></span>
+        <br />
+        @Html.LabelFor(model => model.Count):
+        <span data-bind="text: $data.Count"></span>
+        <br />
+        @Html.DisplayNameFor(model => model.Price):
+        <span data-bind="text: $data.Price"></span>
+        <br />
+        <input type="button" class="btn" value="Delete" data-bind="click: $root.CartViewModel.Delete" />
+        <input type="button" class="btn btn-info" value="Details" data-bind="click: $root.goToPageCategoryItem" />
+    </div>
+</div>
+
+<div>
+
     <br />
-    <input type="button" class="btn btn-success" value="Checkout" data-bind="click:wizardOpen" />
+    <input type="button" class="btn btn-success" value="Checkout" data-bind="click:wizardOpen,
+        visible:CartViewModel.checkoutReady" />
 </div>

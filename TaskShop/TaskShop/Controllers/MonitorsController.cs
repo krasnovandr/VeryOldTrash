@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using TaskShop.Repositories;
-using TaskShop.Repositories;
-using TaskShop.Services;
-using Shared;
+using DataLayer.Models;
+using ServiceLayer;
+
 
 namespace TaskShop.Controllers
 {
@@ -47,8 +46,10 @@ namespace TaskShop.Controllers
        public JsonResult GetById(int id)
        {
            var monitor = _service.GetMonitor(id);
+           if (monitor != null)
+               return Json(monitor, JsonRequestBehavior.AllowGet);
 
-           return Json(monitor, JsonRequestBehavior.AllowGet);
+           return Json(new { item = "Error" }, JsonRequestBehavior.AllowGet);
        }
 
     }

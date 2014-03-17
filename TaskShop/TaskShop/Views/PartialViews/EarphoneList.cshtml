@@ -1,66 +1,25 @@
-﻿@model IEnumerable<Shared.Earphone>
+﻿@model DataLayer.Models.Earphone
 
 <div id="Show" data-bind="visible:EarphoneViewModel.isReadMode">
-    <table>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Id)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Producer)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Model)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.MaxFrequency)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Resistance)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CableLength)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Price)
-            </th>
-            <th></th>
-
-        </tr>
+    
+    <div>
+        Max Price <span data-bind="text: EarphoneViewModel.maxPrice"></span>
+        Min Price <span data-bind="text: EarphoneViewModel.minPrice"></span>
+    </div>
 
 
-        <tbody data-bind="foreach: EarphoneViewModel.arr">
-            <tr>
-                <td>
-                    <span data-bind="text: $data.Id"></span>
-                </td>
-                <td>
-                    <span data-bind="text: $data.Producer"></span>
-                </td>
-                <td>
-                    <span data-bind="text: $data.Model"></span>
-                </td>
-                <td>
-                    <span data-bind="text: $data.MaxFrequency"></span>
-                </td>
-                <td>
-                    <span data-bind="text: $data.Resistance"></span>
-                </td>
-                <td>
-                    <span data-bind="text: $data.CableLength"></span>
-                </td>
-                <td>
-                    <span data-bind="text: $data.Price"></span>
-                </td>
-                <td>
-                    <input type="button" class="btn btn-default" value="To Cart" data-bind="click: $root.EarphoneViewModel.AddToCart" />
-                    <input type="button" class="btn btn-info" value="Details" data-bind="click: $root.goToPageItem" />
-                </td>
-            </tr>
-        </tbody>
 
-    </table>
-    <div>Max Price <span data-bind="text: EarphoneViewModel.maxPrice"></span></div>
-    <div>Min Price<span data-bind="text: EarphoneViewModel.minPrice"></span> </div>
+    <div data-bind="foreach: EarphoneViewModel.arr" class="row">
+        <div class="col-md-4 ">
+            <br/>
+            @Html.LabelFor(model => model.Model)
+            <span data-bind="text: $data.Model"></span><br/>
+            @Html.LabelFor(model => model.Producer)<span data-bind="text: $data.Producer"></span>
+            <br />
+            @Html.LabelFor(model => model.Price) <span data-bind="text: $data.Price"></span>
+            <br />
+            <input type="button" class="btn  btn-sm" value="To Cart" data-bind="click: $root.EarphoneViewModel.AddToCart" /><br />
+            <input type="button" class="btn btn-info btn-sm" value="Details" data-bind="click: $root.goToPageItem" /><br/>
+        </div>
+    </div>
 </div>
-

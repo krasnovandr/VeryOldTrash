@@ -1,65 +1,28 @@
-﻿@model IEnumerable<Shared.MemoryCard>
+﻿@model DataLayer.Models.MemoryCard
 
 <div id="Show" data-bind="visible:MemoryCardViewModel.isReadMode">
-    <table>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Id)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Producer)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Model)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Size)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ReadSpeed)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.WriteSpeed)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Price)
-            </th>
-            <th></th>
+   
+    
+    <div>
+        Max Price <span data-bind="text: MemoryCardViewModel.maxPrice"></span>
+        Min Price <span data-bind="text: MemoryCardViewModel.minPrice"></span>
+    </div>
 
-        </tr>
-
-
-        <tbody data-bind="foreach: MemoryCardViewModel.arr">
-            <tr>
-                <td>
-                    <span data-bind="text: $data.Id"></span>
-                </td>
-                <td>
-                    <span data-bind="text: $data.Producer"></span>
-                </td>
-                <td>
-                    <span data-bind="text: $data.Model"></span>
-                </td>
-                <td>
-                    <span data-bind="text: $data.Size"></span>
-                </td>
-                <td>
-                    <span data-bind="text: $data.WriteSpeed"></span>
-                </td>
-                <td>
-                    <span data-bind="text: $data.ReadSpeed"></span>
-                </td>
-                <td>
-                    <span data-bind="text: $data.Price"></span>
-                </td>
-                <td>
-                    <input type="button" class="btn btn-default" value="To Cart" data-bind="click: $root.MemoryCardViewModel.AddToCart" />
-                    <input type="button" class="btn btn-info" value="Details" data-bind="click: $root.goToPageItem" />
-                </td>
-            </tr>
-        </tbody>
-
-    </table>
-    <div>Max Price <span data-bind="text: MemoryCardViewModel.maxPrice"></span></div>
-    <div>Min Price<span data-bind="text: MemoryCardViewModel.minPrice"></span> </div>
+    <div data-bind="foreach: MemoryCardViewModel.arr" class="row">
+        <div class="col-md-4 ">
+            <br/>
+            @Html.LabelFor(model => model.Model):
+            <span data-bind="text: $data.Model"></span><br/>
+            @Html.LabelFor(model => model.Producer): <span data-bind="text: $data.Producer"></span>
+            <br />
+            @Html.LabelFor(model => model.Price): <span data-bind="text: $data.Price"></span>
+            <br />
+            <input type="button" class="btn  btn-sm" value="To Cart" data-bind="click: $root.MemoryCardViewModel.AddToCart" /><br />
+            <input type="button" class="btn btn-info btn-sm" value="Details" data-bind="click: $root.goToPageItem" /><br/>
+        </div>
+    </div>
 </div>
+
+    
+    
+   

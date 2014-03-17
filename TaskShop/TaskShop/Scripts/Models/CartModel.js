@@ -24,7 +24,13 @@ var CartViewModel = function (options) {
     self.totalItems = ko.observable(0);
     self.totalPrice = ko.observable(0);
 
-
+    self.checkoutReady = ko.computed(function () {
+        if (self.CartModel.arr()) {
+            if (self.CartModel.arr().length != 0)
+            return true;
+        }
+          return false;
+    });
 
     self.GetAll = function () {
         $.ajax({
@@ -46,7 +52,7 @@ var CartViewModel = function (options) {
                 }
                 else {
                     for (var j = 0; j < self.CartModel.arr()[i].Count; j++)
-                    price += parseInt(self.CartModel.arr()[i].Price);
+                        price += parseInt(self.CartModel.arr()[i].Price);
 
                 }
 

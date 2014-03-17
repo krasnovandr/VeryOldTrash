@@ -1,64 +1,26 @@
-﻿@model IEnumerable<Shared.Monitor>
+﻿@model DataLayer.Models.Monitor
 <div id="Show" data-bind="visible:MonitorViewModel.isReadMode">
-    <table>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Id)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Producer)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Model)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.MatrixType)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Resolution)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Frequency)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Price)
-            </th>
-            <th></th>
-
-        </tr>
 
 
-        <tbody data-bind="foreach: MonitorViewModel.arr">
-            <tr>
-                <td>
-                    <span data-bind="text: $data.Id"></span>
-                </td>
-                <td>
-                    <span data-bind="text: $data.Producer"></span>
-                </td>
-                <td>
-                    <span data-bind="text: $data.Model"></span>
-                </td>
-                <td>
-                    <span data-bind="text: $data.MatrixType"></span>
-                </td>
-                <td>
-                    <span data-bind="text: $data.Resolution"></span>
-                </td>
-                <td>
-                    <span data-bind="text: $data.Frequency"></span>
-                </td>
-                <td>
-                    <span data-bind="text: $data.Price"></span>
-                </td>
-                <td>
-                    <input type="button" class="btn btn-default" value="To Cart" data-bind="click: $root.MonitorViewModel.AddToCart" />
-                    <input type="button" class="btn btn-info" value="Details" data-bind="click: $root.goToPageItem" />
-                </td>
-            </tr>
-        </tbody>
 
-    </table>
-    <div>Max Price <span data-bind="text: MonitorViewModel.maxPrice"></span></div>
-    <div>Min Price<span data-bind="text: MonitorViewModel.minPrice"></span> </div>
+    <div>
+        Max Price <span data-bind="text: MonitorViewModel.maxPrice"></span>
+        Min Price <span data-bind="text: MonitorViewModel.minPrice"></span>
+    </div>
+
+    <div data-bind="foreach: MonitorViewModel.arr" class="row">
+        <div class="col-md-4 ">
+            <br />
+            @Html.LabelFor(model => model.Model):
+            <span data-bind="text: $data.Model"></span>
+            <br />
+            @Html.LabelFor(model => model.Producer): <span data-bind="text: $data.Producer"></span>
+            <br />
+            @Html.LabelFor(model => model.Price): <span data-bind="text: $data.Price"></span>
+            <br />
+            <input type="button" class="btn  btn-sm" value="To Cart" data-bind="click: $root.MonitorViewModel.AddToCart" /><br />
+            <input type="button" class="btn btn-info btn-sm" value="Details" data-bind="click: $root.goToPageItem" /><br />
+        </div>
+    </div>
 </div>
+

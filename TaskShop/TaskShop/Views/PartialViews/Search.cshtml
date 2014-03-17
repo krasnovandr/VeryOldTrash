@@ -1,30 +1,47 @@
 ﻿<div data-bind="with:SearchViewModel">
     <label>
-        Producer:
-        <input data-bind="value: SearchForm.Producer" /></label>
-    <label>
         Model
-        <input data-bind="value: SearchForm.Model" /></label>
-    <label>
-        Search Category:
-        <select data-bind="options: GoodsCategories,
-                            value: SearchForm.GoodsCategory"></select>
-    </label>
-    <br />
-    <label>Min Price:<input data-bind="value: SearchForm.MinPrice" /></label>
-    <label>Max Price:<input data-bind="value: SearchForm.MaxPrice" /></label>
-    <br />
-    <input type="button" class="btn btn-info" value="Search" data-bind="click:GetAll" />
+            <input data-bind="value:SearchForm.Model" /></label>
 
-    <div data-bind="foreach:arr">
-        <div class="row">
+    <div data-bind="visible:fullMode">
+        <label>
+            Producer:
+        <input data-bind="value: SearchForm.Producer" /></label>
+
+        <label>
+            Search Category:
+        <select data-bind="options: GoodsCategories,
+                            value: SearchForm.GoodsCategory">
+        </select>
+        </label>
+        <br />
+        <label>Min Price:<input data-bind="value: SearchForm.MinPrice" /></label>
+        <br />
+        <label>Max Price:<input data-bind="value: SearchForm.MaxPrice" /></label>
+        <br />
+    </div>
+    <input type="button" class="btn btn-info" value="Search" data-bind="click:GetAll" />
+    <p>
+        <input type="button" value="Extended" data-bind="click: Full,visible:standartMode" />
+        <input type="button" value="Cancel" data-bind="click: Cancel,visible:fullMode" />
+    </p>
+
+    <div data-bind="foreach:arr" class="row">
+
+        <div class="col-md-4">
             GoodsId:      <span data-bind="text: $data.GoodsId"></span>
-            GoodsCategory:<span data-bind="text: $data.GoodsCategory"></span>
+            <br />
+            GoodsCategory:<span data-bind="text: $data.GoodsCategory"></span><br />
             Model:        <span data-bind="text: $data.Model"></span>
+            <br />
             Price:        <span data-bind="text: $data.Price"></span>
-            Producer:        <span data-bind="text: $data.Producer"></span>
-            <input type="button" class="btn btn-info" value="Details" data-bind="click: $root.goToPageCategoryItem" />
+            <br />
+            Producer:     <span data-bind="text: $data.Producer"></span>
+            <br />
+            <input type="button" class="btn btn-info" value="Details" data-bind="click: $root.goToPageCategoryItem" /><br />
+            <br />
         </div>
+
     </div>
 
 </div>

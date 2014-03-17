@@ -35,7 +35,7 @@ var MonitorViewModel = function (options) {
     self.arr = ko.observableArray([]);
     self.maxPrice = ko.computed(function () {
         var m = 0;
-        for (var i = 1; i < self.arr().length; i++) {
+        for (var i = 0; i < self.arr().length; i++) {
             if (self.arr()[i].Price > m)
                 m = self.arr()[i].Price;
         }
@@ -49,7 +49,12 @@ var MonitorViewModel = function (options) {
         }
         return m;
     }, self);
+
     self.errors = ko.observableArray([]);
+
+    self.totalCount = ko.computed(function () {
+        return self.arr().length;
+    }, self);
 
     self.Add = function (data) {
         var jsonData = ko.toJS(self.MonitorModel);
@@ -63,8 +68,8 @@ var MonitorViewModel = function (options) {
         });
     };
 
-    self.GetAll = function() {
-        $.get(options.monitorGetAll, function(returnedData) {
+    self.GetAll = function () {
+        $.get(options.monitorGetAll, function (returnedData) {
             if (returnedData)
                 self.arr(returnedData);
         });

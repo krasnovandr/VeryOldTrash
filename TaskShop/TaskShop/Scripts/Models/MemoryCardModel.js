@@ -19,7 +19,7 @@ var MemoryCardViewModel = function (options) {
 
     self.maxPrice = ko.computed(function () {
         var m = 0;
-        for (var i = 1; i < self.arr().length; i++) {
+        for (var i = 0; i < self.arr().length; i++) {
             if (self.arr()[i].Price > m)
                 m = self.arr()[i].Price;
         }
@@ -33,7 +33,9 @@ var MemoryCardViewModel = function (options) {
         }
         return m;
     }, self);
-
+    self.totalCount = ko.computed(function () {
+        return self.arr().length;
+    }, self);
 
     self.MemoryCardModel = new MemoryCardModel();
 
