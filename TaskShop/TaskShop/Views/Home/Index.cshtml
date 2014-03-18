@@ -71,8 +71,8 @@
                     <div>
                         @*<h2>Monitors</h2>*@
                         <input type="button" value="Add" data-bind="click: MonitorViewModel.Create,visible:MonitorViewModel.isReadMode" />
-                        @Html.Partial(Url.Content("~/Views/PartialViews/MonitorAdd.cshtml"))
-                        @Html.Partial(Url.Content("~/Views/PartialViews/MonitorList.cshtml"))
+                        @Html.Partial(Url.Content("~/Views/PartialViews/Monitor/MonitorAdd.cshtml"))
+                        @Html.Partial(Url.Content("~/Views/PartialViews/Monitor/MonitorList.cshtml"))
                     </div>
                 </div>
 
@@ -80,8 +80,8 @@
                     <div>
                         @*<h2>Batteries</h2>*@
                         <input type="button" value="Add" data-bind="click: BatteryViewModel.Create,visible:BatteryViewModel.isReadMode" />
-                        @Html.Partial(Url.Content("~/Views/PartialViews/BatteryAdd.cshtml"))
-                        @Html.Partial(Url.Content("~/Views/PartialViews/BatteryList.cshtml"))
+                        @Html.Partial(Url.Content("~/Views/PartialViews/Battery/BatteryAdd.cshtml"))
+                        @Html.Partial(Url.Content("~/Views/PartialViews/Battery/BatteryList.cshtml"))
                     </div>
                 </div>
 
@@ -89,16 +89,16 @@
                     <div>
                         @*<h2>Earphones</h2>*@
                         <input type="button" value="Add" data-bind="click: EarphoneViewModel.Create,visible:EarphoneViewModel.isReadMode" />
-                        @Html.Partial(Url.Content("~/Views/PartialViews/EarphoneAdd.cshtml"))
-                        @Html.Partial(Url.Content("~/Views/PartialViews/EarphoneList.cshtml"))
+                        @Html.Partial(Url.Content("~/Views/PartialViews/Earphone/EarphoneAdd.cshtml"))
+                        @Html.Partial(Url.Content("~/Views/PartialViews/Earphone/EarphoneList.cshtml"))
                     </div>
                 </div>
 
                 <div id="MemoryCards" data-bind="if: show_MemoryCards">
                     <div>
                         <input type="button" value="Add" data-bind="click: MemoryCardViewModel.Create,visible:MemoryCardViewModel.isReadMode" />
-                        @Html.Partial(Url.Content("~/Views/PartialViews/MemoryCardAdd.cshtml"))
-                        @Html.Partial(Url.Content("~/Views/PartialViews/MemoryCardList.cshtml"))
+                        @Html.Partial(Url.Content("~/Views/PartialViews/MemoryCard/MemoryCardAdd.cshtml"))
+                        @Html.Partial(Url.Content("~/Views/PartialViews/MemoryCard/MemoryCardList.cshtml"))
                     </div>
                 </div>
                 <div id="Cart" data-bind="if: show_Cart">
@@ -120,25 +120,25 @@
                 <div id="Battery" data-bind="if: show_Battery">
                     <div>
                         <h2>Battery</h2>
-                        @Html.Partial(Url.Content("~/Views/PartialViews/BatteryShow.cshtml"))
+                        @Html.Partial(Url.Content("~/Views/PartialViews/Battery/BatteryShow.cshtml"))
                     </div>
                 </div>
                 <div id="Earphone" data-bind="if: show_Earphone">
                     <div>
                         <h2>Earphone</h2>
-                        @Html.Partial(Url.Content("~/Views/PartialViews/EarphoneShow.cshtml"))
+                        @Html.Partial(Url.Content("~/Views/PartialViews/Earphone/EarphoneShow.cshtml"))
                     </div>
                 </div>
                 <div id="MemoryCard" data-bind="if: show_MemoryCard">
                     <div>
                         <h2>MemoryCard</h2>
-                        @Html.Partial(Url.Content("~/Views/PartialViews/MemoryCardShow.cshtml"))
+                        @Html.Partial(Url.Content("~/Views/PartialViews/MemoryCard/MemoryCardShow.cshtml"))
                     </div>
                 </div>
                 <div id="Monitor" data-bind="if: show_Monitor">
                     <div>
                         @*<h2>Monitor</h2>*@
-                        @Html.Partial(Url.Content("~/Views/PartialViews/MonitorShow.cshtml"))
+                        @Html.Partial(Url.Content("~/Views/PartialViews/Monitor/MonitorShow.cshtml"))
                     </div>
                 </div>
                 <div id="Order" data-bind="if: show_Order">
@@ -192,6 +192,8 @@
         memoryCardGetAll: '@Url.Action("GetAll", "MemoryCards")',
         memoryCardGetById: '@Url.Action("GetById", "MemoryCards")',
         homeGetAll: '@Url.Action("GetAll", "Home")',
+        homeGetNext: '@Url.Action("GetNext", "Home")',
+        homeGetPrevious: '@Url.Action("GetPrevious", "Home")',
 
         searchGetAll: '@Url.Action("GetAll", "Search")'
     };

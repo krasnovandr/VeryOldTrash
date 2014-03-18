@@ -1,23 +1,28 @@
-﻿
+﻿<div data-bind="foreach:arrData" class="row">
+    <div class="col-md-4 ">
+        <h4><span data-bind="text: $data.Model"></span></h4>
 
-    <div data-bind="foreach:arrData" class="row">
-        <div class="col-md-3 ">
-            <h4><span data-bind="text: $data.Model"></span></h4>
-         
-            <span data-bind="text: $data.Producer"></span>
-            <br />
-            <span data-bind="text: $data.GoodsCategory"></span>
-            <br />
+        <span data-bind="text: $data.Producer"></span>
+        <br />
+        <span data-bind="text: $data.GoodsCategory"></span>
+        <br />
 
-            <input type="button" class="btn btn-info btn-sm" value="Details" data-bind="click: $root.goToPageCategoryItem" />
-        </div>
-        @* GoodsId:      <span data-bind="text: $data.GoodsId"></span>
+        <input type="button" class="btn btn-info btn-sm" value="Details" data-bind="click: $root.goToPageCategoryItem" />
+    </div>
+    @* GoodsId:      <span data-bind="text: $data.GoodsId"></span>
             GoodsCategory:<span data-bind="text: $data.GoodsCategory"></span>
             Model:        <span data-bind="text: $data.Model"></span>
             Price:        <span data-bind="text: $data.Price"></span>
             Producer:        <span data-bind="text: $data.Producer"></span>*@
 
-    </div>
+</div>
+<br/>
+<br/>
+<br/>
+<div>
 
+    <input type="button" class="btn btn-info btn-sm" value="Previous" data-bind="click: $root.Previous" />
 
+    <input type="button" class="btn btn-info btn-sm" value="Next" data-bind="click: $root.Next" />
+</div>
 

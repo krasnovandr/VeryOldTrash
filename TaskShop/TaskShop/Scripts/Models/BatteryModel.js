@@ -58,6 +58,7 @@ var BatteryViewModel = function (options) {
             }
         });
     };
+
     self.totalCount = ko.computed(function () {
         return self.arr().length;
     }, self);

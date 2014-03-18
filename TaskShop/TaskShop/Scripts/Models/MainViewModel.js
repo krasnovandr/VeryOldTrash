@@ -19,6 +19,20 @@ function MainViewModel(options) {
     self.views = ko.observableArray(["Home", "Monitors", "Batteries", "MemoryCards", "Earphones", "Cart", "Orders", "Search", "Error"]);
     self.arrData = ko.observable([]);
 
+    self.Next = function () {
+        $.get(options.homeGetNext, function(returnedData) {
+            self.arrData(returnedData);
+        });
+    };
+
+    self.Previous = function () {
+        $.get(options.homeGetPrevious, function (returnedData) {
+            self.arrData(returnedData);
+        });
+    };
+
+
+
 
     self.show_Battery = ko.computed(function () {
         return self.currentDeepView() === "Batteries" ? true : false;
@@ -67,6 +81,7 @@ function MainViewModel(options) {
     self.currentMainViewFunc = function (viewName) {
         self.currentDeepView(false);
         self.currentMainView(viewName);
+        //location.hash = viewName;
     };
 
     self.show_Error = ko.computed(function () {

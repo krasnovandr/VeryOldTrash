@@ -62,7 +62,7 @@ namespace DataLayer.Models
        
         public int TotalCount { get; set; }
         [Required]
-        [Range(1, 100)]
+        [Range(0, 100)]
         public int Discount { get; set; }
         [Required]
         [EmailAddress]

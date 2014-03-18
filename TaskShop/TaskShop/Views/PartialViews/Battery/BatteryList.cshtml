@@ -9,15 +9,16 @@
 
     <div data-bind="foreach: BatteryViewModel.arr" class="row">
         <div class="col-md-4 ">
-            <br/>
+            <br />
             @Html.LabelFor(model => model.Model):
-            <span data-bind="text: $data.Model"></span><br/>
+            <span data-bind="text: $data.Model"></span>
+            <br />
             @Html.LabelFor(model => model.Producer): <span data-bind="text: $data.Producer"></span>
             <br />
             @Html.LabelFor(model => model.Price): <span data-bind="text: $data.Price"></span>
             <br />
             <input type="button" class="btn btn-sm" value="To Cart" data-bind="click: $root.BatteryViewModel.AddToCart" /><br />
-            <input type="button" class="btn btn-info btn-sm" value="Details" data-bind="click: $root.goToPageItem" /><br/>
+            <input type="button" class="btn btn-info btn-sm" value="Details" data-bind="click: $root.goToPageItem" /><br />
         </div>
     </div>
 </div>

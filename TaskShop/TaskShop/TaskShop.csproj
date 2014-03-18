@@ -189,7 +189,9 @@
     <Content Include="Scripts\Models\MainViewModel.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Unity.Mvc3.README.txt" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -201,32 +203,28 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\PartialViews\BatteryAdd.cshtml" />
-    <Content Include="Views\PartialViews\BatteryList.cshtml" />
-    <Content Include="Views\PartialViews\EarphoneAdd.cshtml" />
-    <Content Include="Views\PartialViews\EarphoneList.cshtml" />
-    <Content Include="Views\PartialViews\MonitorList.cshtml" />
-    <Content Include="Views\PartialViews\MonitorAdd.cshtml" />
-    <Content Include="Views\PartialViews\MemoryCardAdd.cshtml" />
-    <Content Include="Views\PartialViews\MemoryCardList.cshtml" />
+    <Content Include="Views\PartialViews\Battery\BatteryAdd.cshtml" />
+    <Content Include="Views\PartialViews\Battery\BatteryList.cshtml" />
+    <Content Include="Views\PartialViews\Earphone\EarphoneAdd.cshtml" />
+    <Content Include="Views\PartialViews\Earphone\EarphoneList.cshtml" />
+    <Content Include="Views\PartialViews\Monitor\MonitorList.cshtml" />
+    <Content Include="Views\PartialViews\Monitor\MonitorAdd.cshtml" />
+    <Content Include="Views\PartialViews\MemoryCard\MemoryCardAdd.cshtml" />
+    <Content Include="Views\PartialViews\MemoryCard\MemoryCardList.cshtml" />
     <Content Include="Views\PartialViews\CartList.cshtml" />
     <Content Include="Views\PartialViews\Wizard.cshtml" />
     <Content Include="Views\PartialViews\OrderList.cshtml" />
-    <Content Include="Views\PartialViews\BatteryShow.cshtml" />
-    <Content Include="Views\PartialViews\MonitorShow.cshtml" />
+    <Content Include="Views\PartialViews\Battery\BatteryShow.cshtml" />
+    <Content Include="Views\PartialViews\Monitor\MonitorShow.cshtml" />
     <Content Include="Views\PartialViews\OrderShow.cshtml" />
     <Content Include="Views\PartialViews\Search.cshtml" />
-    <Content Include="Views\PartialViews\MemoryCardShow.cshtml" />
-    <Content Include="Views\PartialViews\EarphoneShow.cshtml" />
+    <Content Include="Views\PartialViews\MemoryCard\MemoryCardShow.cshtml" />
+    <Content Include="Views\PartialViews\Earphone\EarphoneShow.cshtml" />
     <Content Include="Views\PartialViews\Error.cshtml" />
     <Content Include="Views\PartialViews\MainList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\PartialViews\Battery\" />
-    <Folder Include="Views\PartialViews\Earphone\" />
-    <Folder Include="Views\PartialViews\MemoryCard\" />
-    <Folder Include="Views\PartialViews\Monitor\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
